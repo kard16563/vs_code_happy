@@ -137,6 +137,75 @@ void over_load_1 (double i){
 }
 
 
+class shape  //基类   //继承 --派生
+{
+    private:
+        int x;
+        int y;
+    public:
+       // shape(int in_x,int in_y);
+        void print_shape();
+        void set(int in_x,int in_y);
+         int *pp(int i);
+};
+int *shape::pp(int i){
+        static int *tt=new int;
+
+        switch (i)
+        {
+        case 1:
+        //    static int *m;
+             tt=(int*)(this->x);
+                printf(" \n\n mmm-> %p \n",tt);
+            //tt=(int*)(this->x);
+            return tt;
+            break;
+        case 2:
+            tt=(int*)(this->y);
+            return tt;
+            break;
+        
+        default:
+            printf("输入有误");
+            break;
+        }
+
+}
+
+
+void shape ::set(int in_x,int in_y){
+    x=in_x;
+    y=in_y;
+}
+
+void shape::print_shape(){
+    printf(" method of  shape --> prentf x->%d y->%d ",x,y);
+}
+
+class circle : public shape{
+    private:
+        int plus;
+    public:
+        int aa=10; 
+        circle(){plus=0;};
+        void add();
+        void print_cir();
+};
+
+void circle::print_cir(){
+    printf("void circle::print_cir() -> %d",plus);
+}
+
+void circle::add(){
+    int*tt= (this->pp(1));
+
+    // tt=(int*)(this->pp(1));
+    printf("%d", *(this->pp(1)) );
+    printf("123");
+
+    // printf("\n\n   circle::add--> %d  ",*tt);
+}
+
 
 int main(){
 
@@ -178,6 +247,12 @@ int main(){
     s.print_str();
     //cout <<"4545"; //导入
     printf("hello123");
+
+    circle ci_1;
+    ci_1.set(1,2);
+    ci_1.add();
+
+    
 
 
     getchar();
