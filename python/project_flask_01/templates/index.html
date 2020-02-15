@@ -1,0 +1,39 @@
+{% extends 'base.html'%}
+{% from 'bootstrap/form.html' import render_form %}
+{#render_form() Render a form object create by Flask-WTF/WTFormsBootstrap-Flask
+    提供的表单渲染宏通过其内置的bootstrap/form.html模板导入，
+    render_field()宏的使用方式和我们自己编写的form_field()宏完全相同。
+    值得特别介绍的是render_form()宏，它使用起来更加简单，
+    使用一行代码可以渲染整个表单，而且会自动帮我们渲染CSRF令牌字段form.csrf_token#}
+    <div class="hello-form">
+        {{ render_field(form),action=request.full_path}}{# action 提交表单途径 #}
+    </div>
+    <h5>{{message|length}} messages
+        <small class="float-right">
+            <a href="#bottom" title="go bottle"> &darr;</a><!-- 箭头向下的图标-->
+        </small>
+    </h5>
+    <div class="list-group"><!--列表组-->
+        {% for message in messages %}
+            <a class="list-group-item list-group-item-action flex-colum">
+                <div class="d-flex w-100 justify-content-between" ><!--justify-content-between 子元素两端对齐  d-flex 弹性---->
+                    <h5 class="mb-1 test-success">{{message.name}}
+                        <small class="text-muted"># {{loop.revindex}} </small> <!--text-muted 字体颜色-->
+                    </h5>
+
+                    <small data-toggle="tooltip" data-placement="top"
+                            data-timestamp="{{ message.timestamp.strftime('%Y-%m-%dT%H:%M:%SZ') }}"
+                            data-delay="500">
+                            {{ moment(message.timestamp).fromNow(refresh=True) }}
+                            {#渲染时间日期 format（）方法接收特定的 格式字符串来渲染时间格式， 
+                                将refresh参数设为True（默认为False）可以让时间戳在不重载页面
+                                的情况下，随着时间的变化自动刷新。#}
+                    </small>
+                </div>
+                <p class="mb-1">{{message.body}} </p>
+            </a>
+            {% endfor %}
+
+
+    </div>
+{% endblock%}
