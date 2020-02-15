@@ -177,6 +177,7 @@ int main(){
     string s;//可以调用但析构函数无法 起作用 报错
     s.print_str();
     //cout <<"4545"; //导入
+    
 
 
     getchar();
