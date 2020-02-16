@@ -146,9 +146,9 @@ class shape  //基类   //继承 --派生
        // shape(int in_x,int in_y);
         void print_shape();
         void set(int in_x,int in_y);
-         int *pp(int i);
+         int *pp(int i,char *flag);
 };
-int *shape::pp(int i){
+int *shape::pp(int i,char *flag){
         static int *tt=new int;
         printf("\n ---->> %p \n",tt);
 
@@ -156,15 +156,36 @@ int *shape::pp(int i){
         {
         case 1:
         //    static int *m;
-             *tt=(int)(this->x);//这样指针可以传出去--》传到203行
-             //tt=(int*)(this->x);//这样指针传不出去---》地址就没了
+            // *tt=(int)(this->x);//这样指针可以传出去--》传到203行--->传的是内容-->ok
+             //tt=(int*)(this->x);//这样指针传不出去---》地址就没了---->传的是地址->一结束就收回了
+            this;
+            this->x;
+            
 
+
+            printf("\n\n  地址验证 ---> this->: %p  this->x: %p == x的值 %d y的地址%p == y的值%d---->this->y==this指针访问成员变量y的值  \
+            ",this,this->x,this->x,this->y,this->y);
+
+            if (flag =="write" )
+            {
+                printf(" \n write");
+                tt=&(this->x);//指向x的地址----->后面可以读取好直接修改x的值
+                //tt=this;--->回来试一下
+
+            }else if(flag =="read")
+            {
+                printf(" \n wrong--->");
+                *tt=(int)(this->x);//保存x的值-->后面可以读取
+            }
+            
+            
+            
                // printf(" \n\n mmm-> %p \n",tt);
             //tt=(int*)(this->x);
             return tt;
             break;
         case 2:
-            tt=(int*)(this->y);
+            *tt=(int)(this->y);
             return tt;
             break;
         
@@ -200,7 +221,14 @@ void circle::print_cir(){
 }
 
 void circle::add(){
-    int*tt_11= (this->pp(1));
+   // int*tt_11= (this->pp(1));//---->ok
+
+   int*tt_11;
+   tt_11=(this->pp(1,"write"));
+
+    printf("\n  --x的地址上访问--> %d---y的地址上访问->%d",*tt_11,*(tt_11+1));//从debug x y排列 看来为连续的
+
+    *tt_11=*tt_11+1;
 
 
     // tt=(int*)(this->pp(1));
@@ -253,7 +281,7 @@ int main(){
     printf("hello123");
 
     circle ci_1;
-    ci_1.set(1,2);
+    ci_1.set(12,23);
     ci_1.add();
 
     
