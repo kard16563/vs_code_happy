@@ -150,13 +150,16 @@ class shape  //基类   //继承 --派生
 };
 int *shape::pp(int i){
         static int *tt=new int;
+        printf("\n ---->> %p \n",tt);
 
         switch (i)
         {
         case 1:
         //    static int *m;
-             tt=(int*)(this->x);
-                printf(" \n\n mmm-> %p \n",tt);
+             *tt=(int)(this->x);//这样指针可以传出去--》传到203行
+             //tt=(int*)(this->x);//这样指针传不出去---》地址就没了
+
+               // printf(" \n\n mmm-> %p \n",tt);
             //tt=(int*)(this->x);
             return tt;
             break;
@@ -197,10 +200,11 @@ void circle::print_cir(){
 }
 
 void circle::add(){
-    int*tt= (this->pp(1));
+    int*tt_11= (this->pp(1));
+
 
     // tt=(int*)(this->pp(1));
-    printf("%d", *(this->pp(1)) );
+   // printf("%d", *(this->pp(1)) );
     printf("123");
 
     // printf("\n\n   circle::add--> %d  ",*tt);
