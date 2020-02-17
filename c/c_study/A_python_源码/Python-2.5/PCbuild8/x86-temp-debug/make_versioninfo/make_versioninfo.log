@@ -1,0 +1,9 @@
+﻿  make_versioninfo.c
+E:\vs2015\vsstudio_ide\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(1274,5): warning MSB8012: TargetPath(E:\the_c_of_vs_code\c\c_study\A_python_源码\Python-2.5\PCbuild8\.\.\make_versioninfo.exe) does not match the Linker's OutputFile property value (E:\the_c_of_vs_code\c\c_study\A_python_源码\Python-2.5\PCbuild8\make_versioninfo_d.exe). This may cause your project to build incorrectly. To correct this, please make sure that $(OutDir), $(TargetName) and $(TargetExt) property values match the value specified in %(Link.OutputFile).
+E:\vs2015\vsstudio_ide\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(1276,5): warning MSB8012: TargetName(make_versioninfo) does not match the Linker's OutputFile property value (make_versioninfo_d). This may cause your project to build incorrectly. To correct this, please make sure that $(OutDir), $(TargetName) and $(TargetExt) property values match the value specified in %(Link.OutputFile).
+  make_versioninfo.vcxproj -> E:\the_c_of_vs_code\c\c_study\A_python_源码\Python-2.5\PCbuild8\.\.\make_versioninfo.exe
+  Performing Custom Build Step
+  'make_versioninfo.exe' 不是内部或外部命令，也不是可运行的程序
+  或批处理文件。
+E:\vs2015\vsstudio_ide\MSBuild\Microsoft\VC\v160\Microsoft.CppCommon.targets(149,5): error MSB3073: 命令“make_versioninfo.exe > ..\PC\python_nt_d.h
+E:\vs2015\vsstudio_ide\MSBuild\Microsoft\VC\v160\Microsoft.CppCommon.targets(149,5): error MSB3073: :VCEnd”已退出，代码为 9009。

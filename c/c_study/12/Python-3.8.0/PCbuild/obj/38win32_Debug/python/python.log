@@ -1,0 +1,11 @@
+﻿  python.c
+  python.vcxproj -> E:\the_c_of_vs_code\c\c_study\12\Python-3.8.0\PCbuild\win32\python_d.exe
+  Traceback (most recent call last):
+    File "E:\the_c_of_vs_code\c\c_study\12\Python-3.8.0\PC\validate_ucrtbase.py", line 8, in <module>
+      from ctypes import (c_buffer, POINTER, byref, create_unicode_buffer,
+    File "E:\the_c_of_vs_code\c\c_study\12\Python-3.8.0\Lib\ctypes\__init__.py", line 7, in <module>
+      from _ctypes import Union, Structure, Array
+  ModuleNotFoundError: No module named '_ctypes'
+E:\the_c_of_vs_code\c\c_study\12\Python-3.8.0\PCbuild\python.vcxproj(123,5): warning MSB3073: 命令“setlocal
+E:\the_c_of_vs_code\c\c_study\12\Python-3.8.0\PCbuild\python.vcxproj(123,5): warning MSB3073: set PYTHONPATH=E:\the_c_of_vs_code\c\c_study\12\Python-3.8.0\Lib
+E:\the_c_of_vs_code\c\c_study\12\Python-3.8.0\PCbuild\python.vcxproj(123,5): warning MSB3073: "E:\the_c_of_vs_code\c\c_study\12\Python-3.8.0\PCbuild\win32\python_d.exe" "E:\the_c_of_vs_code\c\c_study\12\Python-3.8.0\PC\validate_ucrtbase.py" ucrtbased”已退出，代码为 1。

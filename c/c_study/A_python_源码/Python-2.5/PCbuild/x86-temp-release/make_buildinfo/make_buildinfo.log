@@ -1,0 +1,26 @@
+﻿cl : 命令行 warning D9035: “Gm”选项已否决，并将在将来的版本中移除
+  make_buildinfo.c
+E:\the_c_of_vs_code\c\c_study\A_python_源码\Python-2.5\PCbuild\make_buildinfo.c(43,1): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+E:\Windows Kits\10\Include\10.0.18362.0\ucrt\string.h(90): message : 参见“strcat”的声明
+E:\the_c_of_vs_code\c\c_study\A_python_源码\Python-2.5\PCbuild\make_buildinfo.c(47,1): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+E:\Windows Kits\10\Include\10.0.18362.0\ucrt\string.h(90): message : 参见“strcat”的声明
+E:\the_c_of_vs_code\c\c_study\A_python_源码\Python-2.5\PCbuild\make_buildinfo.c(63,1): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+E:\Windows Kits\10\Include\10.0.18362.0\ucrt\string.h(90): message : 参见“strcat”的声明
+E:\the_c_of_vs_code\c\c_study\A_python_源码\Python-2.5\PCbuild\make_buildinfo.c(66,1): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+E:\Windows Kits\10\Include\10.0.18362.0\ucrt\string.h(90): message : 参见“strcat”的声明
+E:\the_c_of_vs_code\c\c_study\A_python_源码\Python-2.5\PCbuild\make_buildinfo.c(69,1): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+E:\Windows Kits\10\Include\10.0.18362.0\ucrt\string.h(90): message : 参见“strcat”的声明
+E:\the_c_of_vs_code\c\c_study\A_python_源码\Python-2.5\PCbuild\make_buildinfo.c(72,1): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+E:\Windows Kits\10\Include\10.0.18362.0\ucrt\string.h(90): message : 参见“strcat”的声明
+E:\the_c_of_vs_code\c\c_study\A_python_源码\Python-2.5\PCbuild\make_buildinfo.c(73,1): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+E:\Windows Kits\10\Include\10.0.18362.0\ucrt\string.h(90): message : 参见“strcat”的声明
+E:\the_c_of_vs_code\c\c_study\A_python_源码\Python-2.5\PCbuild\make_buildinfo.c(81,1): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+E:\Windows Kits\10\Include\10.0.18362.0\ucrt\string.h(90): message : 参见“strcat”的声明
+E:\the_c_of_vs_code\c\c_study\A_python_源码\Python-2.5\PCbuild\make_buildinfo.c(83,1): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+E:\Windows Kits\10\Include\10.0.18362.0\ucrt\string.h(90): message : 参见“strcat”的声明
+E:\the_c_of_vs_code\c\c_study\A_python_源码\Python-2.5\PCbuild\make_buildinfo.c(84,1): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+E:\Windows Kits\10\Include\10.0.18362.0\ucrt\string.h(90): message : 参见“strcat”的声明
+E:\the_c_of_vs_code\c\c_study\A_python_源码\Python-2.5\PCbuild\make_buildinfo.c(88,1): warning C4996: 'unlink': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _unlink. See online help for details.
+E:\Windows Kits\10\Include\10.0.18362.0\ucrt\stdio.h(381): message : 参见“unlink”的声明
+make_buildinfo.obj : warning LNK4075: 忽略“/EDITANDCONTINUE”(由于“/SAFESEH”规范)
+  make_buildinfo.vcxproj -> E:\the_c_of_vs_code\c\c_study\A_python_源码\Python-2.5\PCbuild\.\make_buildinfo.exe

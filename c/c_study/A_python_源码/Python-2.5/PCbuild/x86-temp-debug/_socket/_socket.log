@@ -1,0 +1,25 @@
+﻿  socketmodule.c
+E:\Windows Kits\10\Include\10.0.18362.0\um\winnt.h(11282,1): warning C4005: “WRITE_RESTRICTED”: 宏重定义
+E:\the_c_of_vs_code\c\c_study\A_python_源码\Python-2.5\Include\structmember.h(77): message : 参见“WRITE_RESTRICTED”的前一个定义
+E:\the_c_of_vs_code\c\c_study\A_python_源码\Python-2.5\Modules\socketmodule.c(300,5): error C2373: “inet_pton”: 重定义；不同的类型修饰符
+E:\Windows Kits\10\Include\10.0.18362.0\um\ws2tcpip.h(573): message : 参见“inet_pton”的声明
+E:\the_c_of_vs_code\c\c_study\A_python_源码\Python-2.5\Modules\socketmodule.c(301,13): error C2373: “inet_ntop”: 重定义；不同的类型修饰符
+E:\Windows Kits\10\Include\10.0.18362.0\um\ws2tcpip.h(593): message : 参见“inet_ntop”的声明
+E:\the_c_of_vs_code\c\c_study\A_python_源码\Python-2.5\Modules\socketmodule.c(347,1): warning C4005: “EAFNOSUPPORT”: 宏重定义
+E:\Windows Kits\10\Include\10.0.18362.0\ucrt\errno.h(87): message : 参见“EAFNOSUPPORT”的前一个定义
+E:\the_c_of_vs_code\c\c_study\A_python_源码\Python-2.5\Modules\socketmodule.c(3174,1): warning C4996: 'gethostbyname': Use getaddrinfo() or GetAddrInfoW() instead or define _WINSOCK_DEPRECATED_NO_WARNINGS to disable deprecated API warnings
+E:\Windows Kits\10\Include\10.0.18362.0\um\winsock2.h(2219): message : 参见“gethostbyname”的声明
+E:\the_c_of_vs_code\c\c_study\A_python_源码\Python-2.5\Modules\socketmodule.c(3270,1): warning C4996: 'gethostbyaddr': Use getnameinfo() or GetNameInfoW() instead or define _WINSOCK_DEPRECATED_NO_WARNINGS to disable deprecated API warnings
+E:\Windows Kits\10\Include\10.0.18362.0\um\winsock2.h(2197): message : 参见“gethostbyaddr”的声明
+E:\the_c_of_vs_code\c\c_study\A_python_源码\Python-2.5\Modules\socketmodule.c(3640,1): warning C4996: 'inet_addr': Use inet_pton() or InetPton() instead or define _WINSOCK_DEPRECATED_NO_WARNINGS to disable deprecated API warnings
+E:\Windows Kits\10\Include\10.0.18362.0\um\winsock2.h(1831): message : 参见“inet_addr”的声明
+E:\the_c_of_vs_code\c\c_study\A_python_源码\Python-2.5\Modules\socketmodule.c(3682,1): warning C4996: 'inet_ntoa': Use inet_ntop() or InetNtop() instead or define _WINSOCK_DEPRECATED_NO_WARNINGS to disable deprecated API warnings
+E:\Windows Kits\10\Include\10.0.18362.0\um\winsock2.h(1849): message : 参见“inet_ntoa”的声明
+E:\the_c_of_vs_code\c\c_study\A_python_源码\Python-2.5\Modules\socketmodule.c(5065,1): error C2373: “inet_pton”: 重定义；不同的类型修饰符
+E:\Windows Kits\10\Include\10.0.18362.0\um\ws2tcpip.h(573): message : 参见“inet_pton”的声明
+E:\the_c_of_vs_code\c\c_study\A_python_源码\Python-2.5\Modules\socketmodule.c(5069,1): warning C4996: 'inet_addr': Use inet_pton() or InetPton() instead or define _WINSOCK_DEPRECATED_NO_WARNINGS to disable deprecated API warnings
+E:\Windows Kits\10\Include\10.0.18362.0\um\winsock2.h(1831): message : 参见“inet_addr”的声明
+E:\the_c_of_vs_code\c\c_study\A_python_源码\Python-2.5\Modules\socketmodule.c(5080,1): error C2373: “inet_ntop”: 重定义；不同的类型修饰符
+E:\Windows Kits\10\Include\10.0.18362.0\um\ws2tcpip.h(593): message : 参见“inet_ntop”的声明
+E:\the_c_of_vs_code\c\c_study\A_python_源码\Python-2.5\Modules\socketmodule.c(5088,1): warning C4996: 'inet_ntoa': Use inet_ntop() or InetNtop() instead or define _WINSOCK_DEPRECATED_NO_WARNINGS to disable deprecated API warnings
+E:\Windows Kits\10\Include\10.0.18362.0\um\winsock2.h(1849): message : 参见“inet_ntoa”的声明
