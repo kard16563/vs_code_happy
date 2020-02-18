@@ -147,6 +147,11 @@ class shape  //基类   //继承 --派生
         void print_shape();
         void set(int in_x,int in_y);
          int *pp(int i,char *flag);
+
+         virtual void grow(){
+             //printf("shape__> 虚函数");这里可以不写但 函数的形式要具备全
+         };//虚函数 在基类布置  
+         //但每个从shape派生的 类不一样所以加上 virtual---派生的可以自己定义其功能 
 };
 int *shape::pp(int i,char *flag){
         static int *tt=new int;
@@ -214,7 +219,12 @@ class circle : public shape{
         circle(){plus=0;};
         void add();
         void print_cir();
+        void grow(){//在这里重写父类的东西 为虚函数时
+            printf("\n   circle 虚函数这里使用中...");
+        };
 };
+
+
 
 void circle::print_cir(){
     printf("void circle::print_cir() -> %d",plus);
@@ -283,6 +293,7 @@ int main(){
     circle ci_1;
     ci_1.set(12,23);
     ci_1.add();
+    ci_1.grow();//可以重写父类的
 
     
 
