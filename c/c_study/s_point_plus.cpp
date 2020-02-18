@@ -32,6 +32,8 @@ void print_str(char *p){
     {
        printf(" \n print_str_=>oooo - > %c \n ",*p);
        p=p+1;
+
+       
     }
 }
 
