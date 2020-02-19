@@ -248,6 +248,42 @@ void circle::add(){
     // printf("\n\n   circle::add--> %d  ",*tt);
 }
 
+class modle{
+    public:
+    void print_model(int i);
+};
+
+void modle::print_model(int i){
+
+    printf(" \n\n   模板类型--》 %f  ",i);
+}
+
+template <class ha>//模板让这个类更加的泛化了 ha为任意的数据类型可谓任意字母为变量类型
+class modle_1{
+    public:
+    void print_model(ha i);
+};
+
+
+template<class ha> void modle_1<ha>::print_model(ha i){
+    //int flg=0;
+
+    try
+    {
+        printf("模板已经应用 --》 %d",i);
+
+        if (i==10.1){
+
+            throw 1;//抛出
+        }
+    }
+    catch(...)//有抛出就完蛋
+    {
+        printf("\n 有异常！！");
+    }
+    
+    
+}
 
 int main(){
 
@@ -295,6 +331,11 @@ int main(){
     ci_1.add();
     ci_1.grow();//可以重写父类的
 
+    //模板应用
+    modle mod_1;
+    mod_1.print_model(10);
+    modle_1 <double> mod_2;//模板应用
+    mod_2.print_model(10.1);
     
 
 
