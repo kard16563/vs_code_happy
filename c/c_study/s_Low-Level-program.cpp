@@ -1,4 +1,19 @@
 #include<stdio.h>
+//头文件种类 346
+
+#undef NULL //删除预先定义的宏---》在头文件中
+#define NULL 1  //将其重新定义
+
+#include<stddef.h>  
+//提供了常用的定义   这里有个null 表示空指针---》null与stdio.h的一样
+//但这里面 有个 offsetof 可以计算结构起点（结构类型）到 指定成员间（成员的一个结构）
+//字节数
+
+    struct s{
+        char a;
+        int b[2];
+        float c;
+    };
 
     typedef unsigned char byte1;
     typedef unsigned int word1;
@@ -18,6 +33,19 @@
 
     }regs;
     
+    class haha {
+        private:
+            int a;
+            int b[2];
+            double c[3];
+        public:
+            void test();
+    };
+
+    void haha::test(){
+        printf(" \n  起点与成员的字节间隔 class ---》与a %d,与b %d,与c %d ",\
+    offsetof(haha,a),offsetof(haha,b),offsetof(haha,c)) ;
+    }
 
 int main(){
     unsigned int i,j,k;
@@ -65,7 +93,14 @@ int main(){
 
     volatile byte1 *uu;//告诉寄存器这个所指的东西常常变化 所以在编译的时候进行优化
 
+    printf("\n   TEST- 宏  %d",NULL);
 
+    printf(" \n  起点与成员的字节间隔 结构体 ---》与a %d,与b %d,与c %d ",\
+    offsetof(s,a),offsetof(s,b),offsetof(s,c));
+
+    haha aaa;
+    haha *ta;
+    ta=aaa.test;//指针再次深究........
 
 
     getchar();
