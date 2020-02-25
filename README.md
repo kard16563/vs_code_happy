@@ -4,9 +4,8 @@
 
 
 ##	neighbor : 
-				username | 	name	|address.com
-				-------  | ---------| ----------  
- 
-	
-			1	Daincy  | xdz 	| github   
-			2	Loriame	 |dn	| gitee  
+id	|	username	|	name	|	address.com
+----|	--------	|	----	|	----------  
+	|				|			|	
+1	|	Daincy		|	xdz 	|	github   
+2	|	Loriame		|	dn		|	gitee  
