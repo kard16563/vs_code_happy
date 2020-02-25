@@ -1,8 +1,9 @@
 # vs_code_diy
-address:
+#address:
 	git@github.com:kard16563/vs_code_diy.git
 
-neighbor :--->github.com
-	username - 	name
+#neighbor :--->github.com
+#	username - 	name	-address.com
 	
-	Daincy   -	xdz 
+*1	Daincy   -	xdz 	github
+*2	Loriame	 -	dn		gitee
