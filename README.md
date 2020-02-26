@@ -16,6 +16,9 @@
                      5.利用Python进行数据分析(第二版)(ing..)
                  B-> 1.PYTHON源码剖析（） 2.Unix-Linux编程实践教程（）3.《TC-PIP网络编程》（）
                  C-> 1.精通Python设计模式() 2.Python高级编程第2版()3.Python数据科学手册()
+				 
+				 
+				 
            branch->
                  A-> 1.vue(ing..) 2.鸟哥（ing..）3.flask开发(ing..) 4.windows核心编程（）
                      5.第一行代码（第2版）（ing..）6.《Python 3网络爬虫开发实战（）
