@@ -1,31 +1,3 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
- Python Documentation contents
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-.. toctree::
-
-   whatsnew/index.rst
-   tutorial/index.rst
-   using/index.rst
-   reference/index.rst
-   library/index.rst
-   extending/index.rst
-   c-api/index.rst
-   distributing/index.rst
-   installing/index.rst
-   howto/index.rst
-   faq/index.rst
-   glossary.rst
-
-   about.rst
-   bugs.rst
-   copyright.rst
-   license.rst
-
-.. to include legacy packaging docs in build
-
-.. toctree::
-   :hidden:
-
-   distutils/index.rst
-   install/index.rst
+version https://git-lfs.github.com/spec/v1
+oid sha256:18bb23f3bf1cdbf84f4e4a58fce1cd7968571c584b9d636eeb7077b4451acdeb
+size 569

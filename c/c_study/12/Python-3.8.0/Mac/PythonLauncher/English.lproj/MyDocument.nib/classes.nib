@@ -1,26 +1,3 @@
-{
-    IBClasses = (
-        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
-        {
-            ACTIONS = {"do_apply" = id; "do_cancel" = id; "do_reset" = id; "do_run" = id; }; 
-            CLASS = MyDocument; 
-            LANGUAGE = ObjC; 
-            OUTLETS = {
-                commandline = NSTextField; 
-                debug = NSButton; 
-                honourhashbang = NSButton; 
-                inspect = NSButton; 
-                interpreter = NSTextField; 
-                nosite = NSButton; 
-                optimize = NSButton; 
-                others = NSTextField; 
-                scriptargs = NSTextField; 
-                tabs = NSButton; 
-                verbose = NSButton; 
-                "with_terminal" = NSButton; 
-            }; 
-            SUPERCLASS = NSDocument; 
-        }
-    ); 
-    IBVersion = 1; 
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:0936bf5e38fef5ee774cf985f5fff29ec632a5d8da11e262cfa9fc98772f9fe1
+size 882

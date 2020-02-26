@@ -1,5 +1,3 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<WixLocalization Culture="en-us" xmlns="http://schemas.microsoft.com/wix/2006/localization">
-    <String Id="Descriptor">Core Interpreter</String>
-    <String Id="ShortDescriptor">core</String>
-</WixLocalization>
+version https://git-lfs.github.com/spec/v1
+oid sha256:e71c022f199970237b83863453e73895419880068db9227c6b0dfd3a591696ef
+size 260

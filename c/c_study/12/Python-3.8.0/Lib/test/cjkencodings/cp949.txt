@@ -1,9 +1,3 @@
-Œc¹æ°¢ÇÏ ¼„½ÃÄÝ¶ó
-
-¨À¨À³³!! ì×ÎúêÅÆÐ’æp±Å ¨Þ¨ÓÄR¢¯¢¯¢¯ ±àŠ– ¨Ñµ³ ¨À. .
-ä¬¿µ¨Ñ´ÉÈÂ . . . . ¼­¿ï·ï µ¯ÇÐëà Ê«ÄR ! ! !¤Ð.¤Ð
-ÈåÈåÈå ¤¡¤¡¤¡¡Ù¤Ð_¤Ð ¾îŠ ÅËÄâƒO µ®ÀÀ ¯hÎúµéëà ¨ÀµåƒO
-¼³j Ê«ÄR . . . . ±¼¾Öšf ¨Ñ±Å ¨Þt¨ÂƒO ì×ìÒô¹åüñé±î£Ž
-¿Í¾¬ÄR ! ! ä¬¿µ¨Ñ Ê«´É±Å ¡Ùß¾°ü ¾ø´É±Å´É ä¬´ÉµØÄR ±Û¾ÖŠÛ
-¨Þ·ÁµàÎú šÃÇ´½¤ÄR ¾îŠ ì×ìÒô¹åüñéšÄ¨ïµéÚ!! ¨À¨À³³¢½ ¡Ò¡Ò*
-
+version https://git-lfs.github.com/spec/v1
+oid sha256:b86fcc1361dd2f83e54cfd586192dbff7ab8a89f50b003ed8deb706cffd36fae
+size 355

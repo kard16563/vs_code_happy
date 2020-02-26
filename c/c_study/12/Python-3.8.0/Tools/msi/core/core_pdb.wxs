@@ -1,14 +1,3 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-    <Product Id="*" Language="!(loc.LCID)" Name="!(loc.TitlePdb)" Version="$(var.Version)" Manufacturer="!(loc.Manufacturer)" UpgradeCode="$(var.UpgradeCode)">
-        <Package InstallerVersion="300" Compressed="yes" InstallScope="perUser" Platform="$(var.Platform)" />
-        <MediaTemplate EmbedCab="yes" CompressionLevel="high" />
-        
-        <PropertyRef Id="UpgradeTable" />
-        
-        <Feature Id="Symbols" AllowAdvertise="no" Title="!(loc.TitlePdb)" Description="!(loc.DescriptionPdb)">
-            <ComponentGroupRef Id="core_symbols" />
-            <ComponentRef Id="OptionalFeature" />
-        </Feature>
-    </Product>
-</Wix>
+version https://git-lfs.github.com/spec/v1
+oid sha256:aaa022c5771704af3d1ece1a245a2ee90c8ad38d692eba5890e5cdac92994003
+size 760

@@ -1,12 +1,3 @@
-{
-    IBClasses = (
-        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
-        {
-            ACTIONS = {showPreferences = id; }; 
-            CLASS = MyAppDelegate; 
-            LANGUAGE = ObjC; 
-            SUPERCLASS = NSObject; 
-        }
-    ); 
-    IBVersion = 1; 
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:4423f87bd4ade0263fa9f63bbc7896023cb4e1ab0c6e38d7dbca5110ee16e4dc
+size 308

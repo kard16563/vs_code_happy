@@ -1,28 +1,3 @@
-# Not referenced from the documentation, but builds the database file the other
-# code snippets expect.
-
-import sqlite3
-import os
-
-DB_FILE = "mydb"
-
-if os.path.exists(DB_FILE):
-    os.remove(DB_FILE)
-
-con = sqlite3.connect(DB_FILE)
-cur = con.cursor()
-cur.execute("""
-        create table people
-        (
-          name_last      varchar(20),
-          age            integer
-        )
-        """)
-
-cur.execute("insert into people (name_last, age) values ('Yeltsin',   72)")
-cur.execute("insert into people (name_last, age) values ('Putin',     51)")
-
-con.commit()
-
-cur.close()
-con.close()
+version https://git-lfs.github.com/spec/v1
+oid sha256:bc74c27df66711025a3b790896c2e386b1d5ed022589aa49c807b34b15129d42
+size 619

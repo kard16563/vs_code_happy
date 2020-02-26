@@ -1,19 +1,3 @@
-.. _crypto:
-
-**********************
-Cryptographic Services
-**********************
-
-.. index:: single: cryptography
-
-The modules described in this chapter implement various algorithms of a
-cryptographic nature.  They are available at the discretion of the installation.
-On Unix systems, the :mod:`crypt` module may also be available.
-Here's an overview:
-
-
-.. toctree::
-
-   hashlib.rst
-   hmac.rst
-   secrets.rst
+version https://git-lfs.github.com/spec/v1
+oid sha256:72f2a21d04890948aee56728ec675aee8c996a786cb89ac8d5bfdb0972b9993a
+size 430

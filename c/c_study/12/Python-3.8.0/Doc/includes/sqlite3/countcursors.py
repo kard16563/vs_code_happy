@@ -1,17 +1,3 @@
-import sqlite3
-
-class CountCursorsConnection(sqlite3.Connection):
-    def __init__(self, *args, **kwargs):
-        sqlite3.Connection.__init__(self, *args, **kwargs)
-        self.numcursors = 0
-
-    def cursor(self, *args, **kwargs):
-        self.numcursors += 1
-        return sqlite3.Connection.cursor(self, *args, **kwargs)
-
-con = sqlite3.connect(":memory:", factory=CountCursorsConnection)
-cur1 = con.cursor()
-cur2 = con.cursor()
-print(con.numcursors)
-
-con.close()
+version https://git-lfs.github.com/spec/v1
+oid sha256:1df2838d17ea5a6c6c73b8dcd3d52eb172054d46c9aced35c3d0ba1940fe376c
+size 486

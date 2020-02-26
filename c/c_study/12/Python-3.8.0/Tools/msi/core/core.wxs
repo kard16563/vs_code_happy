@@ -1,13 +1,3 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-    <Product Id="*" Language="!(loc.LCID)" Name="!(loc.Title)" Version="$(var.Version)" Manufacturer="!(loc.Manufacturer)" UpgradeCode="$(var.UpgradeCode)">
-        <Package InstallerVersion="300" Compressed="yes" InstallScope="perUser" Platform="$(var.Platform)" />
-        <MediaTemplate EmbedCab="yes" CompressionLevel="high" />
-        
-        <PropertyRef Id="UpgradeTable" />
-        
-        <Feature Id="DefaultFeature" AllowAdvertise="no" Title="!(loc.Title)" Description="!(loc.Description)">
-            <ComponentGroupRef Id="core_dll" />
-        </Feature>
-    </Product>
-</Wix>
+version https://git-lfs.github.com/spec/v1
+oid sha256:e16adf14bf3fab9be6f41a9add49f18e49a1f99d37ea7e1503944b00a3b35ccf
+size 703

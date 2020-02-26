@@ -1,23 +1,3 @@
-<?xml version="1.0"?>
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-    <Fragment>
-        <PackageGroup Id="crt">
-            <MsiPackage Id="ucrt_AllUsers"
-                        SourceFile="ucrt.msi"
-                        Compressed="$(var.CompressMSI)"
-                        DownloadUrl="$(var.DownloadUrl)"
-                        ForcePerMachine="yes"
-                        InstallCondition="InstallAllUsers and not CRTInstalled and (Include_core or Include_exe or Include_pip) and not LauncherOnly">
-                <MsiProperty Name="TARGETDIR" Value="[TargetDir]" />
-            </MsiPackage>
-            <MsiPackage Id="ucrt_JustForMe"
-                        SourceFile="ucrt.msi"
-                        Compressed="$(var.CompressMSI)"
-                        DownloadUrl="$(var.DownloadUrl)"
-                        ForcePerMachine="no"
-                        InstallCondition="not InstallAllUsers and not CRTInstalled and (Include_core or Include_exe or Include_pip) and not LauncherOnly">
-                <MsiProperty Name="TARGETDIR" Value="[TargetDir]" />
-            </MsiPackage>
-        </PackageGroup>
-    </Fragment>
-</Wix>
+version https://git-lfs.github.com/spec/v1
+oid sha256:d3d7d3de1fad289f7e7c9316b5e1f6c99a92608cdfdca503cd9bfaea4cbc446b
+size 1184
