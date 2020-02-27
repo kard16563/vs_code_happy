@@ -1,5 +1,7 @@
 ﻿  python.c
   python.vcxproj -> E:\the_c_of_vs_code\c\c_study\12\Python-3.8.0\PCbuild\win32\python_d.exe
+  
+  在调用堆栈中这个在最下面这里是程序的入口 在 longobject 311 行 打上断点  
   Traceback (most recent call last):
     File "E:\the_c_of_vs_code\c\c_study\12\Python-3.8.0\PC\validate_ucrtbase.py", line 8, in <module>
       from ctypes import (c_buffer, POINTER, byref, create_unicode_buffer,

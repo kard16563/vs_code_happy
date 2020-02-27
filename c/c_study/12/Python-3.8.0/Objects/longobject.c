@@ -308,12 +308,16 @@ _PyLong_Copy(PyLongObject *src)
 
 PyObject *
 PyLong_FromLong(long ival)
-{
+{   //∂œµ„≤‚ ‘
+
+    
     PyLongObject *v;
     unsigned long abs_ival;
     unsigned long t;  /* unsigned so >> doesn't propagate sign bit */
     int ndigits = 0;
     int sign;
+
+   // printf("--123--- ∂œµ„≤‚ ‘");
 
     CHECK_SMALL_INT(ival);
 
