@@ -19,6 +19,25 @@ int main(int argc,char *argv[]){
 printf("\n\n\n\n\n\n\n");
 
 
+     char **argv;
+     argc = 5;
+     char** tt1, ** tt2,**tt3,**tt4,**tt0; //方法ok
+     tt0 = &argv[0];
+    *tt0 = "E:\\yolo\\yolo-windows-master\\build\\darknet\\x64\\darknet_no_gpu.exe";
+     tt1=&argv[1];
+     *tt1="detect";
+     tt2=&argv[2];
+     *tt2="cfg/yolov3-tiny.cfg";
+     tt3= &argv[3];
+     *tt3 = "yolov3-tiny.weights";
+     tt4= &argv[4];
+     *tt4 = NULL;
+
+     char* s = *tt0;
+     char *temp="aa";
+     s[0] = *temp;
+
+
 
 
     printf("argc 是命令行 参数的数量 包括程序本身  -》%d \
