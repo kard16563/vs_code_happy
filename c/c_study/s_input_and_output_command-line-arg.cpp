@@ -1,5 +1,5 @@
 #include<stdio.h>
-
+#include <stdlib.h>
 int main(int argc,char *argv[]){
 
 
@@ -17,25 +17,42 @@ int main(int argc,char *argv[]){
 
 
 printf("\n\n\n\n\n\n\n");
+      const  char *yy="1000\0";
+      const  char *yya="6\0";//字符串乱码------》
+        //yya=(char *)malloc(sizeof(char)*10);
+        //*yya="11111";
 
+    const char **argv1;
+     //argc = 5;
+    const char*** tt1, ** tt2,**tt3,**tt4,**tt0; //方法ok
 
-     char **argv;
-     argc = 5;
-     char** tt1, ** tt2,**tt3,**tt4,**tt0; //方法ok
-     tt0 = &argv[0];
-    *tt0 = "E:\\yolo\\yolo-windows-master\\build\\darknet\\x64\\darknet_no_gpu.exe";
-     tt1=&argv[1];
-     *tt1="detect";
-     tt2=&argv[2];
-     *tt2="cfg/yolov3-tiny.cfg";
-     tt3= &argv[3];
-     *tt3 = "yolov3-tiny.weights";
-     tt4= &argv[4];
-     *tt4 = NULL;
+     argv1=&yy;
+     tt1=(&argv1)+1;
 
-     char* s = *tt0;
-     char *temp="aa";
-     s[0] = *temp;
+     *( (&argv1)+1)=&yya;
+     int add=&argv1[1]-&argv1[0];
+//argv1[1],*(*(&argv1+2)),add  %s %s  add %d\n
+     printf(" \n\n *(argv1[0]) ---> %s -->%s ,%s ",argv1[0],argv1[1],*(*(&argv1+1)) );
+     printf("\n");
+
+    //   char*tt1_1="E:\\yolo\\yolo-windows-master\\build\\darknet\\x64\\darknet_no_gpu.exe";
+    //     tt0 = &argv1[0];
+    //     *argv1[0]=*tt1_1;
+       // *tt0 =  tt1_1;
+     
+     //tt1=&argv1[1];
+    //*tt1="detect";
+
+    //  tt2=&argv1[2];
+    //  *tt2="cfg/yolov3-tiny.cfg";
+    //  tt3= &argv1[3];
+    //  *tt3 = "yolov3-tiny.weights";
+    //  tt4= &argv1[4];
+    //  *tt4 = NULL;
+
+    //  char* s = *tt0;
+    //  char *temp="aa";
+    //  s[0] = *temp;
 
 
 
