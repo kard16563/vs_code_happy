@@ -1,1 +1,2 @@
-123456
+gibberish 乱码
+concatenate 连接--字符串连接

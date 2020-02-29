@@ -1,5 +1,15 @@
 #include<stdio.h>
 #include <stdlib.h>
+#include<string.h>
+
+
+char *gibberish(char *c){//处理乱码 +1 确保后面为零 这样保证可以正确停止
+        static char *str3=(char *) malloc( strlen(c)+1 );
+        strcpy (str3,c);
+        printf("\n  -->%x ",&str3);
+        return str3;//返回新的地址
+    }
+
 int main(int argc,char *argv[]){
 
 
@@ -17,31 +27,50 @@ int main(int argc,char *argv[]){
 
 
 printf("\n\n\n\n\n\n\n");
-      const  char *yy="1000\0";
-      const  char *yya="6\0";//字符串乱码------》
-        //yya=(char *)malloc(sizeof(char)*10);
-        //*yya="11111";
+        char *yy="kkkk";
+        //(char *) malloc( sizeof(char)*10 );
+        //strcpy(yy, "sssss");
+        char *yya="ppppp";
+        //(char *) malloc( sizeof(char)*10 );//字符串乱码------》
+        //strcpy(yya, "kkkk");
+        char **argv1;
+        //char **argv1=(char **) malloc( sizeof(char)*21 );
+    
+     char** tt1;
 
-    const char **argv1;
-     //argc = 5;
-    const char*** tt1, ** tt2,**tt3,**tt4,**tt0; //方法ok
-
-     argv1=&yy;
-     tt1=(&argv1)+1;
-
-     *( (&argv1)+1)=&yya;
-     int add=&argv1[1]-&argv1[0];
-//argv1[1],*(*(&argv1+2)),add  %s %s  add %d\n
-     printf(" \n\n *(argv1[0]) ---> %s -->%s ,%s ",argv1[0],argv1[1],*(*(&argv1+1)) );
+     argv1=&yy;//指向 指针yy的地址yy指向文字
+     tt1=&(*argv1)+1;//设置指针tt1的指向为yy的地址的下一个空白区域
+     *tt1=gibberish(yya) ;//更新yy地址下一个空白区域的所指向的值 为某个指向文字指针的地址
+    //选中 gibberish 按f12
+     //*( (&argv1)+1)=&yya;--->码已经
+    printf("\n");
+    int add=&argv1[1]-&argv1[0];
+    char **check1,**check2;
+     check1=&argv1[0];
+     check2=&argv1[1];
+     
+     printf(" \n\n *(argv1[0])   ---> %s -->%s --- %s ",argv1[0],argv1[1],*(tt1) );
      printf("\n");
 
-    //   char*tt1_1="E:\\yolo\\yolo-windows-master\\build\\darknet\\x64\\darknet_no_gpu.exe";
-    //     tt0 = &argv1[0];
-    //     *argv1[0]=*tt1_1;
-       // *tt0 =  tt1_1;
+//////认知整理
+     char **te;
+     char *a0="1000001";
+     te=&a0;
+     char **te2;
+     te2=(&a0)+1;//地址不能单独单独当做变量用引入一个构造的辅助性的
+     *te2="2555555552";
+     printf(" \n\n  new test  %s ____ %s  ",te[0],te[2]);
+    
      
-     //tt1=&argv1[1];
+
+    //  char*tt1_1="E:\\yolo\\yolo-windows-master\\build\\darknet\\x64\\darknet_no_gpu.exe";
+    //  tt0 = &argv1[0];
+    //  *argv1[0]=*tt1_1;
+    // *tt0 =  tt1_1;
+     //char **argv;
     //*tt1="detect";
+     //argv[1]=tt1;
+    
 
     //  tt2=&argv1[2];
     //  *tt2="cfg/yolov3-tiny.cfg";
