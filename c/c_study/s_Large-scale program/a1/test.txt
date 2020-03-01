@@ -1,2 +1,5 @@
-gibberish 乱码
-concatenate 连接--字符串连接
+1 gibberish 1乱码
+2 concatenate 2连接--2字符串连接
+c://123//456//xx.txt
+d://123//456//xx.txt
+e://123//456//xx.txt
