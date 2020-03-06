@@ -3,6 +3,7 @@
      git@github.com:kard16563/vs_code_diy.git
 	 
 	 觉得快要成功的时候、轻而易举就可以解决的时候 往往是最吃劲的时候 弄不好会全盘皆输
+	 虽然有时间也要认认真真与马马虎虎.
 	 
 ### neighbor : 
             id    |        sername    |     name   |    address.com      |remarks/ps
