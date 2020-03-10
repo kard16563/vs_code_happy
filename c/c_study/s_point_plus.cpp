@@ -37,7 +37,7 @@ void print_str(char *p){
     }
 }
 
-int ahah(){
+int ahah(  ){
     printf("\n\n\n  本函数由指针调用 ----");
     return 88;
 }
@@ -48,6 +48,60 @@ int haha( int (*f)(),int a ){
     printf("\n\n   ----- > %d---- ",a);
     return 99;
 }
+
+int aa12( int i,int b){
+    
+    printf("%d",i);
+    return i;
+
+}
+
+
+int haha2( int (*f)(int i,int ii),int a ){
+    printf(" int (*f)()haha2 --<  %d",(*f)(a,a)  );//-->调用函数
+    printf("\n\n   ----- > %d---- ",a);
+    return 99;
+}
+
+
+/*void qsort(void *base, size_t nmemb,
+                   size_t size,
+                   int(*compar)(const void *, const void *)
+                   );
+because void* pointers can point to anything. Because we don't know the size of the individual elements in a void* array,
+ we must give qsort the number of elements, nmemb, of the array to be sorted, base, 
+ in addition to the standard requirement of giving the length, size, of the input. 
+
+But what we're really interested in is the compar argument to qsort: 
+it's a function pointer that takes two void *s and returns an int. 
+This allows anyone to specify how to sort the elements of the array 
+base without having to write a specialized sorting algorithm. 
+Note, also, that compar returns an int; 
+the function pointed to should return -1 
+if the first argument is less than the second, 
+0 if they are equal, or 1 if the second is less than the first.                   
+                   
+                   */
+int int_sorter( const void *first_arg, const void *second_arg )
+{
+    printf("\n run ");
+    int first = *(int*)first_arg;
+    int second = *(int*)second_arg;
+    printf(" fir %d sec %d",first,second);
+    if ( first < second )
+    {
+        return -1;
+    }
+    else if ( first == second )
+    {
+        return 0;
+    }
+    else
+    {
+        return 1;
+    }
+}
+
 
 int main(){
     int *i;//没初始化就没有申请位置
@@ -110,6 +164,28 @@ int main(){
 
 
     haha(   ahah  , 456  );
+
+    int  (*fun) (int ii ,int i) =& aa12;//直接指向喊
+    (*fun)(5,5);
+
+
+    int array[10];
+    int ii=0;
+    /* fill array */
+    for ( ii = 0; ii<10; ii=ii+1 )
+    {
+       array[ ii ] = 10 - ii;
+       printf("ii %d  - %d \n",ii,array[ ii ] );
+    }
+    qsort( array, 10 , sizeof( int ), int_sorter );
+    for ( ii = 0; ii < 10; ii=ii+1 )
+     {
+         printf ( "%d\n" ,array[ii] );
+     }
+
+
+    //haha2(  aa12(5,6) ,456);
+    printf("555");
 
 
 //     char* src=(char*)malloc(7);

@@ -36,6 +36,7 @@ struct city_info{
 };
 
 int compare_city(const void *key_ptr,const void *elment_ptr){
+    printf("\n run %s %s ",(char*)key_ptr,(char*)((city_info*)elment_ptr)->city);
     return strcmp((char*)key_ptr,((city_info*)elment_ptr)->city);
 }
 
@@ -65,7 +66,7 @@ int main(){
     };
                                                     //这里是元素的数量
     ptr11=(city_info *)bsearch(city_name,mileage,sizeof(mileage)/sizeof(mileage[0]),
-                    sizeof(mileage[0]),compare_city(city_name,mileage));//问题
+                    sizeof(mileage[0]),compare_city );//问题
                     //每个元素的大小     //这里指向比较函数
     if(ptr11 !=NULL){
         printf("%s,%d",ptr11->city,ptr11->miles);
