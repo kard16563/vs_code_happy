@@ -16,7 +16,7 @@
 
 ### plan:
            main->
-                 A-> 1.c语言现代方法（ing..） 2.一站式C(ing...) 3.c++(ing..) 4.研磨设计模式（ing..）
+                 A-> 1.c语言现代方法（✿✿ヽ(°▽°)ノ✿完结于2020 3/18 ） 2.一站式C(ing...) 3.c++(ing..) 4.研磨设计模式（ing..）
                      5.利用Python进行数据分析(第二版)(ing..)6.数据结构与算法分析C++描述第三版(ing..)
 					 7.数据结构与算法分析C描述第二版（ing..）8.高质量程序设计指南 第三版 修订版(ing..)
 					 
@@ -40,3 +40,13 @@
 ###  editor 
      http://mahua.jser.me/  
      https://blog.csdn.net/u012067966/article/details/50736647?depth_1-utm_source=distribute.pc_relevant.none-task&utm_source=distribute.pc_relevant.none-task
+	 
+	 in:name example	名字中有“example”
+     in:readme example	readme中有“example”
+     in:description example	描述中有“example”
+
+     stars:>1000	star>1000
+     forks:>1000	fork>1000
+     pushed:>2019-09-01	2019年9月1日后有更新的
+
+language:java	用Java编写的项目
