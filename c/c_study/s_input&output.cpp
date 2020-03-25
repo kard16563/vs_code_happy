@@ -47,7 +47,6 @@ int main(){
 
         //fprintf(stream,"\n writed %d by fprintf \0",100);//写入文件中
         //printf("\n  p-> %p  \n ",stream);
-       
 
         fclose(stream);
 
@@ -63,7 +62,7 @@ int main(){
         }
 
         char a,b;
-       int n=fscanf(stream2,"%c%c",&a,&b);
+        int n=fscanf(stream2,"%c%c",&a,&b);
         printf(" %c %c 是否读取成功 -》 %d >0 ",a,b,n);//将文件中的数据读到变量中
 
         fclose(stream2);
