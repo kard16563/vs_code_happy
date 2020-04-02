@@ -1,5 +1,5 @@
 #include<stdio.h>
-/* 用gdbc 调试程序*/
+/* 用gdbc 调试程序  s_gdb_debugging_tool.cpp   */
 
 int  add_range(int low,int high){
     int i,sum;
