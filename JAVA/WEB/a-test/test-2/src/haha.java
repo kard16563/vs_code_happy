@@ -6,13 +6,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-
+@WebServlet(name="haha",urlPatterns = "/haha")
 public class haha extends HttpServlet {
 private String message1;
 
             @Override
             public void init() throws ServletException {
-            message1 = "kkk 666Hello world, this message is from servlet!";
+            message1 = "kkk /////666Hello world, this message is from servlet!";
             }
 
             @Override
