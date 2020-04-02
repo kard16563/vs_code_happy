@@ -2,7 +2,7 @@
 /* 用gdbc 调试程序  s_gdb_debugging_tool.cpp   */
 
 int  add_range(int low,int high){
-    int i,sum;
+    int i=0,sum=0;
     for (i=low;i<=high;i++)
         sum=sum +i;
         return sum;
