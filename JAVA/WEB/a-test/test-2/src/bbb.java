@@ -20,6 +20,8 @@ public class bbb extends HttpServlet {
         //设置响应内容类型  
         resp.setContentType("text/html");
 
+
+
         //设置逻辑实现  
         PrintWriter out = resp.getWriter();
         out.println("<h1>  " + message1 + "</h1>");

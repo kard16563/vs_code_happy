@@ -32,5 +32,7 @@
         <jarDirectory url="file://$MODULE_DIR$/web/WEB-INF/lib" recursive="false" />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="commons-fileupload-1.2.2" level="project" />
+    <orderEntry type="library" name="mysql-connector-java-5.0.8-bin" level="project" />
   </component>
 </module>
