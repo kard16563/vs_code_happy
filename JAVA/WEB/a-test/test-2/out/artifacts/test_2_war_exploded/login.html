@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>登录页面</title>
+</head>
+<body>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--传回后端的用utf-8 -->
+
+<form action="login" method="post" ><!--寻找那边的 post 方法-->
+    <h1>支持中文</h1>
+    账号: <input type="text" name="name"> <br>
+    密码: <input type="password" name="password"> <br>
+    <input type="submit" value="登录">
+</form>
+
+<br>
+<br>
+
+<form action="login2" method="post">
+    <p> 这个可以分页跳转  </p>
+    账号2: <input type="text" name="name"> <br>
+    密码2: <input type="password" name="password"> <br>
+    <input type="submit" value="登录">
+</form>
+
+<br>
+
+
+
+
+<form action="response" method="post">
+
+    账号3: <input type="text" name="name"> <br>
+    <input type="submit" value="响应式的跳转-- 下载">
+</form>
+
+<br>
+
+<a href="/response" >
+    <button>响应式的跳转 get</button>
+</a>
+</body>
+</html>
