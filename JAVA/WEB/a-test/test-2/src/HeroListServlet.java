@@ -25,7 +25,11 @@ public class HeroListServlet extends HttpServlet {
 
         String trFormat = "<tr><td>%d</td><td>%s</td><td>%f</td><td>%d</td></tr>\r\n";
 
+        int i=0;
         for (Hero hero : heros) {
+
+            i=i+1;
+            System.out.println("88888---->"+i);
             String tr = String.format(trFormat, hero.getId(), hero.getName(), hero.getHp(), hero.getDamage());
             sb.append(tr);
         }
