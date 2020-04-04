@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>用AJAX以JSON方式提交数据</title>
+    <script type="text/javascript" src="./jquery.min.js"></script>
+</head>
+<body>
+<form >
+<!--    separation_of _front _and_ rear_ ends-->
+    名称：<input type="text" id="name"/><br/>
+    血量：<input type="text" id="hp"/><br/>
+    <input type="button" value="提交" id="sender">
+</form>
+<div id="messageDiv"></div>
+
+<script>
+    $('#sender').click(function(){
+        var name=document.getElementById('name').value;
+        var hp=document.getElementById('hp').value;
+        var hero={"name":name,"hp":hp};
+        var url="/submitServlet";
+        console.log("3333333");
+
+        $.post(
+            url,
+            {
+
+                "data":JSON.stringify(hero)
+            },
+            function(data) {
+                console.log("555555555");
+                alert("提交成功，请在Tomcat控制台查看服务端接收到的数据");
+            });
+        console.log("66666");
+
+    });
+</script>
+</body>
+
+</body>
+</html>
