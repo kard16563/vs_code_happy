@@ -9,17 +9,23 @@
             id    |        sername    |     name   |    address.com      |remarks/ps
             1     |     Daincy     |     xdz    |    github           |.....
             2     |     Loriame    |     dn     |    gitee            |.....
+			3     |     Lo1iame    |     dn     |    github           |.....
+			4     |     TNTsama11  |     bls    |    github           |.....
 
 ### dalao :
             address                 |       main           
             haolly.com                      front-end -game
 			YuleZhang               |       stu
+### web :
+           apinchoftnt.xyz          |       bls
+		   3w.lolimakeus.fun:81     |       dn
 
 ### plan:
            main->
                  A-> 1.c语言现代方法（✿✿ヽ(°▽°)ノ✿完结于2020 3/18 ） 2.一站式C(ing...) 3.c++(ing..) 4.研磨设计模式（ing..）
                      5.利用Python进行数据分析(第二版)(ing..)6.数据结构与算法分析C++描述第三版(ing..)
 					 7.数据结构与算法分析C描述第二版（ing..）8.高质量程序设计指南 第三版 修订版(ing..)
+					 9.C++标准库++第2版()
 					 
                  B-> 1.PYTHON源码剖析（） 2.Unix-Linux编程实践教程（）3.《TC-PIP网络编程*韩国人》（）
 				 
