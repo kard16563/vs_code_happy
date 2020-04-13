@@ -1,4 +1,5 @@
-//s_gdb_debug_watchpoint.cpp
+//s_gdb_debug_watchpoint.cpp 
+//E:\the_c_of_vs_code\c\c_study>gcc -g s_gdb_debug_watchpoint.cpp -o deb2
 #include<stdio.h>
 
 int main( void ){
