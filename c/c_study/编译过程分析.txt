@@ -1,0 +1,157 @@
+#执行的命令
+#gcc -v s_the_c_with_the_assembly_language.cpp -o s_c_and_as_2 -t > 编译过程分析.txt
+
+
+Using built-in specs.
+COLLECT_GCC=gcc
+COLLECT_LTO_WRAPPER=E:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/7.3.0/lto-wrapper.exe
+Target: x86_64-w64-mingw32
+Configured with: ../../../src/gcc-7.3.0/configure --host=x86_64-w64-mingw32 --build=x86_64-w64-mingw32 --target=x86_64-w64-mingw32 --prefix=/mingw64 --with-sysroot=/c/mingw730/x86_64-730-win32-seh-rt_v5-rev0/mingw64 --enable-shared --enable-static --disable-multilib --enable-languages=c,c++,fortran,lto --enable-libstdcxx-time=yes --enable-threads=win32 --enable-libgomp --enable-libatomic --enable-lto --enable-graphite --enable-checking=release --enable-fully-dynamic-string --enable-version-specific-runtime-libs --enable-libstdcxx-filesystem-ts=yes --disable-libstdcxx-pch --disable-libstdcxx-debug --enable-bootstrap --disable-rpath --disable-win32-registry --disable-nls --disable-werror --disable-symvers --with-gnu-as --with-gnu-ld --with-arch=nocona --with-tune=core2 --with-libiconv --with-system-zlib --with-gmp=/c/mingw730/prerequisites/x86_64-w64-mingw32-static --with-mpfr=/c/mingw730/prerequisites/x86_64-w64-mingw32-static --with-mpc=/c/mingw730/prerequisites/x86_64-w64-mingw32-static --with-isl=/c/mingw730/prerequisites/x86_64-w64-mingw32-static --with-pkgversion='x86_64-win32-seh-rev0, Built by MinGW-W64 project' --with-bugurl=https://sourceforge.net/projects/mingw-w64 CFLAGS='-O2 -pipe -fno-ident -I/c/mingw730/x86_64-730-win32-seh-rt_v5-rev0/mingw64/opt/include -I/c/mingw730/prerequisites/x86_64-zlib-static/include -I/c/mingw730/prerequisites/x86_64-w64-mingw32-static/include' CXXFLAGS='-O2 -pipe -fno-ident -I/c/mingw730/x86_64-730-win32-seh-rt_v5-rev0/mingw64/opt/include -I/c/mingw730/prerequisites/x86_64-zlib-static/include -I/c/mingw730/prerequisites/x86_64-w64-mingw32-static/include' CPPFLAGS=' -I/c/mingw730/x86_64-730-win32-seh-rt_v5-rev0/mingw64/opt/include -I/c/mingw730/prerequisites/x86_64-zlib-static/include -I/c/mingw730/prerequisites/x86_64-w64-mingw32-static/include' LDFLAGS='-pipe -fno-ident -L/c/mingw730/x86_64-730-win32-seh-rt_v5-rev0/mingw64/opt/lib -L/c/mingw730/prerequisites/x86_64-zlib-static/lib -L/c/mingw730/prerequisites/x86_64-w64-mingw32-static/lib '
+Thread model: win32
+gcc version 7.3.0 (x86_64-win32-seh-rev0, Built by MinGW-W64 project)
+COLLECT_GCC_OPTIONS='-v' '-o' 's_c_and_as_2.exe' '-t' '-mtune=core2' '-march=nocona'
+ 
+ E:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/7.3.0/cc1plus.exe -quiet -v -iprefix E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/ -U_REENTRANT s_the_c_with_the_assembly_language.cpp -quiet -dumpbase s_the_c_with_the_assembly_language.cpp -mtune=core2 -march=nocona -auxbase s_the_c_with_the_assembly_language -version -o C:\Users\Lenovo\AppData\Local\Temp\ccXH8DJN.s---->首先编译成了汇编语言 汇编程序
+                                                    #编译器--》cc1plus.exe
+
+
+
+GNU C++14 (x86_64-win32-seh-rev0, Built by MinGW-W64 project) version 7.3.0 (x86_64-w64-mingw32)
+        compiled by GNU C version 7.3.0, GMP version 6.1.2, MPFR version 4.0.1, MPC version 1.1.0, isl version isl-0.18-GMP
+
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+ignoring duplicate directory "E:/mingw64/lib/gcc/../../lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++"
+ignoring duplicate directory "E:/mingw64/lib/gcc/../../lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32"
+ignoring duplicate directory "E:/mingw64/lib/gcc/../../lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward"
+ignoring duplicate directory "E:/mingw64/lib/gcc/../../lib/gcc/x86_64-w64-mingw32/7.3.0/include"
+ignoring nonexistent directory "C:/mingw730/x86_64-730-win32-seh-rt_v5-rev0/mingw64C:/msys64-2/mingw64/lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../include"
+ignoring duplicate directory "E:/mingw64/lib/gcc/../../lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed"
+ignoring duplicate directory "E:/mingw64/lib/gcc/../../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/include"
+ignoring nonexistent directory "C:/mingw730/x86_64-730-win32-seh-rt_v5-rev0/mingw64/mingw/include"
+#include "..." search starts here:
+#include <...> search starts here:
+ E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++
+ E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32
+ E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward
+ E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/include
+ E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed
+ E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/include
+End of search list.
+GNU C++14 (x86_64-win32-seh-rev0, Built by MinGW-W64 project) version 7.3.0 (x86_64-w64-mingw32)
+        compiled by GNU C version 7.3.0, GMP version 6.1.2, MPFR version 4.0.1, MPC version 1.1.0, isl version isl-0.18-GMP
+
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+Compiler executable checksum: 0a188eef8a5d0757d516bbf71573e0cd
+COLLECT_GCC_OPTIONS='-v' '-o' 's_c_and_as_2.exe' '-t' '-mtune=core2' '-march=nocona'
+ 
+ 
+ E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/bin/as.exe -v -o C:\Users\Lenovo\AppData\Local\Temp\cc5pBH2p.o C:\Users\Lenovo\AppData\Local\Temp\ccXH8DJN.s
+                                                                                                                                           as被as编译为了cc5pBH2p.o     《----------Temp\ccXH8DJN.s
+                                                                                                                                           生成之后再连接以下的其他目标文件
+
+
+
+
+GNU assembler version 2.30 (x86_64-w64-mingw32) using BFD version (GNU Binutils) 2.30
+COMPILER_PATH=E:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/7.3.0/;E:/mingw64/bin/../libexec/gcc/;E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/bin/
+LIBRARY_PATH=E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/;E:/mingw64/bin/../lib/gcc/;E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/../lib/;E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../lib/;E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/;E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../
+COLLECT_GCC_OPTIONS='-v' '-o' 's_c_and_as_2.exe' '-t' '-mtune=core2' '-march=nocona'
+ E:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/7.3.0/collect2.exe -plugin E:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/7.3.0/liblto_plugin-0.dll -plugin-opt=E:/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/7.3.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\Users\Lenovo\AppData\Local\Temp\ccTJMPWy.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lmoldname -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-liconv -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lmoldname -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt --sysroot=C:/mingw730/x86_64-730-win32-seh-rt_v5-rev0/mingw64 -m i386pep -Bdynamic -o s_c_and_as_2.exe -t E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/crtbegin.o -LE:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0 -LE:/mingw64/bin/../lib/gcc -LE:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/../lib -LE:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../lib -LE:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib -LE:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../.. C:\Users\Lenovo\AppData\Local\Temp\cc5pBH2p.o -lmingw32 -lgcc -lgcc_eh -lmoldname -lmingwex
+-lmsvcrt -ladvapi32 -lshell32 -luser32 -lkernel32 -liconv -lmingw32 -lgcc -lgcc_eh -lmoldname -lmingwex -lmsvcrt E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/crtend.o
+COLLECT_GCC_OPTIONS='-v' '-o' 's_c_and_as_2.exe' '-t' '-mtune=core2' '-march=nocona'
+
+
+
+
+#crt.o存在的路径--》 E:\mingw64\x86_64-w64-mingw32\lib
+#查看编译器提供的目标文件.o里有啥 用nm命令
+#E:\mingw64\x86_64-w64-mingw32\lib>nm crt1.o
+
+
+E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/bin/ld.exe: mode i386pep
+E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o
+
+
+E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/crtbegin.o
+
+
+C:\Users\Lenovo\AppData\Local\Temp\cc5pBH2p.o
+(E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/../lib/libmingw32.a)lib64_libmingw32_a-gccmain.o
+(E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/../lib/libmingw32.a)lib64_libmingw32_a-natstart.o
+(E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/../lib/libmingw32.a)lib64_libmingw32_a-wildcard.o
+(E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/../lib/libmingw32.a)lib64_libmingw32_a-charmax.o
+(E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/../lib/libmingw32.a)lib64_libmingw32_a-dllargv.o
+(E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/../lib/libmingw32.a)lib64_libmingw32_a-gs_support.o
+(E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/../lib/libmingw32.a)lib64_libmingw32_a-_newmode.o
+(E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/../lib/libmingw32.a)lib64_libmingw32_a-tlssup.o
+(E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/../lib/libmingw32.a)lib64_libmingw32_a-cinitexe.o
+(E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/../lib/libmingw32.a)lib64_libmingw32_a-merr.o
+(E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/../lib/libmingw32.a)lib64_libmingw32_a-CRT_fp10.o
+(E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/../lib/libmingw32.a)lib64_libmingw32_a-mingw_helpers.o
+(E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/../lib/libmingw32.a)lib64_libmingw32_a-pseudo-reloc.o
+(E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/../lib/libmingw32.a)lib64_libmingw32_a-xtxtmode.o
+(E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/../lib/libmingw32.a)lib64_libmingw32_a-crt_handler.o
+(E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/../lib/libmingw32.a)lib64_libmingw32_a-tlsthrd.o
+(E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/../lib/libmingw32.a)lib64_libmingw32_a-tlsmcrt.o
+(E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/../lib/libmingw32.a)lib64_libmingw32_a-pseudo-reloc-list.o
+(E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/../lib/libmingw32.a)lib64_libmingw32_a-pesect.o
+(E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/libgcc.a)_chkstk_ms.o
+(E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/libgcc.a)_ctors.o
+(E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/../lib/libmingwex.a)lib64_libmingwex_a-mingw_matherr.o
+(E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/../lib/libmsvcrt.a)dmmfs01243.o
+(E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/../lib/libmsvcrt.a)dmmfs01211.o
+(E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/../lib/libmsvcrt.a)dmmfs01208.o
+(E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/../lib/libmsvcrt.a)dmmfs01187.o
+(E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/../lib/libmsvcrt.a)dmmfs01157.o
+(E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/../lib/libmsvcrt.a)dmmfs01149.o
+(E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/../lib/libmsvcrt.a)dmmfs01101.o
+(E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/../lib/libmsvcrt.a)dmmfs01089.o
+(E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/../lib/libmsvcrt.a)dmmfs01082.o
+(E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/../lib/libmsvcrt.a)dmmfs01063.o
+(E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/../lib/libmsvcrt.a)dmmfs01050.o
+(E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/../lib/libmsvcrt.a)dmmfs01032.o
+(E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/../lib/libmsvcrt.a)dmmfs00614.o
+(E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/../lib/libmsvcrt.a)dmmfs00332.o
+(E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/../lib/libmsvcrt.a)dmmfs00141.o
+(E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/../lib/libmsvcrt.a)dmmfs00122.o
+(E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/../lib/libmsvcrt.a)dmmfs00098.o
+(E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/../lib/libmsvcrt.a)dmmfs00096.o
+(E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/../lib/libmsvcrt.a)dmmfs00090.o
+(E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/../lib/libmsvcrt.a)dmmfs00082.o
+(E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/../lib/libmsvcrt.a)dmmfs00081.o
+(E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/../lib/libmsvcrt.a)dmmfs00055.o
+(E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/../lib/libmsvcrt.a)lib64_libmsvcrt_os_a-acrt_iob_func.o
+(E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/../lib/libmsvcrt.a)lib64_libmsvcrt_os_a-invalid_parameter_handler.o
+(E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/../lib/libmsvcrt.a)lib64_libmsvcrt_os_a-__p__acmdln.o
+(E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/../lib/libmsvcrt.a)lib64_libmsvcrt_os_a-__p__fmode.o
+(E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/../lib/libmsvcrt.a)dmmfh.o
+(E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/../lib/libmsvcrt.a)dmmfs00115.o
+(E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/../lib/libmsvcrt.a)dmmfs00083.o
+(E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/../lib/libmsvcrt.a)dmmft.o
+(E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/../lib/libkernel32.a)dqkbs01445.o
+(E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/../lib/libkernel32.a)dqkbs01443.o
+(E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/../lib/libkernel32.a)dqkbs01409.o
+(E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/../lib/libkernel32.a)dqkbs01395.o
+(E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/../lib/libkernel32.a)dqkbs01375.o
+(E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/../lib/libkernel32.a)dqkbs01360.o
+(E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/../lib/libkernel32.a)dqkbs01346.o
+(E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/../lib/libkernel32.a)dqkbs01194.o
+(E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/../lib/libkernel32.a)dqkbs01187.o
+(E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/../lib/libkernel32.a)dqkbs01180.o
+(E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/../lib/libkernel32.a)dqkbs01179.o
+(E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/../lib/libkernel32.a)dqkbs01093.o
+(E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/../lib/libkernel32.a)dqkbs00951.o
+(E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/../lib/libkernel32.a)dqkbs00863.o
+(E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/../lib/libkernel32.a)dqkbs00774.o
+(E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/../lib/libkernel32.a)dqkbs00746.o
+(E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/../lib/libkernel32.a)dqkbs00721.o
+(E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/../lib/libkernel32.a)dqkbs00609.o
+(E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/../lib/libkernel32.a)dqkbs00540.o
+(E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/../lib/libkernel32.a)dqkbs00536.o
+(E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/../lib/libkernel32.a)dqkbs00535.o
+(E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/../lib/libkernel32.a)dqkbs00304.o
+(E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/../lib/libkernel32.a)dqkbs00268.o
+(E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/../lib/libkernel32.a)dqkbh.o
+(E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/../lib/libkernel32.a)dqkbt.o
+(E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/../../../../x86_64-w64-mingw32/lib/../lib/libmsvcrt.a)dmmfs00253.o
+E:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/7.3.0/crtend.o
