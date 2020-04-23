@@ -1,4 +1,7 @@
 E:\mingw64\x86_64-w64-mingw32\lib>nm crt1.o
+地址   符号类型     符号名称 0000000000000000-》目标文件地址待定
+                                    符号大写的为 全局符号 消写的为局部符号
+
 0000000000000000 b .bss
 0000000000000000 d .CRT$XCAA
 0000000000000000 d .CRT$XIAA
@@ -100,7 +103,11 @@ E:\mingw64\x86_64-w64-mingw32\lib>nm crt1.o
 0000000000000010 b envp
                  U exit
 0000000000000004 b has_cctor
-                 U main
+                 U main                     #这里表示main这个符号被在改文件被引用 但是需要别的文件链接在这里 u-》undefine未定义
+
+
+
+
 00000000000004e0 T mainCRTStartup
 000000000000000c b mainret
                  U malloc
@@ -227,6 +234,10 @@ E:\mingw64\x86_64-w64-mingw32\lib>nm crt2.o
                  U exit
 0000000000000004 b has_cctor
                  U main
+
+
+
+                 
 00000000000004e0 T mainCRTStartup
 000000000000000c b mainret
                  U malloc

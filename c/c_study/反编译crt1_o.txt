@@ -1,0 +1,509 @@
+
+crt1.o:     file format pe-x86-64
+
+SYMBOL TABLE:
+[  0](sec -2)(fl 0x00)(ty   0)(scl 103) (nx 1) 0x0000000000000000 crtexe.c
+File 
+[  2](sec  1)(fl 0x00)(ty  20)(scl   3) (nx 1) 0x0000000000000000 __mingw_invalidParameterHandler
+AUX tagndx 0 ttlsiz 0x0 lnnos 0 next 0
+[  4](sec  1)(fl 0x00)(ty  20)(scl   3) (nx 0) 0x0000000000000010 pre_c_init
+[  5](sec 29)(fl 0x00)(ty   0)(scl   3) (nx 1) 0x0000000000000000 .rdata$.refptr.mingw_initltsdrot_force
+AUX scnlen 0x8 nreloc 1 nlnno 0 checksum 0x0 assoc 0 comdat 2
+[  7](sec 28)(fl 0x00)(ty   0)(scl   3) (nx 1) 0x0000000000000000 .rdata$.refptr.mingw_initltsdyn_force
+AUX scnlen 0x8 nreloc 1 nlnno 0 checksum 0x0 assoc 0 comdat 2
+[  9](sec 27)(fl 0x00)(ty   0)(scl   3) (nx 1) 0x0000000000000000 .rdata$.refptr.mingw_initltssuo_force
+AUX scnlen 0x8 nreloc 1 nlnno 0 checksum 0x0 assoc 0 comdat 2
+[ 11](sec 26)(fl 0x00)(ty   0)(scl   3) (nx 1) 0x0000000000000000 .rdata$.refptr.mingw_initcharmax
+AUX scnlen 0x8 nreloc 1 nlnno 0 checksum 0x0 assoc 0 comdat 2
+[ 13](sec 25)(fl 0x00)(ty   0)(scl   3) (nx 1) 0x0000000000000000 .rdata$.refptr.__image_base__
+AUX scnlen 0x8 nreloc 1 nlnno 0 checksum 0x0 assoc 0 comdat 2
+[ 15](sec 24)(fl 0x00)(ty   0)(scl   3) (nx 1) 0x0000000000000000 .rdata$.refptr.mingw_app_type
+AUX scnlen 0x8 nreloc 1 nlnno 0 checksum 0x0 assoc 0 comdat 2
+[ 17](sec  3)(fl 0x00)(ty   0)(scl   3) (nx 0) 0x0000000000000008 managedapp
+[ 18](sec 23)(fl 0x00)(ty   0)(scl   3) (nx 1) 0x0000000000000000 .rdata$.refptr._fmode
+AUX scnlen 0x8 nreloc 1 nlnno 0 checksum 0x0 assoc 0 comdat 2
+[ 20](sec 22)(fl 0x00)(ty   0)(scl   3) (nx 1) 0x0000000000000000 .rdata$.refptr._MINGW_INSTALL_DEBUG_MATHERR
+AUX scnlen 0x8 nreloc 1 nlnno 0 checksum 0x0 assoc 0 comdat 2
+[ 22](sec  1)(fl 0x00)(ty  20)(scl   3) (nx 0) 0x0000000000000130 pre_cpp_init
+[ 23](sec 20)(fl 0x00)(ty   0)(scl   3) (nx 1) 0x0000000000000000 .rdata$.refptr._newmode
+AUX scnlen 0x8 nreloc 1 nlnno 0 checksum 0x0 assoc 0 comdat 2
+[ 25](sec  3)(fl 0x00)(ty   0)(scl   3) (nx 0) 0x0000000000000010 envp
+[ 26](sec  3)(fl 0x00)(ty   0)(scl   3) (nx 0) 0x0000000000000018 argv
+[ 27](sec  3)(fl 0x00)(ty   0)(scl   3) (nx 0) 0x0000000000000020 argc
+[ 28](sec  3)(fl 0x00)(ty   0)(scl   3) (nx 0) 0x0000000000000000 startinfo
+[ 29](sec 19)(fl 0x00)(ty   0)(scl   3) (nx 1) 0x0000000000000000 .rdata$.refptr._dowildcard
+AUX scnlen 0x8 nreloc 1 nlnno 0 checksum 0x0 assoc 0 comdat 2
+[ 31](sec  1)(fl 0x00)(ty  20)(scl   3) (nx 0) 0x0000000000000180 __tmainCRTStartup
+[ 32](sec 18)(fl 0x00)(ty   0)(scl   3) (nx 1) 0x0000000000000000 .rdata$.refptr.__native_startup_lock
+AUX scnlen 0x8 nreloc 1 nlnno 0 checksum 0x0 assoc 0 comdat 2
+[ 34](sec 17)(fl 0x00)(ty   0)(scl   3) (nx 1) 0x0000000000000000 .rdata$.refptr.__native_startup_state
+AUX scnlen 0x8 nreloc 1 nlnno 0 checksum 0x0 assoc 0 comdat 2
+[ 36](sec  3)(fl 0x00)(ty   0)(scl   3) (nx 0) 0x0000000000000004 has_cctor
+[ 37](sec 12)(fl 0x00)(ty   0)(scl   3) (nx 1) 0x0000000000000000 .rdata$.refptr.__dyn_tls_init_callback
+AUX scnlen 0x8 nreloc 1 nlnno 0 checksum 0x0 assoc 0 comdat 2
+[ 39](sec 10)(fl 0x00)(ty   0)(scl   3) (nx 1) 0x0000000000000000 .rdata$.refptr.__mingw_oldexcpt_handler
+AUX scnlen 0x8 nreloc 1 nlnno 0 checksum 0x0 assoc 0 comdat 2
+[ 41](sec  9)(fl 0x00)(ty   0)(scl   3) (nx 1) 0x0000000000000000 .rdata$.refptr.__imp___initenv
+AUX scnlen 0x8 nreloc 1 nlnno 0 checksum 0x0 assoc 0 comdat 2
+[ 43](sec  3)(fl 0x00)(ty   0)(scl   3) (nx 0) 0x000000000000000c mainret
+[ 44](sec 14)(fl 0x00)(ty   0)(scl   3) (nx 1) 0x0000000000000000 .rdata$.refptr.__xc_z
+AUX scnlen 0x8 nreloc 1 nlnno 0 checksum 0x0 assoc 0 comdat 2
+[ 46](sec 13)(fl 0x00)(ty   0)(scl   3) (nx 1) 0x0000000000000000 .rdata$.refptr.__xc_a
+AUX scnlen 0x8 nreloc 1 nlnno 0 checksum 0x0 assoc 0 comdat 2
+[ 48](sec 16)(fl 0x00)(ty   0)(scl   3) (nx 1) 0x0000000000000000 .rdata$.refptr.__xi_z
+AUX scnlen 0x8 nreloc 1 nlnno 0 checksum 0x0 assoc 0 comdat 2
+[ 50](sec 15)(fl 0x00)(ty   0)(scl   3) (nx 1) 0x0000000000000000 .rdata$.refptr.__xi_a
+AUX scnlen 0x8 nreloc 1 nlnno 0 checksum 0x0 assoc 0 comdat 2
+[ 52](sec  1)(fl 0x00)(ty  20)(scl   2) (nx 0) 0x00000000000004b0 WinMainCRTStartup
+[ 53](sec  1)(fl 0x00)(ty   0)(scl   6) (nx 0) 0x00000000000004b4 .l_startw
+[ 54](sec  1)(fl 0x00)(ty   0)(scl   6) (nx 0) 0x00000000000004cc .l_endw
+[ 55](sec  1)(fl 0x00)(ty  20)(scl   2) (nx 0) 0x00000000000004e0 mainCRTStartup
+[ 56](sec  1)(fl 0x00)(ty   0)(scl   6) (nx 0) 0x00000000000004e4 .l_start
+[ 57](sec  1)(fl 0x00)(ty   0)(scl   6) (nx 0) 0x00000000000004fc .l_end
+[ 58](sec  1)(fl 0x00)(ty  20)(scl   2) (nx 0) 0x0000000000000510 atexit
+[ 59](sec 11)(fl 0x00)(ty   0)(scl   3) (nx 1) 0x0000000000000000 .rdata$.refptr._gnu_exception_handler
+AUX scnlen 0x8 nreloc 1 nlnno 0 checksum 0x0 assoc 0 comdat 2
+[ 61](sec 21)(fl 0x00)(ty   0)(scl   3) (nx 1) 0x0000000000000000 .rdata$.refptr._matherr
+AUX scnlen 0x8 nreloc 1 nlnno 0 checksum 0x0 assoc 0 comdat 2
+[ 63](sec  1)(fl 0x00)(ty   0)(scl   3) (nx 1) 0x0000000000000000 .text
+AUX scnlen 0x529 nreloc 75 nlnno 0
+[ 65](sec  2)(fl 0x00)(ty   0)(scl   3) (nx 1) 0x0000000000000000 .data
+AUX scnlen 0x4 nreloc 0 nlnno 0
+[ 67](sec  3)(fl 0x00)(ty   0)(scl   3) (nx 1) 0x0000000000000000 .bss
+AUX scnlen 0x24 nreloc 0 nlnno 0
+[ 69](sec  4)(fl 0x00)(ty   0)(scl   3) (nx 1) 0x0000000000000000 .xdata
+AUX scnlen 0x70 nreloc 10 nlnno 0
+[ 71](sec  5)(fl 0x00)(ty   0)(scl   3) (nx 1) 0x0000000000000000 .pdata
+AUX scnlen 0x54 nreloc 21 nlnno 0
+[ 73](sec  6)(fl 0x00)(ty   0)(scl   3) (nx 1) 0x0000000000000000 .CRT$XCAA
+AUX scnlen 0x8 nreloc 1 nlnno 0
+[ 75](sec  7)(fl 0x00)(ty   0)(scl   3) (nx 1) 0x0000000000000000 .CRT$XIAA
+AUX scnlen 0x8 nreloc 1 nlnno 0
+[ 77](sec  8)(fl 0x00)(ty   0)(scl   3) (nx 1) 0x0000000000000000 .drectve
+AUX scnlen 0x52 nreloc 0 nlnno 0
+[ 79](sec 29)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x0000000000000000 .refptr.mingw_initltsdrot_force
+[ 80](sec 28)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x0000000000000000 .refptr.mingw_initltsdyn_force
+[ 81](sec 27)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x0000000000000000 .refptr.mingw_initltssuo_force
+[ 82](sec 26)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x0000000000000000 .refptr.mingw_initcharmax
+[ 83](sec 25)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x0000000000000000 .refptr.__image_base__
+[ 84](sec 24)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x0000000000000000 .refptr.mingw_app_type
+[ 85](sec 23)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x0000000000000000 .refptr._fmode
+[ 86](sec 22)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x0000000000000000 .refptr._MINGW_INSTALL_DEBUG_MATHERR
+[ 87](sec 20)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x0000000000000000 .refptr._newmode
+[ 88](sec 19)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x0000000000000000 .refptr._dowildcard
+[ 89](sec 18)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x0000000000000000 .refptr.__native_startup_lock
+[ 90](sec 17)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x0000000000000000 .refptr.__native_startup_state
+[ 91](sec 12)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x0000000000000000 .refptr.__dyn_tls_init_callback
+[ 92](sec 10)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x0000000000000000 .refptr.__mingw_oldexcpt_handler
+[ 93](sec  0)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x0000000000000008 __mingw_winmain_hInstance
+[ 94](sec  0)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x0000000000000008 __mingw_winmain_lpCmdLine
+[ 95](sec  2)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x0000000000000000 __mingw_winmain_nShowCmd
+[ 96](sec  9)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x0000000000000000 .refptr.__imp___initenv
+[ 97](sec 14)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x0000000000000000 .refptr.__xc_z
+[ 98](sec 13)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x0000000000000000 .refptr.__xc_a
+[ 99](sec 16)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x0000000000000000 .refptr.__xi_z
+[100](sec 15)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x0000000000000000 .refptr.__xi_a
+[101](sec  6)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x0000000000000000 mingw_pcppinit
+[102](sec  7)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x0000000000000000 mingw_pcinit
+[103](sec 11)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x0000000000000000 .refptr._gnu_exception_handler
+[104](sec 21)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x0000000000000000 .refptr._matherr
+[105](sec  0)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x0000000000000000 __imp_Sleep
+[106](sec  0)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x0000000000000000 __imp_SetUnhandledExceptionFilter
+[107](sec  0)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x0000000000000000 __imp_GetStartupInfoA
+[108](sec  0)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x0000000000000000 __C_specific_handler
+[109](sec  0)(fl 0x00)(ty  20)(scl   2) (nx 0) 0x0000000000000000 __set_app_type
+[110](sec  0)(fl 0x00)(ty  20)(scl   2) (nx 0) 0x0000000000000000 __p__fmode
+[111](sec  0)(fl 0x00)(ty  20)(scl   2) (nx 0) 0x0000000000000000 _setargv
+[112](sec  0)(fl 0x00)(ty  20)(scl   2) (nx 0) 0x0000000000000000 _matherr
+[113](sec  0)(fl 0x00)(ty  20)(scl   2) (nx 0) 0x0000000000000000 __mingw_setusermatherr
+[114](sec  0)(fl 0x00)(ty  20)(scl   2) (nx 0) 0x0000000000000000 __getmainargs
+[115](sec  0)(fl 0x00)(ty  20)(scl   2) (nx 0) 0x0000000000000000 _pei386_runtime_relocator
+[116](sec  0)(fl 0x00)(ty  20)(scl   2) (nx 0) 0x0000000000000000 _gnu_exception_handler
+[117](sec  0)(fl 0x00)(ty  20)(scl   2) (nx 0) 0x0000000000000000 __mingw_init_ehandler
+[118](sec  0)(fl 0x00)(ty  20)(scl   2) (nx 0) 0x0000000000000000 _set_invalid_parameter_handler
+[119](sec  0)(fl 0x00)(ty  20)(scl   2) (nx 0) 0x0000000000000000 _fpreset
+[120](sec  0)(fl 0x00)(ty  20)(scl   2) (nx 0) 0x0000000000000000 __p__acmdln
+[121](sec  0)(fl 0x00)(ty  20)(scl   2) (nx 0) 0x0000000000000000 malloc
+[122](sec  0)(fl 0x00)(ty  20)(scl   2) (nx 0) 0x0000000000000000 strlen
+[123](sec  0)(fl 0x00)(ty  20)(scl   2) (nx 0) 0x0000000000000000 memcpy
+[124](sec  0)(fl 0x00)(ty  20)(scl   2) (nx 0) 0x0000000000000000 __main
+[125](sec  0)(fl 0x00)(ty  20)(scl   2) (nx 0) 0x0000000000000000 main
+[126](sec  0)(fl 0x00)(ty  20)(scl   2) (nx 0) 0x0000000000000000 _cexit
+[127](sec  0)(fl 0x00)(ty  20)(scl   2) (nx 0) 0x0000000000000000 _amsg_exit
+[128](sec  0)(fl 0x00)(ty  20)(scl   2) (nx 0) 0x0000000000000000 _initterm
+[129](sec  0)(fl 0x00)(ty  20)(scl   2) (nx 0) 0x0000000000000000 exit
+[130](sec  0)(fl 0x00)(ty  20)(scl   2) (nx 0) 0x0000000000000000 __security_init_cookie
+[131](sec  0)(fl 0x00)(ty  20)(scl   2) (nx 0) 0x0000000000000000 _onexit
+[132](sec  0)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x0000000000000000 __imp___initenv
+[133](sec  0)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x0000000000000000 __mingw_oldexcpt_handler
+[134](sec  0)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x0000000000000000 __dyn_tls_init_callback
+[135](sec  0)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x0000000000000000 __xc_a
+[136](sec  0)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x0000000000000000 __xc_z
+[137](sec  0)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x0000000000000000 __xi_a
+[138](sec  0)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x0000000000000000 __xi_z
+[139](sec  0)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x0000000000000000 __native_startup_state
+[140](sec  0)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x0000000000000000 __native_startup_lock
+[141](sec  0)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x0000000000000000 _dowildcard
+[142](sec  0)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x0000000000000000 _newmode
+[143](sec  0)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x0000000000000000 _MINGW_INSTALL_DEBUG_MATHERR
+[144](sec  0)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x0000000000000000 _fmode
+[145](sec  0)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x0000000000000000 mingw_app_type
+[146](sec  0)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x0000000000000000 __image_base__
+[147](sec  0)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x0000000000000000 mingw_initcharmax
+[148](sec  0)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x0000000000000000 mingw_initltssuo_force
+[149](sec  0)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x0000000000000000 mingw_initltsdyn_force
+[150](sec  0)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x0000000000000000 mingw_initltsdrot_force
+
+
+
+Disassembly of section .text:
+
+0000000000000000 <__mingw_invalidParameterHandler>:
+   0:	c3                   	retq   
+   1:	0f 1f 44 00 00       	nopl   0x0(%rax,%rax,1)
+   6:	66 2e 0f 1f 84 00 00 	nopw   %cs:0x0(%rax,%rax,1)
+   d:	00 00 00 
+
+0000000000000010 <pre_c_init>:
+  10:	48 83 ec 28          	sub    $0x28,%rsp
+  14:	48 8b 05 00 00 00 00 	mov    0x0(%rip),%rax        # 1b <pre_c_init+0xb>
+  1b:	31 d2                	xor    %edx,%edx
+  1d:	c7 00 01 00 00 00    	movl   $0x1,(%rax)
+  23:	48 8b 05 00 00 00 00 	mov    0x0(%rip),%rax        # 2a <pre_c_init+0x1a>
+  2a:	c7 00 01 00 00 00    	movl   $0x1,(%rax)
+  30:	48 8b 05 00 00 00 00 	mov    0x0(%rip),%rax        # 37 <pre_c_init+0x27>
+  37:	c7 00 01 00 00 00    	movl   $0x1,(%rax)
+  3d:	48 8b 05 00 00 00 00 	mov    0x0(%rip),%rax        # 44 <pre_c_init+0x34>
+  44:	c7 00 01 00 00 00    	movl   $0x1,(%rax)
+  4a:	48 8b 05 00 00 00 00 	mov    0x0(%rip),%rax        # 51 <pre_c_init+0x41>
+  51:	66 81 38 4d 5a       	cmpw   $0x5a4d,(%rax)
+  56:	74 58                	je     b0 <pre_c_init+0xa0>
+  58:	48 8b 05 00 00 00 00 	mov    0x0(%rip),%rax        # 5f <pre_c_init+0x4f>
+  5f:	89 15 08 00 00 00    	mov    %edx,0x8(%rip)        # 6d <pre_c_init+0x5d>
+  65:	8b 00                	mov    (%rax),%eax
+  67:	85 c0                	test   %eax,%eax
+  69:	74 35                	je     a0 <pre_c_init+0x90>
+  6b:	b9 02 00 00 00       	mov    $0x2,%ecx
+  70:	e8 00 00 00 00       	callq  75 <pre_c_init+0x65>
+  75:	e8 00 00 00 00       	callq  7a <pre_c_init+0x6a>
+  7a:	48 8b 15 00 00 00 00 	mov    0x0(%rip),%rdx        # 81 <pre_c_init+0x71>
+  81:	8b 12                	mov    (%rdx),%edx
+  83:	89 10                	mov    %edx,(%rax)
+  85:	e8 00 00 00 00       	callq  8a <pre_c_init+0x7a>
+  8a:	48 8b 05 00 00 00 00 	mov    0x0(%rip),%rax        # 91 <pre_c_init+0x81>
+  91:	83 38 01             	cmpl   $0x1,(%rax)
+  94:	74 5a                	je     f0 <pre_c_init+0xe0>
+  96:	31 c0                	xor    %eax,%eax
+  98:	48 83 c4 28          	add    $0x28,%rsp
+  9c:	c3                   	retq   
+  9d:	0f 1f 00             	nopl   (%rax)
+  a0:	b9 01 00 00 00       	mov    $0x1,%ecx
+  a5:	e8 00 00 00 00       	callq  aa <pre_c_init+0x9a>
+  aa:	eb c9                	jmp    75 <pre_c_init+0x65>
+  ac:	0f 1f 40 00          	nopl   0x0(%rax)
+  b0:	48 63 48 3c          	movslq 0x3c(%rax),%rcx
+  b4:	48 01 c8             	add    %rcx,%rax
+  b7:	81 38 50 45 00 00    	cmpl   $0x4550,(%rax)
+  bd:	75 99                	jne    58 <pre_c_init+0x48>
+  bf:	0f b7 48 18          	movzwl 0x18(%rax),%ecx
+  c3:	66 81 f9 0b 01       	cmp    $0x10b,%cx
+  c8:	74 39                	je     103 <pre_c_init+0xf3>
+  ca:	66 81 f9 0b 02       	cmp    $0x20b,%cx
+  cf:	75 87                	jne    58 <pre_c_init+0x48>
+  d1:	83 b8 84 00 00 00 0e 	cmpl   $0xe,0x84(%rax)
+  d8:	0f 86 7a ff ff ff    	jbe    58 <pre_c_init+0x48>
+  de:	8b 88 f8 00 00 00    	mov    0xf8(%rax),%ecx
+  e4:	31 d2                	xor    %edx,%edx
+  e6:	85 c9                	test   %ecx,%ecx
+  e8:	0f 95 c2             	setne  %dl
+  eb:	e9 68 ff ff ff       	jmpq   58 <pre_c_init+0x48>
+  f0:	48 8d 0d 00 00 00 00 	lea    0x0(%rip),%rcx        # f7 <pre_c_init+0xe7>
+  f7:	e8 00 00 00 00       	callq  fc <pre_c_init+0xec>
+  fc:	31 c0                	xor    %eax,%eax
+  fe:	48 83 c4 28          	add    $0x28,%rsp
+ 102:	c3                   	retq   
+ 103:	83 78 74 0e          	cmpl   $0xe,0x74(%rax)
+ 107:	0f 86 4b ff ff ff    	jbe    58 <pre_c_init+0x48>
+ 10d:	44 8b 80 e8 00 00 00 	mov    0xe8(%rax),%r8d
+ 114:	31 d2                	xor    %edx,%edx
+ 116:	45 85 c0             	test   %r8d,%r8d
+ 119:	0f 95 c2             	setne  %dl
+ 11c:	e9 37 ff ff ff       	jmpq   58 <pre_c_init+0x48>
+ 121:	0f 1f 44 00 00       	nopl   0x0(%rax,%rax,1)
+ 126:	66 2e 0f 1f 84 00 00 	nopw   %cs:0x0(%rax,%rax,1)
+ 12d:	00 00 00 
+
+0000000000000130 <pre_cpp_init>:
+ 130:	48 83 ec 38          	sub    $0x38,%rsp
+ 134:	48 8b 05 00 00 00 00 	mov    0x0(%rip),%rax        # 13b <pre_cpp_init+0xb>
+ 13b:	4c 8d 05 10 00 00 00 	lea    0x10(%rip),%r8        # 152 <pre_cpp_init+0x22>
+ 142:	48 8d 15 18 00 00 00 	lea    0x18(%rip),%rdx        # 161 <pre_cpp_init+0x31>
+ 149:	48 8d 0d 20 00 00 00 	lea    0x20(%rip),%rcx        # 170 <pre_cpp_init+0x40>
+ 150:	8b 00                	mov    (%rax),%eax
+ 152:	89 05 00 00 00 00    	mov    %eax,0x0(%rip)        # 158 <pre_cpp_init+0x28>
+ 158:	48 8d 05 00 00 00 00 	lea    0x0(%rip),%rax        # 15f <pre_cpp_init+0x2f>
+ 15f:	48 89 44 24 20       	mov    %rax,0x20(%rsp)
+ 164:	48 8b 05 00 00 00 00 	mov    0x0(%rip),%rax        # 16b <pre_cpp_init+0x3b>
+ 16b:	44 8b 08             	mov    (%rax),%r9d
+ 16e:	e8 00 00 00 00       	callq  173 <pre_cpp_init+0x43>
+ 173:	90                   	nop
+ 174:	48 83 c4 38          	add    $0x38,%rsp
+ 178:	c3                   	retq   
+ 179:	0f 1f 80 00 00 00 00 	nopl   0x0(%rax)
+
+0000000000000180 <__tmainCRTStartup>:
+ 180:	41 55                	push   %r13
+ 182:	41 54                	push   %r12
+ 184:	55                   	push   %rbp
+ 185:	57                   	push   %rdi
+ 186:	56                   	push   %rsi
+ 187:	53                   	push   %rbx
+ 188:	48 81 ec 98 00 00 00 	sub    $0x98,%rsp
+ 18f:	31 c0                	xor    %eax,%eax
+ 191:	b9 0d 00 00 00       	mov    $0xd,%ecx
+ 196:	48 8d 54 24 20       	lea    0x20(%rsp),%rdx
+ 19b:	48 89 d7             	mov    %rdx,%rdi
+ 19e:	f3 48 ab             	rep stos %rax,%es:(%rdi)
+ 1a1:	48 8b 3d 00 00 00 00 	mov    0x0(%rip),%rdi        # 1a8 <__tmainCRTStartup+0x28>
+ 1a8:	44 8b 0f             	mov    (%rdi),%r9d
+ 1ab:	45 85 c9             	test   %r9d,%r9d
+ 1ae:	0f 85 bc 02 00 00    	jne    470 <__tmainCRTStartup+0x2f0>
+ 1b4:	65 48 8b 04 25 30 00 	mov    %gs:0x30,%rax
+ 1bb:	00 00 
+ 1bd:	48 8b 1d 00 00 00 00 	mov    0x0(%rip),%rbx        # 1c4 <__tmainCRTStartup+0x44>
+ 1c4:	31 ed                	xor    %ebp,%ebp
+ 1c6:	48 8b 70 08          	mov    0x8(%rax),%rsi
+ 1ca:	4c 8b 25 00 00 00 00 	mov    0x0(%rip),%r12        # 1d1 <__tmainCRTStartup+0x51>
+ 1d1:	eb 11                	jmp    1e4 <__tmainCRTStartup+0x64>
+ 1d3:	48 39 c6             	cmp    %rax,%rsi
+ 1d6:	0f 84 34 02 00 00    	je     410 <__tmainCRTStartup+0x290>
+ 1dc:	b9 e8 03 00 00       	mov    $0x3e8,%ecx
+ 1e1:	41 ff d4             	callq  *%r12
+ 1e4:	48 89 e8             	mov    %rbp,%rax
+ 1e7:	f0 48 0f b1 33       	lock cmpxchg %rsi,(%rbx)
+ 1ec:	48 85 c0             	test   %rax,%rax
+ 1ef:	75 e2                	jne    1d3 <__tmainCRTStartup+0x53>
+ 1f1:	48 8b 35 00 00 00 00 	mov    0x0(%rip),%rsi        # 1f8 <__tmainCRTStartup+0x78>
+ 1f8:	31 ed                	xor    %ebp,%ebp
+ 1fa:	8b 06                	mov    (%rsi),%eax
+ 1fc:	83 f8 01             	cmp    $0x1,%eax
+ 1ff:	0f 84 22 02 00 00    	je     427 <__tmainCRTStartup+0x2a7>
+ 205:	8b 06                	mov    (%rsi),%eax
+ 207:	85 c0                	test   %eax,%eax
+ 209:	0f 84 71 02 00 00    	je     480 <__tmainCRTStartup+0x300>
+ 20f:	c7 05 00 00 00 00 01 	movl   $0x1,0x0(%rip)        # 219 <__tmainCRTStartup+0x99>
+ 216:	00 00 00 
+ 219:	8b 06                	mov    (%rsi),%eax
+ 21b:	83 f8 01             	cmp    $0x1,%eax
+ 21e:	0f 84 18 02 00 00    	je     43c <__tmainCRTStartup+0x2bc>
+ 224:	85 ed                	test   %ebp,%ebp
+ 226:	0f 84 31 02 00 00    	je     45d <__tmainCRTStartup+0x2dd>
+ 22c:	48 8b 05 00 00 00 00 	mov    0x0(%rip),%rax        # 233 <__tmainCRTStartup+0xb3>
+ 233:	48 8b 00             	mov    (%rax),%rax
+ 236:	48 85 c0             	test   %rax,%rax
+ 239:	74 0c                	je     247 <__tmainCRTStartup+0xc7>
+ 23b:	45 31 c0             	xor    %r8d,%r8d
+ 23e:	ba 02 00 00 00       	mov    $0x2,%edx
+ 243:	31 c9                	xor    %ecx,%ecx
+ 245:	ff d0                	callq  *%rax
+ 247:	e8 00 00 00 00       	callq  24c <__tmainCRTStartup+0xcc>
+ 24c:	48 8d 0d 00 00 00 00 	lea    0x0(%rip),%rcx        # 253 <__tmainCRTStartup+0xd3>
+ 253:	ff 15 00 00 00 00    	callq  *0x0(%rip)        # 259 <__tmainCRTStartup+0xd9>
+ 259:	48 8b 15 00 00 00 00 	mov    0x0(%rip),%rdx        # 260 <__tmainCRTStartup+0xe0>
+ 260:	48 89 02             	mov    %rax,(%rdx)
+ 263:	e8 00 00 00 00       	callq  268 <__tmainCRTStartup+0xe8>
+ 268:	48 8d 0d 91 fd ff ff 	lea    -0x26f(%rip),%rcx        # 0 <__mingw_invalidParameterHandler>
+ 26f:	e8 00 00 00 00       	callq  274 <__tmainCRTStartup+0xf4>
+ 274:	e8 00 00 00 00       	callq  279 <__tmainCRTStartup+0xf9>
+ 279:	48 8b 05 00 00 00 00 	mov    0x0(%rip),%rax        # 280 <__tmainCRTStartup+0x100>
+ 280:	48 89 05 00 00 00 00 	mov    %rax,0x0(%rip)        # 287 <__tmainCRTStartup+0x107>
+ 287:	e8 00 00 00 00       	callq  28c <__tmainCRTStartup+0x10c>
+ 28c:	31 c9                	xor    %ecx,%ecx
+ 28e:	48 8b 00             	mov    (%rax),%rax
+ 291:	48 85 c0             	test   %rax,%rax
+ 294:	75 1c                	jne    2b2 <__tmainCRTStartup+0x132>
+ 296:	eb 5f                	jmp    2f7 <__tmainCRTStartup+0x177>
+ 298:	0f 1f 84 00 00 00 00 	nopl   0x0(%rax,%rax,1)
+ 29f:	00 
+ 2a0:	84 d2                	test   %dl,%dl
+ 2a2:	74 2c                	je     2d0 <__tmainCRTStartup+0x150>
+ 2a4:	83 e1 01             	and    $0x1,%ecx
+ 2a7:	74 27                	je     2d0 <__tmainCRTStartup+0x150>
+ 2a9:	b9 01 00 00 00       	mov    $0x1,%ecx
+ 2ae:	48 83 c0 01          	add    $0x1,%rax
+ 2b2:	0f b6 10             	movzbl (%rax),%edx
+ 2b5:	80 fa 20             	cmp    $0x20,%dl
+ 2b8:	7e e6                	jle    2a0 <__tmainCRTStartup+0x120>
+ 2ba:	41 89 c8             	mov    %ecx,%r8d
+ 2bd:	41 83 f0 01          	xor    $0x1,%r8d
+ 2c1:	80 fa 22             	cmp    $0x22,%dl
+ 2c4:	41 0f 44 c8          	cmove  %r8d,%ecx
+ 2c8:	eb e4                	jmp    2ae <__tmainCRTStartup+0x12e>
+ 2ca:	66 0f 1f 44 00 00    	nopw   0x0(%rax,%rax,1)
+ 2d0:	84 d2                	test   %dl,%dl
+ 2d2:	75 11                	jne    2e5 <__tmainCRTStartup+0x165>
+ 2d4:	eb 1a                	jmp    2f0 <__tmainCRTStartup+0x170>
+ 2d6:	66 2e 0f 1f 84 00 00 	nopw   %cs:0x0(%rax,%rax,1)
+ 2dd:	00 00 00 
+ 2e0:	80 fa 20             	cmp    $0x20,%dl
+ 2e3:	7f 0b                	jg     2f0 <__tmainCRTStartup+0x170>
+ 2e5:	48 83 c0 01          	add    $0x1,%rax
+ 2e9:	0f b6 10             	movzbl (%rax),%edx
+ 2ec:	84 d2                	test   %dl,%dl
+ 2ee:	75 f0                	jne    2e0 <__tmainCRTStartup+0x160>
+ 2f0:	48 89 05 00 00 00 00 	mov    %rax,0x0(%rip)        # 2f7 <__tmainCRTStartup+0x177>
+ 2f7:	44 8b 07             	mov    (%rdi),%r8d
+ 2fa:	45 85 c0             	test   %r8d,%r8d
+ 2fd:	74 16                	je     315 <__tmainCRTStartup+0x195>
+ 2ff:	f6 44 24 5c 01       	testb  $0x1,0x5c(%rsp)
+ 304:	b8 0a 00 00 00       	mov    $0xa,%eax
+ 309:	0f 85 f1 00 00 00    	jne    400 <__tmainCRTStartup+0x280>
+ 30f:	89 05 00 00 00 00    	mov    %eax,0x0(%rip)        # 315 <__tmainCRTStartup+0x195>
+ 315:	8b 1d 20 00 00 00    	mov    0x20(%rip),%ebx        # 33b <__tmainCRTStartup+0x1bb>
+ 31b:	44 8d 63 01          	lea    0x1(%rbx),%r12d
+ 31f:	4d 63 e4             	movslq %r12d,%r12
+ 322:	49 c1 e4 03          	shl    $0x3,%r12
+ 326:	4c 89 e1             	mov    %r12,%rcx
+ 329:	e8 00 00 00 00       	callq  32e <__tmainCRTStartup+0x1ae>
+ 32e:	85 db                	test   %ebx,%ebx
+ 330:	48 8b 3d 18 00 00 00 	mov    0x18(%rip),%rdi        # 34f <__tmainCRTStartup+0x1cf>
+ 337:	48 89 c5             	mov    %rax,%rbp
+ 33a:	7e 4b                	jle    387 <__tmainCRTStartup+0x207>
+ 33c:	8d 43 ff             	lea    -0x1(%rbx),%eax
+ 33f:	31 db                	xor    %ebx,%ebx
+ 341:	4c 8d 2c c5 08 00 00 	lea    0x8(,%rax,8),%r13
+ 348:	00 
+ 349:	0f 1f 80 00 00 00 00 	nopl   0x0(%rax)
+ 350:	48 8b 0c 1f          	mov    (%rdi,%rbx,1),%rcx
+ 354:	e8 00 00 00 00       	callq  359 <__tmainCRTStartup+0x1d9>
+ 359:	48 8d 70 01          	lea    0x1(%rax),%rsi
+ 35d:	48 89 f1             	mov    %rsi,%rcx
+ 360:	e8 00 00 00 00       	callq  365 <__tmainCRTStartup+0x1e5>
+ 365:	49 89 f0             	mov    %rsi,%r8
+ 368:	48 89 44 1d 00       	mov    %rax,0x0(%rbp,%rbx,1)
+ 36d:	48 8b 14 1f          	mov    (%rdi,%rbx,1),%rdx
+ 371:	48 89 c1             	mov    %rax,%rcx
+ 374:	48 83 c3 08          	add    $0x8,%rbx
+ 378:	e8 00 00 00 00       	callq  37d <__tmainCRTStartup+0x1fd>
+ 37d:	49 39 dd             	cmp    %rbx,%r13
+ 380:	75 ce                	jne    350 <__tmainCRTStartup+0x1d0>
+ 382:	4a 8d 44 25 f8       	lea    -0x8(%rbp,%r12,1),%rax
+ 387:	48 c7 00 00 00 00 00 	movq   $0x0,(%rax)
+ 38e:	48 89 2d 18 00 00 00 	mov    %rbp,0x18(%rip)        # 3ad <__tmainCRTStartup+0x22d>
+ 395:	e8 00 00 00 00       	callq  39a <__tmainCRTStartup+0x21a>
+ 39a:	48 8b 05 00 00 00 00 	mov    0x0(%rip),%rax        # 3a1 <__tmainCRTStartup+0x221>
+ 3a1:	48 8b 15 10 00 00 00 	mov    0x10(%rip),%rdx        # 3b8 <__tmainCRTStartup+0x238>
+ 3a8:	8b 0d 20 00 00 00    	mov    0x20(%rip),%ecx        # 3ce <__tmainCRTStartup+0x24e>
+ 3ae:	48 8b 00             	mov    (%rax),%rax
+ 3b1:	48 89 10             	mov    %rdx,(%rax)
+ 3b4:	4c 8b 05 10 00 00 00 	mov    0x10(%rip),%r8        # 3cb <__tmainCRTStartup+0x24b>
+ 3bb:	48 8b 15 18 00 00 00 	mov    0x18(%rip),%rdx        # 3da <__tmainCRTStartup+0x25a>
+ 3c2:	e8 00 00 00 00       	callq  3c7 <__tmainCRTStartup+0x247>
+ 3c7:	8b 0d 08 00 00 00    	mov    0x8(%rip),%ecx        # 3d5 <__tmainCRTStartup+0x255>
+ 3cd:	89 05 0c 00 00 00    	mov    %eax,0xc(%rip)        # 3df <__tmainCRTStartup+0x25f>
+ 3d3:	85 c9                	test   %ecx,%ecx
+ 3d5:	0f 84 c3 00 00 00    	je     49e <__tmainCRTStartup+0x31e>
+ 3db:	8b 15 04 00 00 00    	mov    0x4(%rip),%edx        # 3e5 <__tmainCRTStartup+0x265>
+ 3e1:	85 d2                	test   %edx,%edx
+ 3e3:	75 0b                	jne    3f0 <__tmainCRTStartup+0x270>
+ 3e5:	e8 00 00 00 00       	callq  3ea <__tmainCRTStartup+0x26a>
+ 3ea:	8b 05 0c 00 00 00    	mov    0xc(%rip),%eax        # 3fc <__tmainCRTStartup+0x27c>
+ 3f0:	48 81 c4 98 00 00 00 	add    $0x98,%rsp
+ 3f7:	5b                   	pop    %rbx
+ 3f8:	5e                   	pop    %rsi
+ 3f9:	5f                   	pop    %rdi
+ 3fa:	5d                   	pop    %rbp
+ 3fb:	41 5c                	pop    %r12
+ 3fd:	41 5d                	pop    %r13
+ 3ff:	c3                   	retq   
+ 400:	0f b7 44 24 60       	movzwl 0x60(%rsp),%eax
+ 405:	e9 05 ff ff ff       	jmpq   30f <__tmainCRTStartup+0x18f>
+ 40a:	66 0f 1f 44 00 00    	nopw   0x0(%rax,%rax,1)
+ 410:	48 8b 35 00 00 00 00 	mov    0x0(%rip),%rsi        # 417 <__tmainCRTStartup+0x297>
+ 417:	bd 01 00 00 00       	mov    $0x1,%ebp
+ 41c:	8b 06                	mov    (%rsi),%eax
+ 41e:	83 f8 01             	cmp    $0x1,%eax
+ 421:	0f 85 de fd ff ff    	jne    205 <__tmainCRTStartup+0x85>
+ 427:	b9 1f 00 00 00       	mov    $0x1f,%ecx
+ 42c:	e8 00 00 00 00       	callq  431 <__tmainCRTStartup+0x2b1>
+ 431:	8b 06                	mov    (%rsi),%eax
+ 433:	83 f8 01             	cmp    $0x1,%eax
+ 436:	0f 85 e8 fd ff ff    	jne    224 <__tmainCRTStartup+0xa4>
+ 43c:	48 8b 15 00 00 00 00 	mov    0x0(%rip),%rdx        # 443 <__tmainCRTStartup+0x2c3>
+ 443:	48 8b 0d 00 00 00 00 	mov    0x0(%rip),%rcx        # 44a <__tmainCRTStartup+0x2ca>
+ 44a:	e8 00 00 00 00       	callq  44f <__tmainCRTStartup+0x2cf>
+ 44f:	85 ed                	test   %ebp,%ebp
+ 451:	c7 06 02 00 00 00    	movl   $0x2,(%rsi)
+ 457:	0f 85 cf fd ff ff    	jne    22c <__tmainCRTStartup+0xac>
+ 45d:	31 c0                	xor    %eax,%eax
+ 45f:	48 87 03             	xchg   %rax,(%rbx)
+ 462:	e9 c5 fd ff ff       	jmpq   22c <__tmainCRTStartup+0xac>
+ 467:	66 0f 1f 84 00 00 00 	nopw   0x0(%rax,%rax,1)
+ 46e:	00 00 
+ 470:	48 89 d1             	mov    %rdx,%rcx
+ 473:	ff 15 00 00 00 00    	callq  *0x0(%rip)        # 479 <__tmainCRTStartup+0x2f9>
+ 479:	e9 36 fd ff ff       	jmpq   1b4 <__tmainCRTStartup+0x34>
+ 47e:	66 90                	xchg   %ax,%ax
+ 480:	48 8b 15 00 00 00 00 	mov    0x0(%rip),%rdx        # 487 <__tmainCRTStartup+0x307>
+ 487:	c7 06 01 00 00 00    	movl   $0x1,(%rsi)
+ 48d:	48 8b 0d 00 00 00 00 	mov    0x0(%rip),%rcx        # 494 <__tmainCRTStartup+0x314>
+ 494:	e8 00 00 00 00       	callq  499 <__tmainCRTStartup+0x319>
+ 499:	e9 7b fd ff ff       	jmpq   219 <__tmainCRTStartup+0x99>
+ 49e:	89 c1                	mov    %eax,%ecx
+ 4a0:	e8 00 00 00 00       	callq  4a5 <__tmainCRTStartup+0x325>
+ 4a5:	90                   	nop
+ 4a6:	66 2e 0f 1f 84 00 00 	nopw   %cs:0x0(%rax,%rax,1)
+ 4ad:	00 00 00 
+
+00000000000004b0 <WinMainCRTStartup>:
+ 4b0:	48 83 ec 28          	sub    $0x28,%rsp
+
+00000000000004b4 <.l_startw>:
+ 4b4:	48 8b 05 00 00 00 00 	mov    0x0(%rip),%rax        # 4bb <.l_startw+0x7>
+ 4bb:	c7 00 01 00 00 00    	movl   $0x1,(%rax)
+ 4c1:	e8 00 00 00 00       	callq  4c6 <.l_startw+0x12>
+ 4c6:	e8 b5 fc ff ff       	callq  180 <__tmainCRTStartup>
+ 4cb:	90                   	nop
+
+00000000000004cc <.l_endw>:
+ 4cc:	90                   	nop
+ 4cd:	48 83 c4 28          	add    $0x28,%rsp
+ 4d1:	c3                   	retq   
+ 4d2:	0f 1f 40 00          	nopl   0x0(%rax)
+ 4d6:	66 2e 0f 1f 84 00 00 	nopw   %cs:0x0(%rax,%rax,1)
+ 4dd:	00 00 00 
+
+00000000000004e0 <mainCRTStartup>:
+ 4e0:	48 83 ec 28          	sub    $0x28,%rsp
+
+00000000000004e4 <.l_start>:
+ 4e4:	48 8b 05 00 00 00 00 	mov    0x0(%rip),%rax        # 4eb <.l_start+0x7>
+ 4eb:	c7 00 00 00 00 00    	movl   $0x0,(%rax)
+ 4f1:	e8 00 00 00 00       	callq  4f6 <.l_start+0x12>
+ 4f6:	e8 85 fc ff ff       	callq  180 <__tmainCRTStartup>
+ 4fb:	90                   	nop
+
+00000000000004fc <.l_end>:
+ 4fc:	90                   	nop
+ 4fd:	48 83 c4 28          	add    $0x28,%rsp
+ 501:	c3                   	retq   
+ 502:	0f 1f 40 00          	nopl   0x0(%rax)
+ 506:	66 2e 0f 1f 84 00 00 	nopw   %cs:0x0(%rax,%rax,1)
+ 50d:	00 00 00 
+
+0000000000000510 <atexit>:
+ 510:	48 83 ec 28          	sub    $0x28,%rsp
+ 514:	e8 00 00 00 00       	callq  519 <atexit+0x9>
+ 519:	48 85 c0             	test   %rax,%rax
+ 51c:	0f 94 c0             	sete   %al
+ 51f:	0f b6 c0             	movzbl %al,%eax
+ 522:	f7 d8                	neg    %eax
+ 524:	48 83 c4 28          	add    $0x28,%rsp
+ 528:	c3                   	retq   
+ 529:	90                   	nop
+ 52a:	90                   	nop
+ 52b:	90                   	nop
+ 52c:	90                   	nop
+ 52d:	90                   	nop
+ 52e:	90                   	nop
+ 52f:	90                   	nop
