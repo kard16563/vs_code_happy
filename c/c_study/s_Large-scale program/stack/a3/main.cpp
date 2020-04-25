@@ -35,5 +35,6 @@ int main(void){
 // -L. 在当前目录下 寻找库文件 
 //-lstack 连接 stack 
 //-I 寻找头文件 -》stack
+
 //位置探究的命令
 //stack\a3>gcc -g main.cpp stack.o push.o pop.o -Istack -o main_绝对重定位
