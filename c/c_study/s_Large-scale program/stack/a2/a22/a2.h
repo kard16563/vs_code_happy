@@ -1,0 +1,1 @@
+extern void test_aa2 (void);
