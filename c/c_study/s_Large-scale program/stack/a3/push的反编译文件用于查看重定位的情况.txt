@@ -1,0 +1,89 @@
+
+push.o:     file format pe-x86-64
+
+SYMBOL TABLE:
+[  0](sec -2)(fl 0x00)(ty   0)(scl 103) (nx 1) 0x0000000000000000 push.cpp
+File 
+[  2](sec  1)(fl 0x00)(ty  20)(scl   2) (nx 1) 0x0000000000000000 _Z4pushc
+AUX tagndx 0 ttlsiz 0x0 lnnos 0 next 0
+[  4](sec  9)(fl 0x00)(ty   0)(scl   3) (nx 1) 0x0000000000000000 .rdata$.refptr.top
+AUX scnlen 0x8 nreloc 1 nlnno 0 checksum 0x0 assoc 0 comdat 2
+[  6](sec  8)(fl 0x00)(ty   0)(scl   3) (nx 1) 0x0000000000000000 .rdata$.refptr.stack
+AUX scnlen 0x8 nreloc 1 nlnno 0 checksum 0x0 assoc 0 comdat 2
+[  8](sec  1)(fl 0x00)(ty   0)(scl   3) (nx 1) 0x0000000000000000 .text
+AUX scnlen 0x8c nreloc 12 nlnno 0
+[ 10](sec  2)(fl 0x00)(ty   0)(scl   3) (nx 1) 0x0000000000000000 .data
+AUX scnlen 0x0 nreloc 0 nlnno 0
+[ 12](sec  3)(fl 0x00)(ty   0)(scl   3) (nx 1) 0x0000000000000000 .bss
+AUX scnlen 0x0 nreloc 0 nlnno 0
+[ 14](sec  4)(fl 0x00)(ty   0)(scl   3) (nx 1) 0x0000000000000000 .rdata
+AUX scnlen 0x26 nreloc 0 nlnno 0
+[ 16](sec  5)(fl 0x00)(ty   0)(scl   3) (nx 1) 0x0000000000000000 .xdata
+AUX scnlen 0xc nreloc 0 nlnno 0
+[ 18](sec  6)(fl 0x00)(ty   0)(scl   3) (nx 1) 0x0000000000000000 .pdata
+AUX scnlen 0xc nreloc 3 nlnno 0
+[ 20](sec  7)(fl 0x00)(ty   0)(scl   3) (nx 1) 0x0000000000000000 .rdata$zzz
+AUX scnlen 0x3f nreloc 0 nlnno 0
+[ 22](sec  9)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x0000000000000000 .refptr.top
+[ 23](sec  8)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x0000000000000000 .refptr.stack
+[ 24](sec  0)(fl 0x00)(ty  20)(scl   2) (nx 0) 0x0000000000000000 printf
+[ 25](sec  0)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x0000000000000000 stack
+[ 26](sec  0)(fl 0x00)(ty   0)(scl   2) (nx 0) 0x0000000000000000 top
+
+
+
+
+
+
+
+
+
+
+Disassembly of section .text:
+
+0000000000000000 <_Z4pushc>:#没有定位 看看在main的位置是哪里？
+
+
+
+
+   0:	55                   	push   %rbp
+   1:	48 89 e5             	mov    %rsp,%rbp
+   4:	48 83 ec 20          	sub    $0x20,%rsp
+   8:	89 c8                	mov    %ecx,%eax
+   a:	88 45 10             	mov    %al,0x10(%rbp)
+   d:	48 8b 05 00 00 00 00 	mov    0x0(%rip),%rax        # 14 <_Z4pushc+0x14>
+  14:	8b 00                	mov    (%rax),%eax
+  16:	89 c2                	mov    %eax,%edx
+  18:	48 8d 0d 00 00 00 00 	lea    0x0(%rip),%rcx        # 1f <_Z4pushc+0x1f>
+  1f:	e8 00 00 00 00       	callq  24 <_Z4pushc+0x24>
+  24:	48 8b 05 00 00 00 00 	mov    0x0(%rip),%rax        # 2b <_Z4pushc+0x2b>
+  2b:	8b 00                	mov    (%rax),%eax
+  2d:	8d 50 01             	lea    0x1(%rax),%edx
+  30:	48 8b 05 00 00 00 00 	mov    0x0(%rip),%rax        # 37 <_Z4pushc+0x37>
+  37:	89 10                	mov    %edx,(%rax)
+  39:	48 8b 05 00 00 00 00 	mov    0x0(%rip),%rax        # 40 <_Z4pushc+0x40>
+  40:	8b 00                	mov    (%rax),%eax
+  42:	48 8b 15 00 00 00 00 	mov    0x0(%rip),%rdx        # 49 <_Z4pushc+0x49>
+  49:	48 98                	cltq   
+  4b:	0f b6 4d 10          	movzbl 0x10(%rbp),%ecx
+  4f:	88 0c 02             	mov    %cl,(%rdx,%rax,1)
+  52:	48 8b 05 00 00 00 00 	mov    0x0(%rip),%rax        # 59 <_Z4pushc+0x59>
+  59:	8b 00                	mov    (%rax),%eax
+  5b:	48 8b 15 00 00 00 00 	mov    0x0(%rip),%rdx        # 62 <_Z4pushc+0x62>
+  62:	48 98                	cltq   
+  64:	0f b6 04 02          	movzbl (%rdx,%rax,1),%eax
+  68:	0f be d0             	movsbl %al,%edx
+  6b:	48 8b 05 00 00 00 00 	mov    0x0(%rip),%rax        # 72 <_Z4pushc+0x72>
+  72:	8b 00                	mov    (%rax),%eax
+  74:	41 89 d0             	mov    %edx,%r8d
+  77:	89 c2                	mov    %eax,%edx
+  79:	48 8d 0d 0f 00 00 00 	lea    0xf(%rip),%rcx        # 8f <_Z4pushc+0x8f>
+  80:	e8 00 00 00 00       	callq  85 <_Z4pushc+0x85>
+  85:	90                   	nop
+  86:	48 83 c4 20          	add    $0x20,%rsp
+  8a:	5d                   	pop    %rbp
+  8b:	c3                   	retq   
+  8c:	90                   	nop
+  8d:	90                   	nop
+  8e:	90                   	nop
+  8f:	90                   	nop
