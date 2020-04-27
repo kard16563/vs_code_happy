@@ -10,14 +10,14 @@ typedef struct
     t_type type;
 }t_value;
 
-enum{
+enum{//不合法的是啥类型的
     T_PARSE_OK = 0,
     T_PARSE_EXPECT_VALUE,//一个 JSON 只含有空白
     T_PARSE_INVALID_VALUE,//不是null、false 或 true那三种字面值
     T_PARSE_ROOT_NOT_SINGULAR//一个值之后，在空白之后还有其他字符
 };
 
-int t_parse(t_value *v,const char* json);//解析 JSON
-t_type t_get_type(const t_value *v);//访问结果的函数
+int t_parse(t_value *v,const char* json);//解析 JSON  看看是否合法
+t_type t_get_type(const t_value *v);//访问结果的函数  不合法的话看看是啥类型
 
 #endif
