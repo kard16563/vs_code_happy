@@ -12,9 +12,10 @@ static int test_pass=0;
             do\
                 {\
                 test_count++;\
+                printf("\n  test_count-> %d \n",test_count);\
                     if (equality)\
                     {\
-                        test_count++;\
+                        test_pass++;\
                     }else\
                     {\
                         fprintf(stderr, "%s:%d: expect: " format " actual: " format "\n", __FILE__, __LINE__, expect, actual);\
@@ -44,4 +45,8 @@ int main(){
     printf("%d/%d (%3.2f%%) passed\n", test_pass, test_count, test_pass * 100.0 / test_count);
     getchar();
     return main_ret;
+    //E:\the_c_of_vs_code\c\c_project\json
+    //E:\the_c_of_vs_code\c\c_project\json>gcc -c json.c
+    //gcc -g  test.c json.c -o main
+    //gcc -g  test.c json.o -o main
 }
