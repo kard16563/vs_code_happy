@@ -36,6 +36,37 @@ static int t_parse_null(t_context *c,t_value *v){//解析null
     
 }
 
+
+static int t_parse_true(t_context *c,t_value *v){
+
+    expect(c,'t');// t?
+    if (c->json[0] != 'r' ||c->json[1] != 'u' || c->json[2] != 'e'  )
+    {
+        return T_PARSE_INVALID_VALUE;//反向判断 快速
+    }
+    c->json+=3;//指针指到最后
+    return T_PARSE_OK;
+}
+
+static int t_parse_false(t_context *c,t_value *v){
+
+    expect(c,'f');
+    if( c->json[0] != 'a' || c->json[1] != 'l' || c->json[2] != 's' || c->json[3] != 'e' ){
+        return T_PARSE_INVALID_VALUE;
+    }
+    c->json+=4;
+    return T_PARSE_OK;//成功解析
+
+}
+
+static int  t_parse_end_not_null(t_context *t ){
+    if (t->json != '\0') 
+        return  T_PARSE_ROOT_NOT_SINGULAR;
+    return T_PARSE_OK;//直接返回结果 一点也不臃肿 函数尽可能要求单功能尽可能 组合使用
+
+}
+
+
 ///// 一掉部分工具函数写完 下面从37-68 都是对上面的调用与封装
 
 static int t_parse_value(t_context *t ,t_value *v){//解析值
@@ -50,8 +81,13 @@ static int t_parse_value(t_context *t ,t_value *v){//解析值
         // break;
 
     case '\0': // case "n" 就不行 因为不是常量
-        return T_PARSE_EXPECT_VALUE;
+        return T_PARSE_EXPECT_VALUE; //任何字符串的背后都是 \0
         // break; 一个 JSON 只含有空白
+    case 'r':
+        return t_parse_true(t,v);
+
+    case 'f':
+        return t_parse_false(t,v);
     
     default:
         return T_PARSE_INVALID_VALUE;
@@ -59,12 +95,21 @@ static int t_parse_value(t_context *t ,t_value *v){//解析值
     }
 }
 
-int t_parse(t_value *v, const char *json){
+int t_parse(t_value *v, const char *json){//t_parse(&v,"null")
 
     t_context c;
     assert( v !=NULL );
     c.json =json;
     v->type=T_NULL;
+
+    int ret= t_parse_value(&c,v);
+    
+
+    if ( ret == T_PARSE_OK)
+    {
+        t_parse_ws(&c,v);
+        ret=t_parse_end_not_null(&c,v);
+    }
 
     return t_parse_value(&c,v);
     

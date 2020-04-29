@@ -11,7 +11,7 @@ typedef struct
 }t_value;
 
 enum{//不合法的是啥类型的
-    T_PARSE_OK = 0,
+    T_PARSE_OK = 0,// 无错误
     T_PARSE_EXPECT_VALUE,//一个 JSON 只含有空白
     T_PARSE_INVALID_VALUE,//不是null、false 或 true那三种字面值
     T_PARSE_ROOT_NOT_SINGULAR//一个值之后，在空白之后还有其他字符

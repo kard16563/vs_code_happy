@@ -23,9 +23,10 @@ static int test_pass=0;
                         main_ret = 1;\
                     }\
                 } while (0);
-            
 
-#define expect_eq_int(expect,actual)expect_eq_base((expect) == (actual),expect,actual,"%d")
+
+
+#define expect_eq_int(expect,actual)expect_eq_base((expect) == (actual),expect,actual,"%d")//测试宏
 
 static void test_parse_null(){
     t_value v;
