@@ -105,7 +105,8 @@ int t_parse(t_value *v, const char *json){//t_parse(&v,"null")
     int ret= t_parse_value(&c,v);
     
 
-    if ( ret == T_PARSE_OK)
+    if ( ret == T_PARSE_OK)//虽然有很多的函数 要判断很多的类型但是都是有统一的调用入口 和 统一的出口 出口的东西都一样（指的是正确的情况下）
+    //但是在错误的情况下返回的都是各自领域的错误
     {
         t_parse_ws(&c,v);
         ret=t_parse_end_not_null(&c,v);

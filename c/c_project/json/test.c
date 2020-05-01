@@ -29,15 +29,80 @@ static int test_pass=0;
 #define expect_eq_int(expect,actual)expect_eq_base((expect) == (actual),expect,actual,"%d")//测试宏
 
 static void test_parse_null(){
-    t_value v;
-    v.type=T_TURE;
+                t_value v;
+                v.type=T_TURE;
                 expect_eq_int(T_PARSE_OK,t_parse(&v,"null"));
                 expect_eq_int(T_NULL,t_get_type(&v));
 
 }
 
+static void test_parse_true(){
+
+    t_value v;
+    v.type=T_FALSE;
+    expect_eq_int(T_PARSE_OK,t_parse(&v, "true"));
+    expect_eq_int(T_TURE,t_get_type(&v));
+}
+
+static void test_parse_false(){
+
+    t_value v;
+    v.type=T_TURE;
+    expect_eq_int(T_PARSE_OK,t_parse(&v, "false"));
+    expect_eq_int(T_TURE,t_get_type(&v));
+}
+
+static void test_parse_true(){
+
+    t_value v;
+    v.type=T_FALSE;
+    expect_eq_int(T_PARSE_OK,t_parse(&v, "false"));
+    expect_eq_int(T_TURE,t_get_type(&v));
+}
+
+
+
+// static void test_parse_expect_value() {
+//     t_value v;
+
+//     v.type = T_FALSE;
+//     EXPECT_EQ_INT(T_PARSE_EXPECT_VALUE, lept_parse(&v, ""));
+//     EXPECT_EQ_INT(T_NULL, lept_get_type(&v));
+
+//     v.type = T_FALSE;
+//     EXPECT_EQ_INT(T_PARSE_EXPECT_VALUE, lept_parse(&v, " "));
+//     EXPECT_EQ_INT(T_NULL, lept_get_type(&v));
+// }
+
+// static void test_parse_invalid_value() {
+//     t_value v;
+//     v.type = T_FALSE;
+//     EXPECT_EQ_INT(T_PARSE_INVALID_VALUE, lept_parse(&v, "nul"));
+//     EXPECT_EQ_INT(T_NULL, lept_get_type(&v));
+
+//     v.type = T_FALSE;
+//     EXPECT_EQ_INT(T_PARSE_INVALID_VALUE, lept_parse(&v, "?"));
+//     EXPECT_EQ_INT(T_NULL, lept_get_type(&v));
+// }
+
+// static void test_parse_root_not_singular() {
+//     t_value v;
+//     v.type = T_FALSE;
+//     EXPECT_EQ_INT(T_PARSE_ROOT_NOT_SINGULAR, lept_parse(&v, "null x"));
+//     EXPECT_EQ_INT(T_NULL, lept_get_type(&v));
+// }
+
+
+
+
 static void test_parse(){
     test_parse_null();
+
+    // test_parse_true();
+    // test_parse_false();
+    // test_parse_expect_value();
+    // test_parse_invalid_value();
+    // test_parse_root_not_singular();
 }
 
 int main(){
