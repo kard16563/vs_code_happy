@@ -7,6 +7,7 @@ typedef enum {T_NULL,T_FALSE,T_TURE,T_NUMBER,T_STRING,T_ARRAY,T_OBJ} t_type;
 
 typedef struct 
 {
+    double n;//用于数字的表达
     t_type type;
 }t_value;
 

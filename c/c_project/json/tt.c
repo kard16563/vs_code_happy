@@ -31,6 +31,22 @@ static int t_parse_null(t_context *c,t_value *v){//解析null
     
 }
 
+
+// A simple atoi() function---》 conver string to integer 从字符串到整数
+int myAtoi(char* str) 
+{ 
+    int res = 0; // Initialize result 
+
+    // Iterate through all characters of input string and 
+    // update result 
+    for (int i = 0; str[i] != '\0'; ++i) 
+        res = res * 10 + str[i] - '0'; 
+
+    // return result. 
+    return res; 
+} 
+
+
 int main(){
 
     t_context c;
@@ -41,6 +57,10 @@ int main(){
     
     
     t_parse_null(&c,&v);
+
+    char str[] = "89789"; 
+    int val = myAtoi(str); 
+    printf("--->整数 %d -- str-> %s ", val,str); 
 
     getchar();
 

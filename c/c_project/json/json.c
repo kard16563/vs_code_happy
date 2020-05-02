@@ -21,6 +21,9 @@ static void t_parse_ws(t_context *c){// parse_whitespace 解析空格
     c->json=p;
 }
 
+
+///////////////
+
 static int t_parse_null(t_context *c,t_value *v){//解析null
 
     expect(c,'n');
@@ -66,6 +69,13 @@ static int t_parse_false(t_context *c,t_value *v){
     return T_PARSE_OK;//成功解析
 
 }
+
+//这些null true Flase 函数非常的相似 违反编程中常说的 DRY（don't repeat yourself）原则
+//需要合并  但是 上述把 3 个函数合并后，优点是减少重复的代码，维护较容易，
+//但缺点可能是带来性能的少量影响。  软件的架构难以用单一标准评分，重构时要考虑平衡各种软件品质。
+
+////////////////////////////
+
 
 static int  t_parse_end_not_null(t_context *t ){
     if (*t->json != '\0') 
