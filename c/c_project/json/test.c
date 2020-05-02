@@ -18,8 +18,8 @@ static int test_pass=0;
                         test_pass++;\
                     }else\
                     {\
-                        fprintf(stderr, "%s:%d: expect: " format " actual: " format "\n", __FILE__, __LINE__, expect, actual);\
-                        fprintf(stderr,"%s:%d:expect : " format " actual: " format "\n",__FILE__,__LINE__,expect,actual );\
+                        fprintf(stderr, "---------->%s:%d: expect: " format " actual: " format "\n", __FILE__, __LINE__, expect, actual);\
+                        fprintf(stderr,"----------->%s:%d:expect : " format " actual: " format "\n",__FILE__,__LINE__,expect,actual );\
                         main_ret = 1;\
                     }\
                 } while (0);
@@ -40,57 +40,49 @@ static void test_parse_true(){
 
     t_value v;
     v.type=T_FALSE;
+    printf("\n\nT_FALSE %d",T_FALSE);
     expect_eq_int(T_PARSE_OK,t_parse(&v, "true"));
-    expect_eq_int(T_TURE,t_get_type(&v));
+    expect_eq_int(T_TURE,t_get_type(&v));//------>
 }
 
 static void test_parse_false(){
 
     t_value v;
     v.type=T_TURE;
-    expect_eq_int(T_PARSE_OK,t_parse(&v, "false"));
-    expect_eq_int(T_TURE,t_get_type(&v));
+    expect_eq_int(T_PARSE_OK,t_parse(&v, "false"));//对判断过程中是否出错
+    expect_eq_int(T_FALSE,t_get_type(&v));//---> 判断结果是否出错
 }
 
-static void test_parse_true(){
 
+static void test_parse_expect_value() {
     t_value v;
-    v.type=T_FALSE;
-    expect_eq_int(T_PARSE_OK,t_parse(&v, "false"));
-    expect_eq_int(T_TURE,t_get_type(&v));
+
+    v.type = T_FALSE;
+    expect_eq_int(T_PARSE_EXPECT_VALUE, t_parse(&v, ""));
+    expect_eq_int(T_NULL, t_get_type(&v));
+
+    v.type = T_FALSE;
+    expect_eq_int(T_PARSE_EXPECT_VALUE, t_parse(&v, " "));
+    expect_eq_int(T_NULL, t_get_type(&v));
 }
 
+static void test_parse_invalid_value() {
+    t_value v;
+    v.type = T_FALSE;
+    expect_eq_int(T_PARSE_INVALID_VALUE, t_parse(&v, "nul"));
+    expect_eq_int(T_NULL, t_get_type(&v));
 
+    v.type = T_FALSE;
+    expect_eq_int(T_PARSE_INVALID_VALUE, t_parse(&v, "?"));
+    expect_eq_int(T_NULL, t_get_type(&v));
+}
 
-// static void test_parse_expect_value() {
-//     t_value v;
-
-//     v.type = T_FALSE;
-//     EXPECT_EQ_INT(T_PARSE_EXPECT_VALUE, lept_parse(&v, ""));
-//     EXPECT_EQ_INT(T_NULL, lept_get_type(&v));
-
-//     v.type = T_FALSE;
-//     EXPECT_EQ_INT(T_PARSE_EXPECT_VALUE, lept_parse(&v, " "));
-//     EXPECT_EQ_INT(T_NULL, lept_get_type(&v));
-// }
-
-// static void test_parse_invalid_value() {
-//     t_value v;
-//     v.type = T_FALSE;
-//     EXPECT_EQ_INT(T_PARSE_INVALID_VALUE, lept_parse(&v, "nul"));
-//     EXPECT_EQ_INT(T_NULL, lept_get_type(&v));
-
-//     v.type = T_FALSE;
-//     EXPECT_EQ_INT(T_PARSE_INVALID_VALUE, lept_parse(&v, "?"));
-//     EXPECT_EQ_INT(T_NULL, lept_get_type(&v));
-// }
-
-// static void test_parse_root_not_singular() {
-//     t_value v;
-//     v.type = T_FALSE;
-//     EXPECT_EQ_INT(T_PARSE_ROOT_NOT_SINGULAR, lept_parse(&v, "null x"));
-//     EXPECT_EQ_INT(T_NULL, lept_get_type(&v));
-// }
+static void test_parse_root_not_singular() {
+    t_value v;
+    v.type = T_FALSE;
+    expect_eq_int(T_PARSE_ROOT_NOT_SINGULAR, t_parse(&v, "null x"));
+    expect_eq_int(T_NULL, t_get_type(&v));
+}
 
 
 
@@ -98,11 +90,11 @@ static void test_parse_true(){
 static void test_parse(){
     test_parse_null();
 
-    // test_parse_true();
-    // test_parse_false();
-    // test_parse_expect_value();
-    // test_parse_invalid_value();
-    // test_parse_root_not_singular();
+    test_parse_true();
+    test_parse_false();
+    test_parse_expect_value();
+    test_parse_invalid_value();
+    test_parse_root_not_singular();
 }
 
 int main(){

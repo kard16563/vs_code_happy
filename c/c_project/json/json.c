@@ -5,7 +5,7 @@
 
 
 
-#define expect(c,ch) do { assert(*c->json == (ch)); c->json++; } while(0)
+#define expect(c,ch) do { assert(*c->json == (ch)); printf("\n %c == %c ",*c->json,ch );c->json++; printf(" == %c ",*c->json); } while(0)
 
 typedef struct{
     const char *json;
@@ -39,28 +39,36 @@ static int t_parse_null(t_context *c,t_value *v){//解析null
 
 static int t_parse_true(t_context *c,t_value *v){
 
-    expect(c,'t');// t?
+    expect(c,'t');// t? true
+    //printf(" \n  true is  %c,%c ,%c   \n ",c->json[0],c->json[1],c->json[2]);
     if (c->json[0] != 'r' ||c->json[1] != 'u' || c->json[2] != 'e'  )
     {
+        //printf(" \n  true is bad %c,%c ,%c   \n ",c->json[0],c->json[1],c->json[2]);
         return T_PARSE_INVALID_VALUE;//反向判断 快速
     }
     c->json+=3;//指针指到最后
+    //printf(" \n  true is ok \n ");
+    v->type=T_TURE;
     return T_PARSE_OK;
 }
 
 static int t_parse_false(t_context *c,t_value *v){
 
     expect(c,'f');
+    printf(" \n  true is ok 2 \n ");
     if( c->json[0] != 'a' || c->json[1] != 'l' || c->json[2] != 's' || c->json[3] != 'e' ){
         return T_PARSE_INVALID_VALUE;
     }
+    printf(" \n  true is ok \n ");
     c->json+=4;
+
+    v->type=T_FALSE;
     return T_PARSE_OK;//成功解析
 
 }
 
 static int  t_parse_end_not_null(t_context *t ){
-    if (t->json != '\0') 
+    if (*t->json != '\0') 
         return  T_PARSE_ROOT_NOT_SINGULAR;
     return T_PARSE_OK;//直接返回结果 一点也不臃肿 函数尽可能要求单功能尽可能 组合使用
 
@@ -82,8 +90,12 @@ static int t_parse_value(t_context *t ,t_value *v){//解析值
 
     case '\0': // case "n" 就不行 因为不是常量
         return T_PARSE_EXPECT_VALUE; //任何字符串的背后都是 \0
+    
+    case 32: // 空格的阿斯克码为32
+        return T_PARSE_EXPECT_VALUE; //任何字符串的背后都是 \0
+    
         // break; 一个 JSON 只含有空白
-    case 'r':
+    case 't':
         return t_parse_true(t,v);
 
     case 'f':
@@ -98,6 +110,7 @@ static int t_parse_value(t_context *t ,t_value *v){//解析值
 int t_parse(t_value *v, const char *json){//t_parse(&v,"null")
 
     t_context c;
+    printf("\n json-->%d,%c,\n,",*json,*json);
     assert( v !=NULL );
     c.json =json;
     v->type=T_NULL;
@@ -108,16 +121,17 @@ int t_parse(t_value *v, const char *json){//t_parse(&v,"null")
     if ( ret == T_PARSE_OK)//虽然有很多的函数 要判断很多的类型但是都是有统一的调用入口 和 统一的出口 出口的东西都一样（指的是正确的情况下）
     //但是在错误的情况下返回的都是各自领域的错误
     {
-        t_parse_ws(&c,v);
-        ret=t_parse_end_not_null(&c,v);
+        t_parse_ws(&c);
+        ret=t_parse_end_not_null(&c);
     }
 
-    return t_parse_value(&c,v);
+    return ret;
     
 }
 
 t_type t_get_type(const t_value *v){
     assert(v!=NULL);
+    printf("\n t_get_type--->%d \n",v->type);
     return v->type;
 }
 //E:\the_c_of_vs_code\c\c_project\json>gcc -c json.c
