@@ -62,6 +62,15 @@ int main(){
     int val = myAtoi(str); 
     printf("--->整数 %d -- str-> %s ", val,str); 
 
+    char str1[30] = "20.30300 This is test";
+    char *ptr;
+    double ret;
+
+   ret = strtod(str1, &ptr);
+   printf("数字（double）是 %lf\n", ret);
+   printf("字符串部分是 |%s|", ptr);
+
+
     getchar();
 
 

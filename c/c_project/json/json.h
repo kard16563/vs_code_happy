@@ -20,5 +20,5 @@ enum{//不合法的是啥类型的
 
 int t_parse(t_value *v,const char* json);//解析 JSON  看看是否合法
 t_type t_get_type(const t_value *v);//访问结果的函数  不合法的话看看是啥类型
-
+double t_get_number(const t_value *v);
 #endif

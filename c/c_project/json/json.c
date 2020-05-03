@@ -5,7 +5,7 @@
 
 
 
-#define expect(c,ch) do { assert(*c->json == (ch)); printf("\n %c == %c ",*c->json,ch );c->json++; printf(" == %c ",*c->json); } while(0)
+#define expect(c,ch) do { assert(*c->json == (ch));c->json++; } while(0)
 
 typedef struct{
     const char *json;
@@ -17,7 +17,7 @@ static void t_parse_ws(t_context *c){// parse_whitespace 解析空格
     {
         p++;
     }
-    printf("\n fun->t_parse_ws_>  p - %d ",p);
+    //printf("\n fun->t_parse_ws_>  p - %d ",p);
     c->json=p;
 }
 
@@ -33,7 +33,7 @@ static int t_parse_null(t_context *c,t_value *v){//解析null
     }
     // 反之有
     c->json+=3;
-    printf("\n  null 类型正确 \n ");
+    //printf("\n  null 类型正确 \n ");
     v->type = T_NULL;
     return T_PARSE_OK;
     
@@ -51,18 +51,18 @@ static int t_parse_true(t_context *c,t_value *v){
     }
     c->json+=3;//指针指到最后
     //printf(" \n  true is ok \n ");
-    v->type=T_TURE;
-    return T_PARSE_OK;
+    v->type=T_TURE;                 //输出结果
+    return T_PARSE_OK;              //表示过程完毕   
 }
 
 static int t_parse_false(t_context *c,t_value *v){
 
     expect(c,'f');
-    printf(" \n  true is ok 2 \n ");
+    //printf(" \n  true is ok 2 \n ");
     if( c->json[0] != 'a' || c->json[1] != 'l' || c->json[2] != 's' || c->json[3] != 'e' ){
         return T_PARSE_INVALID_VALUE;
     }
-    printf(" \n  true is ok \n ");
+    //printf(" \n  true is ok \n ");
     c->json+=4;
 
     v->type=T_FALSE;
@@ -84,6 +84,18 @@ static int  t_parse_end_not_null(t_context *t ){
 
 }
 
+static double t_parse_number(t_context *c, t_value *v){
+    char *end;
+    v->n=strtod(c->json,&end);//进行结果转化
+    //printf("\n __> %s",*end);
+    if (c->json == end ) return T_PARSE_INVALID_VALUE;
+    printf("\n v->n %lf \n",v->n);
+    v->type=T_NUMBER;
+    c->json=end;//指到尾部
+    printf("\n t_parse_number--->ok  %d",T_PARSE_OK);
+    return T_PARSE_OK;//解析完毕 用于过程确认
+}
+
 
 ///// 一掉部分工具函数写完 下面从37-68 都是对上面的调用与封装
 
@@ -95,24 +107,30 @@ static int t_parse_value(t_context *t ,t_value *v){//解析值
 
     {
     case 'n': // case "n" 就不行 因为不是常量
+        printf("\n  ------> 1");
         return t_parse_null(t,v);
         // break;
 
     case '\0': // case "n" 就不行 因为不是常量
+    printf("\n  ------> 2");
         return T_PARSE_EXPECT_VALUE; //任何字符串的背后都是 \0
     
     case 32: // 空格的阿斯克码为32
+    printf("\n  ------> 3");
         return T_PARSE_EXPECT_VALUE; //任何字符串的背后都是 \0
     
         // break; 一个 JSON 只含有空白
     case 't':
+    printf("\n  ------> 4");
         return t_parse_true(t,v);
 
     case 'f':
+    printf("\n  ------> 5");
         return t_parse_false(t,v);
     
     default:
-        return T_PARSE_INVALID_VALUE;
+    printf("\n  ------> 6");
+        return t_parse_number(t,v);
         //break;不是那三种字面值
     }
 }
@@ -120,13 +138,14 @@ static int t_parse_value(t_context *t ,t_value *v){//解析值
 int t_parse(t_value *v, const char *json){//t_parse(&v,"null")
 
     t_context c;
-    printf("\n json-->%d,%c,\n,",*json,*json);
+    printf("\njson.c get -->num%d, string%c ,\n,",*json,*json);
     assert( v !=NULL );
     c.json =json;
     v->type=T_NULL;
 
     int ret= t_parse_value(&c,v);
-    
+
+    printf("\n___1 ret--> %d ___",ret);
 
     if ( ret == T_PARSE_OK)//虽然有很多的函数 要判断很多的类型但是都是有统一的调用入口 和 统一的出口 出口的东西都一样（指的是正确的情况下）
     //但是在错误的情况下返回的都是各自领域的错误
@@ -134,14 +153,21 @@ int t_parse(t_value *v, const char *json){//t_parse(&v,"null")
         t_parse_ws(&c);
         ret=t_parse_end_not_null(&c);
     }
-
+    printf("2 ret--> %d",ret);
     return ret;
     
 }
 
 t_type t_get_type(const t_value *v){
     assert(v!=NULL);
-    printf("\n t_get_type--->%d \n",v->type);
+    //printf("\n t_get_type--->%d \n",v->type);
     return v->type;
 }
+
+double t_get_number(const t_value *v){
+    assert(v != NULL && v->type == T_NUMBER);
+    return v->n;
+}
+
+
 //E:\the_c_of_vs_code\c\c_project\json>gcc -c json.c
