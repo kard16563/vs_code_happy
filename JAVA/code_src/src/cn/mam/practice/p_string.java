@@ -26,5 +26,23 @@ public class p_string {
         String a6;
         if ( a5 == null ){System.out.println("null");}
 
+        String testA5="hello";//存在有的字符占2个储存单元的
+        int getLength = testA5.length();// 5 占用 5个储存单元
+        int cpCount = testA5.codePointCount(0,testA5.length());// 5 表示5 个字符--》称之为码点
+        //调用 s.charAt(n) 将返回位置 n 的代码单元，n 介于 0 ~ s.length()-l 之间。
+        char firstChar = testA5.charAt(0);//"h"
+        char lastChar = testA5.charAt(4);//"0"
+
+
+
+        System.out.println(" 代码单元长度 "+getLength +" 码点"+cpCount);
+
+        //需要由较短的字符串构建字符串， 例如， 按键或来自文件中的单词。采用字
+        //符串连接的方式达到此目的效率比较低使用 StringBuildei•类就可以避免这个问题的发生。
+
+        StringBuilder strBuild=new StringBuilder();
+        strBuild.append("hello");//可以连续添加字符或者字符串
+        strBuild.append("a");
+        String completedString =strBuild.toString();//转过来就ok了
     }
 }
