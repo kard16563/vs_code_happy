@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Vue </title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="./vue-js/axios.min.js"></script>
+
+</head>
+<body>
+<div id="aa">
+    <div>{{site}}</div>
+    <div>一共点击了  {{clickNumber}}次</div>
+    <button @click="count">点击</button>
+    <button @click="aa()"> ajax </button>
+    <button @click="bb()">bb</button>
+
+
+</div>
+<script type="text/javascript">
+    new Vue({
+        el: '#aa',
+        data: {
+            site: "123",
+            clickNumber:0,
+            url:"/vue"
+
+        },
+
+        methods: {
+            count: function(){
+                this.clickNumber++;
+                //this.aa();
+
+            },
+            bb(){
+                this.site="66666";
+                console.log(this.site);
+            },
+            aa(){
+                var pp;
+                pp=axios({
+                    //method: 'POST',
+                    method: 'GET',
+                    url: this.url,
+                    //url: '/vue',
+                    headers: {
+                        'Content-Type': 'text/html;charset=utf-8',
+                    },
+                   // data:mydata
+
+                }).then(function (res) {
+                    console.log("data",res.data);
+                    return res;
+                });
+                    console.log("pp--->",pp);
+
+
+
+                //axios.get(this.url).then((res)=>{this.site=res.data});
+
+                //
+
+
+            }
+
+        },
+
+    })
+</script>
+</body>
+</html>
