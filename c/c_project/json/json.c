@@ -3,6 +3,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+#include <errno.h>   /* errno, ERANGE */
+#include <math.h>    /* HUGE_VAL */
+
 
 
 #define expect(c,ch) do { assert(*c->json == (ch));c->json++; } while(0)
@@ -102,17 +105,75 @@ static int  t_parse_end_not_null(t_context *t ){
 
 }
 
+// static double t_parse_number(t_context *c, t_value *v){
+//     char *end;
+//     v->n=strtod(c->json,&end);//进行结果转化
+//     //printf("\n __> %s",*end);
+//     if (c->json == end ) return T_PARSE_INVALID_VALUE;
+//     printf("\n v->n %lf \n",v->n);
+//     v->type=T_NUMBER;
+//     c->json=end;//指到尾部
+//     printf("\n t_parse_number--->ok  %d",T_PARSE_OK);
+//     return T_PARSE_OK;//解析完毕 用于过程确认
+// }
+# define ISDIGIT(ch)         ((ch) >= '0' && (ch) <= '9')   // 判断是不是数字
+# define ISDIGIT1TO9(ch)     ((ch) >= '1' && (ch) <= '9')   //判断是不是从1到9的数组
+
 static double t_parse_number(t_context *c, t_value *v){
+    //流水线式的处理
+    //============》    》=========    ========
+    //   正常      ||  ||         || ||  《-检查
+    //             ===》          ====》
+    //           异常抛出          异常抛出--》 return T_PARSE_INVALID_VALUE;
+    
+    
+    const char *p = c->json;// 申请一个指针 让他指向json 并方便遍历 不影响json的指针
+    //printf ( "   t_parse_number 1 %c  p->%x  c->json%x \n",*p,p ,c->json );
+    if( *p == '-' ) p++;
+    if( *p == '0' ) p++;
+    else
+    {    //printf("\n  t_parse_number -> a1 = %d %c \n",ISDIGIT1TO9(*p),*p);
+        if (!ISDIGIT1TO9(*p)) return T_PARSE_INVALID_VALUE;
+        //printf("\n  t_parse_number -> a1.1 = %d %c\n",ISDIGIT(*p),*p);
+        for ( p++ ; ISDIGIT(*p) ; p++ );
+        //if ( !ISDIGIT(*p) ) return T_PARSE_INVALID_VALUE;
+    }
+
+    if ( *p == '.' )
+
+    {   //printf("\n  t_parse_number -> a2.0 %d %c \n",ISDIGIT1TO9(*p),*p);
+        p=p+1; //指针下移动 跳开 .
+        //printf("\n  t_parse_number -> a2 %d %c \n",ISDIGIT1TO9(*p),*p);
+            if (!ISDIGIT(*p)) return T_PARSE_INVALID_VALUE;
+        //printf("\n  t_parse_number -> a2.2 %d %c\n",ISDIGIT(*p),*p);
+            for ( p++ ; ISDIGIT(*p) ; p++ );
+    }
+
+    if ( *p == 'e' || *p == 'E' )
+    {
+        p++;
+        if (*p == '+' || *p == '-') p++;
+        //printf("\n  t_parse_number -> a3 %d %c \n",ISDIGIT1TO9(*p),*p);
+        if ( !ISDIGIT(*p) ) return T_PARSE_INVALID_VALUE;
+         //printf("\n  t_parse_number -> a3.3 %d %c\n",ISDIGIT(*p),*p);
+        for ( p++ ; ISDIGIT(*p) ; p++ );
+    }
+    //printf ( "    t_parse_number 2 %c  p->%x  c->json%x \n\n ",*p,p ,c->json );
+    errno = 0; //errno 是记录系统的最后一次错误代码。代码是一个int型的值
     char *end;
-    v->n=strtod(c->json,&end);//进行结果转化
-    //printf("\n __> %s",*end);
-    if (c->json == end ) return T_PARSE_INVALID_VALUE;
-    printf("\n v->n %lf \n",v->n);
-    v->type=T_NUMBER;
-    c->json=end;//指到尾部
-    printf("\n t_parse_number--->ok  %d",T_PARSE_OK);
-    return T_PARSE_OK;//解析完毕 用于过程确认
+    v->n = strtod( c->json , &end );
+    //printf(" --> %lf ",  v->n );
+    if( errno == ERANGE && (v->n == HUGE_VAL || v->n == -HUGE_VAL) )
+        return T_PARSE_NUMBER_TOO_BIG;
+    v->type = T_NUMBER;
+    c->json = end;//json指针 指向队尾
+    return T_PARSE_OK;
+    
+    
+
+
 }
+
 
 
 ///// 一掉部分工具函数写完 下面从37-68 都是对上面的调用与封装
@@ -131,21 +192,21 @@ static int t_parse_value(t_context *t ,t_value *v){//解析值
         // break;
 
     case '\0': // case "n" 就不行 因为不是常量
-    printf("\n  ------> 2");
+    printf("\n  ------>  json.c  2 \n");
         return T_PARSE_EXPECT_VALUE; //任何字符串的背后都是 \0
     
     case 32: // 空格的阿斯克码为32
-    printf("\n  ------> 3");
+    printf("\n  ------> json.c 3 \n");
         return T_PARSE_EXPECT_VALUE; //任何字符串的背后都是 \0
     
         // break; 一个 JSON 只含有空白
     case 't':
-    printf("\n  ------> 4");
+    printf("\n  ------>  json.c 4 \n");
         //return t_parse_true(t,v);
         return t_parse_literal (t, v, "true", T_TURE);
 
     case 'f':
-    printf("\n  ------> 5");
+    printf("\n  ------> json.c 5 \n");
         //return t_parse_false(t,v);
         return t_parse_literal (t, v, "false", T_FALSE);
     
@@ -159,14 +220,14 @@ static int t_parse_value(t_context *t ,t_value *v){//解析值
 int t_parse(t_value *v, const char *json){//t_parse(&v,"null")
 
     t_context c;
-    printf("\njson.c get -->num%d, string%c ,\n,",*json,*json);
+    printf("\njson.c get -->num : %d, string : %c  \n ",*json,*json);
     assert( v !=NULL );
     c.json =json;
     v->type=T_NULL;
 
     int ret= t_parse_value(&c,v);
 
-    printf("\n___1 ret--> %d ___",ret);
+    //printf("\n___1 ret--> %d ___",ret);
 
     if ( ret == T_PARSE_OK)//虽然有很多的函数 要判断很多的类型但是都是有统一的调用入口 和 统一的出口 出口的东西都一样（指的是正确的情况下）
     //但是在错误的情况下返回的都是各自领域的错误
@@ -174,7 +235,7 @@ int t_parse(t_value *v, const char *json){//t_parse(&v,"null")
         t_parse_ws(&c);
         ret=t_parse_end_not_null(&c);
     }
-    printf("2 ret--> %d",ret);
+    //printf("2 ret--> %d",ret);
     return ret;
     
 }
@@ -186,6 +247,7 @@ t_type t_get_type(const t_value *v){
 }
 
 double t_get_number(const t_value *v){
+    //printf(" t_get_number  %lf \n",v->n);
     assert(v != NULL && v->type == T_NUMBER);
     return v->n;
 }

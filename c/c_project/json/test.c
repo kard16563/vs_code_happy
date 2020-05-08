@@ -16,8 +16,8 @@ static int test_pass=0;
                         test_pass++;\
                     }else\
                     {\
-                        fprintf(stderr, "---------->%s:%d: expect: " format " actual: " format "\n", __FILE__, __LINE__, expect, actual);\
-                        fprintf(stderr,"----------->%s:%d:expect : " format " actual: " format "\n",__FILE__,__LINE__,expect,actual );\
+                        fprintf(stderr, " \n  >>>>=====---------->%s:%d: expect: " format " actual: " format "\n", __FILE__, __LINE__, expect, actual);\
+                        fprintf(stderr,"\n    >>>======---------->%s:%d:expect : " format " actual: " format "\n",__FILE__,__LINE__,expect,actual );\
                         main_ret = 1;\
                     }\
                 } while (0);
@@ -25,7 +25,7 @@ static int test_pass=0;
 
 
 #define expect_eq_int(expect,actual) expect_eq_base((expect) == (actual),expect,actual,"%d")//测试宏
-#define expect_eq_double(expect, actual) expect_eq_base( ((expect) - (actual) == 0.000000), expect, actual, "%.17g") printf(" \n answer -> %d ",((expect) - (actual)) );
+#define expect_eq_double(expect, actual) expect_eq_base( ((expect) - (actual) == 0.000000), expect, actual, "%.17g") ;
 
 static void test_parse_null(){
                 t_value v;
@@ -93,13 +93,16 @@ static void test_parse_expect_value() {
 
 static void test_parse_number() {
     char *c;
-    test_number(0.0, "0");
+    test_number(1.1, "1.1");
     //printf("   tt-> %lf ",strtod("0",&c));
     test_number(0, "0");
     test_number(0.0, "-0.0");
     test_number(1.0, "1");
     test_number(-1.0, "-1");
     test_number(1.5, "1.5");
+    test_number(1E+10, "1E+10");
+    test_number(1e10, "1e10");
+
 }
 
 #define test_error(error, json)\
@@ -149,19 +152,19 @@ static void test_parse_number_too_big() {
 
 
 static void test_parse(){
-    printf("\n  ------>> 1");
+   // printf("\n  ------>> 1");
     test_parse_null();
-    printf("\n  ------>> 1");
+    //printf("\n  ------>> 1");
     test_parse_true();
-    printf("\n  ------>> 2");
+    //printf("\n  ------>> 2");
     test_parse_false();
-    printf("\n  ------>> 2");
+    //printf("\n  ------>> 2");
     test_parse_number();
-    printf("\n  ------>> 3");
+   // printf("\n  ------>> 3");
     test_parse_expect_value();
-    printf("\n  ------>> 4");
+   // printf("\n  ------>> 4");
     test_parse_invalid_value();
-    printf("\n  ------>> 5");
+   // printf("\n  ------>> 5");
     test_parse_root_not_singular();
     test_parse_number_too_big();
 
