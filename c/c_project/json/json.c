@@ -6,12 +6,19 @@
 #include <errno.h>   /* errno, ERANGE */
 #include <math.h>    /* HUGE_VAL */
 
+#include <string.h>  /* memcpy() */
 
+#ifndef T_PARSE_STACK_INIT_SIZE // stack
+    #define T_PARSE_STACK_INIT_SIZE 256// stack
+#endif
 
 #define expect(c,ch) do { assert(*c->json == (ch));c->json++; } while(0)
 
 typedef struct{
     const char *json;
+    char* stack;//引入堆栈 用作缓冲区
+    size_t size, top;// 堆栈的东西
+
 }t_context;
 
 static void t_parse_ws(t_context *c){// parse_whitespace 解析空格
@@ -173,6 +180,23 @@ static double t_parse_number(t_context *c, t_value *v){
 
 
 }
+
+//处理栈函数 缓冲区
+#define PUTC(c,h) do { *(char*) t_contex_push (c,sizeof(char)) = (ch); } while(0)
+
+static void *t_contex_push(t_context *c,size_t size){
+    void *ret;
+    assert(size>0);
+    if ( c->top + size >= c->size ){
+        if ( c->size == 0 )
+            c->size = T_PARSE_STACK_INIT_SIZE;
+            
+    }
+}
+
+
+
+
 
 
 
