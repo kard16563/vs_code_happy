@@ -186,23 +186,87 @@ static double t_parse_number(t_context *c, t_value *v){
 
 static void *t_contex_push(t_context *c,size_t size){
     void *ret;
-    assert(size>0);
-    if ( c->top + size >= c->size ){
-        if ( c->size == 0 )
+    assert(size>0);//判断传入的数据是否出错
+
+    if ( c->top + size >= c->size ){// top 位置将超过 限定的高度
+        if ( c->size == 0 )// 完全为空
             c->size = T_PARSE_STACK_INIT_SIZE;
+        while ( c->top + size >= c->size )//临界
+                c->size +=  c->size >> 1;
+                c->stack = (char*) realloc (c->stack,c->size);//void *realloc(void *ptr, size_t size) ptr -- 指针指向一个要重新分配内存的内存块  size -- 内存块的新的大小，以字节为单位 
             
+    }
+    ret = c->stack + c->top;//在限定内 top直接上移动
+    c->top += size;//更新大小
+    return ret;
+}
+
+static void * t_context_pop( t_context *c,size_t size ){
+    //size 为信息单元 的高度
+    assert( c->top >= size );//为假就会报错 为真就会放行
+    return c->stack +( c->top -= size );//下降
+}
+
+static int t_parse_string (t_context* c, t_value* v ){
+    size_t head = c->top ,len;
+    const char *p;
+    expect (c, '\"');// 判断是不是字符串
+    p = c->json;
+    for ( ; ; )
+    {   
+        char ch = *p ++; // 向后拨动字符
+        switch (ch)
+        {
+        case '\"' ://开头
+            len = c->top - head;
+            t_set_string (v , (const char *)t_context_pop(c , len), len);
+            c->json = p;
+            return T_PARSE_OK;
+
+        case '\0' :
+            c->top = head;
+            return T_PARSE_MISS_QUOTATION_MARK;
+
+        default:
+            PUTC(c, ch);
+        }
     }
 }
 
+int t_get_boolean(const t_value* v) {
+    /* \TODO */
+    return 0;
+}
 
+void t_set_boolean(t_value* v, int b) {
+    /* \TODO */
+}
 
+void t_set_number(t_value* v, double n) {
+    /* \TODO */
+}
 
+const char* t_get_string(const t_value* v){
+    assert(v != NULL && v->type == T_STRING);
+    return v->len;
+}
+
+void t_set_string(t_value* v, const char* s, size_t len){
+    assert(v != NULL && (s != NULL || len == 0));
+    t_free(v);
+    v->s = (char*) malloc (len+1);
+    memcpy(v->s, s, len);
+    v->s[len] = '\0';
+    v->len = len;
+    v->type = T_STRING;
+
+}
 
 
 
 ///// 一掉部分工具函数写完 下面从37-68 都是对上面的调用与封装
 
-static int t_parse_value(t_context *t ,t_value *v){//解析值
+static int t_parse_value(t_context *t , t_value *v){//解析值
     //char str[40];
     //sprintf(str," *t->json ,%s  *v , %s \n ",*t->json,*v);
     //printf("\n *t->json ,%s   \n",*t->json);
@@ -233,10 +297,13 @@ static int t_parse_value(t_context *t ,t_value *v){//解析值
     printf("\n  ------> json.c 5 \n");
         //return t_parse_false(t,v);
         return t_parse_literal (t, v, "false", T_FALSE);
+    case '"' :
+    printf("\n  ------> json.c 6 \n");
+        return t_parse_string(t, v);
     
     default:
-    printf("\n  ------> 6");
-        return t_parse_number(t,v);
+    printf("\n  ------> json.c 7");
+        return t_parse_number(t, v);
         //break;不是那三种字面值
     }
 }
