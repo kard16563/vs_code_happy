@@ -8,7 +8,7 @@ typedef enum {T_NULL,T_FALSE,T_TURE,T_NUMBER,T_STRING,T_ARRAY,T_OBJ} t_type;
 typedef struct 
 {
     char *s;
-    size_t len;
+    int len;//size_t 没有
     double n;//用于数字的表达
     t_type type; 
 }t_value; // pt_value 事实上是一种变体类型（variant type），
@@ -45,8 +45,8 @@ int t_get_boolean(const t_value* v);
 void t_set_boolean(t_value* v, int b);
 
 const char* t_get_string(const t_value* v);// 获取字符串
-size_t t_get_string_length(const t_value* v);// 获取字符串的长度
-void t_set_string(t_value* v, const char* s, size_t len);// 设置字符串
+int t_get_string_length(const t_value* v);// 获取字符串的长度
+void t_set_string(t_value* v, const char* s, int len);// 设置字符串 size_t
 
 
 int t_parse(t_value *v,const char* json);//解析 JSON  看看是否合法

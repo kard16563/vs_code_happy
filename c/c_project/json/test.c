@@ -9,6 +9,7 @@ static int test_count=0;
 static int test_pass=0;
 
 #define  expect_eq_base(equality , expect , actual , format)\
+            \
             do{\
                 test_count++;\
                     if (equality)\
@@ -22,7 +23,8 @@ static int test_pass=0;
                     }\
                 } while (0);
 
-
+/////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
 
 #define expect_eq_int(expect,actual) expect_eq_base((expect) == (actual),expect,actual,"%d")//测试宏
 #define expect_eq_double(expect, actual) expect_eq_base( ((expect) - (actual) == 0.000000), expect, actual, "%.17g") ;
@@ -109,48 +111,144 @@ static void test_parse_number() {
     do {\
         t_value v;\
         v.type = T_FALSE;\
+        printf("\n\n  tt----->1 \n");\
         expect_eq_int(error, t_parse(&v, json));\
+        printf("\n\n  tt-----> 8888 \n");\
         expect_eq_int(T_NULL, t_get_type(&v));\
     } while(0)
 
 static void test_parse_invalid_value() {
-    test_error(T_PARSE_INVALID_VALUE, "nul");
-    test_error(T_PARSE_INVALID_VALUE, "?");
+test_error(T_PARSE_INVALID_VALUE, "nul");
+test_error(T_PARSE_INVALID_VALUE, "?");
 
 #if 0
     /* invalid number */
-    test_error(T_PARSE_INVALID_VALUE, "+0");
-    test_error(T_PARSE_INVALID_VALUE, "+1");
-    test_error(T_PARSE_INVALID_VALUE, ".123"); /* at least one digit before '.' */
-    test_error(T_PARSE_INVALID_VALUE, "1.");   /* at least one digit after '.' */
-    test_error(T_PARSE_INVALID_VALUE, "INF");
-    test_error(T_PARSE_INVALID_VALUE, "inf");
-    test_error(T_PARSE_INVALID_VALUE, "NAN");
-    test_error(T_PARSE_INVALID_VALUE, "nan");
+test_error(T_PARSE_INVALID_VALUE, "+0");
+test_error(T_PARSE_INVALID_VALUE, "+1");
+test_error(T_PARSE_INVALID_VALUE, ".123"); /* at least one digit before '.' */
+test_error(T_PARSE_INVALID_VALUE, "1.");   /* at least one digit after '.' */
+test_error(T_PARSE_INVALID_VALUE, "INF");
+test_error(T_PARSE_INVALID_VALUE, "inf");
+test_error(T_PARSE_INVALID_VALUE, "NAN");
+test_error(T_PARSE_INVALID_VALUE, "nan");
 #endif
 }
 
 
 static void test_parse_root_not_singular() {
-    test_error(T_PARSE_ROOT_NOT_SINGULAR, "null x");
+test_error(T_PARSE_ROOT_NOT_SINGULAR, "null x");
 
 #if 0
     /* invalid number */
-    test_error(T_PARSE_ROOT_NOT_SINGULAR, "0123"); /* after zero should be '.' , 'E' , 'e' or nothing */
-    test_error(T_PARSE_ROOT_NOT_SINGULAR, "0x0");
-    test_error(T_PARSE_ROOT_NOT_SINGULAR, "0x123");
+test_error(T_PARSE_ROOT_NOT_SINGULAR, "0123"); /* after zero should be '.' , 'E' , 'e' or nothing */
+test_error(T_PARSE_ROOT_NOT_SINGULAR, "0x0");
+test_error(T_PARSE_ROOT_NOT_SINGULAR, "0x123");
 #endif
 }
 
 static void test_parse_number_too_big() {
 #if 0
-    test_error(T_PARSE_NUMBER_TOO_BIG, "1e309");
-    test_error(T_PARSE_NUMBER_TOO_BIG, "-1e309");
+test_error(T_PARSE_NUMBER_TOO_BIG, "1e309");
+test_error(T_PARSE_NUMBER_TOO_BIG, "-1e309");
 #endif
 }
 
 
+///////////////////////////////////////////////
+//printf("\n\n   sizeof(expect) - 1 %d alenth %d memcmp(expect,actual,alenth) %d  actual %d  \n\n",sizeof(expect) - 1, alenth, memcmp(expect,actual,alenth), actual);
+#define expect_eq_string(expect, actual, alenth)  \
+printf("\n\n  define expect_eq_string -b  expect-< %d actual-< %d  alenth-< %d  \n", expect,actual,alenth );\
+                    expect_eq_base(sizeof(expect) - 1== alenth && memcmp(expect,actual,alenth) == 0, expect, actual, "%s")\
+printf("\n\n  define expect_eq_string -n \n");
 
+#define expect_true(actural) expect_eq_base((actual) != 0, "true", "false", "actural","%s")
+#define expect_false(actural) expect_eq_base((actural) != 0, "false", "true", "%s")
+
+
+#define test_string(expect,json)\
+    do {\
+        t_value v;\
+        t_init (&v);\
+        expect_eq_int(T_PARSE_OK,t_parse(&v,json));\
+        expect_eq_int(T_STRING,t_get_type(&v));\
+        expect_eq_string(expect, t_get_string(&v), t_get_string_length(&v));\
+        t_free(&v);\
+    }while(0)
+
+static void test_parse_string(){
+    test_string("", "\"\"");
+    test_string("HELLO", "\"Hello\"");
+#if 0
+    test_string("Hello\nWorld", "\"Hello\\nWorld\"");
+    test_string("\" \\ / \b \f \n \r \t", "\"\\\" \\\\ \\/ \\b \\f \\n \\r \\t\"");
+#endif
+
+}
+
+static void test_parse_missing_quotation_mark() {
+printf("\n\n ------------------ \n");
+test_error(T_PARSE_MISS_QUOTATION_MARK, "\"");
+printf("\n\n ================== \n");
+test_error(T_PARSE_MISS_QUOTATION_MARK, "\"Cbc");
+}
+
+static void test_parse_invalid_string_escape() {
+#if 0
+test_error(T_PARSE_INVALID_STRING_ESCAPE, "\"\\v\"");
+test_error(T_PARSE_INVALID_STRING_ESCAPE, "\"\\'\"");
+test_error(T_PARSE_INVALID_STRING_ESCAPE, "\"\\0\"");
+test_error(T_PARSE_INVALID_STRING_ESCAPE, "\"\\x12\"");
+#endif
+}
+
+static void test_parse_invalid_string_char() {
+#if 0
+test_error(T_PARSE_INVALID_STRING_CHAR, "\"\x01\"");
+test_error(T_PARSE_INVALID_STRING_CHAR, "\"\x1F\"");
+#endif
+}
+
+static void test_access_null() {
+    t_value v;
+    t_init(&v);
+    t_set_string(&v, "a", 1);
+    t_set_null(&v);
+    expect_eq_int(T_NULL, t_get_type(&v));
+    t_free(&v);
+}
+
+static void test_access_boolean() {
+    /* \TODO */
+    /* Use EXPECT_TRUE() and EXPECT_FALSE() */
+}
+
+static void test_access_number() {
+    /* \TODO */
+}
+
+static void test_access_string() {
+    t_value v;
+    t_init(&v);
+    t_set_string(&v, "", 0);
+
+    printf("\n\n 0 test_access_string ---> sizeof %d t_get_string(&v) %d   t_get_string_length(&v) %d \n",sizeof(""),t_get_string(&v), t_get_string_length(&v));
+    expect_eq_string("", t_get_string(&v), t_get_string_length(&v));
+    t_set_string(&v, "Helloa", 6);
+    
+    printf("\n\n 1 test_access_string ---> sizeof %d t_get_string(&v) %d   t_get_string_length(&v) %d \n",sizeof("Hello"),t_get_string(&v), t_get_string_length(&v));
+    expect_eq_string("Helloa", t_get_string(&v), t_get_string_length(&v));//ww
+    printf("\n\n 2 test_access_string ---> \n");
+
+    t_free(&v);
+}
+
+
+
+
+
+
+
+//////////////////////////////////////////////////////////
 static void test_parse(){
    // printf("\n  ------>> 1");
     test_parse_null();
@@ -167,6 +265,17 @@ static void test_parse(){
    // printf("\n  ------>> 5");
     test_parse_root_not_singular();
     test_parse_number_too_big();
+    printf("\n\n test_parse_missing_quotation_mark---->0 \n");
+
+    test_parse_missing_quotation_mark();
+    printf("\n\n test_parse_missing_quotation_mark----> 1\n");
+    test_parse_invalid_string_escape();
+    test_parse_invalid_string_char();
+
+    test_access_null();
+    test_access_boolean();
+    test_access_number();
+    test_access_string();
 
 
 

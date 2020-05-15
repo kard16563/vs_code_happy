@@ -70,6 +70,10 @@ int main(){
    printf("数字（double）是 %lf\n  %lf ", ret,*ptr);
    printf("字符串部分是 |%s|", ptr);
 
+   char *str3;
+   str3 = (char *) realloc(str3, 25);
+    
+
 
     getchar();
 

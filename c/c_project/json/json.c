@@ -16,7 +16,7 @@
 
 typedef struct{
     const char *json;
-    char* stack;//引入堆栈 用作缓冲区
+    char* stack ; //引入堆栈 用作缓冲区
     size_t size, top;// 堆栈的东西
 
 }t_context;
@@ -182,22 +182,43 @@ static double t_parse_number(t_context *c, t_value *v){
 }
 
 //处理栈函数 缓冲区
-#define PUTC(c,h) do { *(char*) t_contex_push (c,sizeof(char)) = (ch); } while(0)
+#define PUTC(c,h) do { *(char*) t_contex_push(c,sizeof(char)) = (ch); } while(0)
+
+
+void t_free(t_value *v){
+    printf("\n\n ----------> t_free - b   \n");
+    assert (v != NULL);
+    if (v->type == T_STRING)
+        free(v->s);
+    v->type = T_NULL;
+    printf("\n\n---------------> t_free - n   \n");
+}
+
+void t_init2 (t_context *c){
+    c->stack = (char*) malloc(10);
+}
 
 static void *t_contex_push(t_context *c,size_t size){
-    void *ret;
-    assert(size>0);//判断传入的数据是否出错
+    
 
+    void *ret;
+    assert(size>0);//判断传入的数据是否出错大于0就通过 
+    printf("\n\n t_contex_push  size-> %d \n",size);
     if ( c->top + size >= c->size ){// top 位置将超过 限定的高度
         if ( c->size == 0 )// 完全为空
             c->size = T_PARSE_STACK_INIT_SIZE;
-        while ( c->top + size >= c->size )//临界
-                c->size +=  c->size >> 1;
+        while ( c->top + size >= c->size ){
+            c->size +=  c->size >> 1;
+            printf("\n----> push end 00 \n");
+        }//临界
+        
+                printf("\n----> push end 01 c->size %d \n",c->size);
                 c->stack = (char*) realloc (c->stack,c->size);//void *realloc(void *ptr, size_t size) ptr -- 指针指向一个要重新分配内存的内存块  size -- 内存块的新的大小，以字节为单位 
-            
+            printf("\n----> push end 02 \n");
     }
     ret = c->stack + c->top;//在限定内 top直接上移动
     c->top += size;//更新大小
+    printf("\n----> push end 03 \n");
     return ret;
 }
 
@@ -207,31 +228,7 @@ static void * t_context_pop( t_context *c,size_t size ){
     return c->stack +( c->top -= size );//下降
 }
 
-static int t_parse_string (t_context* c, t_value* v ){
-    size_t head = c->top ,len;
-    const char *p;
-    expect (c, '\"');// 判断是不是字符串
-    p = c->json;
-    for ( ; ; )
-    {   
-        char ch = *p ++; // 向后拨动字符
-        switch (ch)
-        {
-        case '\"' ://开头
-            len = c->top - head;
-            t_set_string (v , (const char *)t_context_pop(c , len), len);
-            c->json = p;
-            return T_PARSE_OK;
 
-        case '\0' :
-            c->top = head;
-            return T_PARSE_MISS_QUOTATION_MARK;
-
-        default:
-            PUTC(c, ch);
-        }
-    }
-}
 
 int t_get_boolean(const t_value* v) {
     /* \TODO */
@@ -248,25 +245,80 @@ void t_set_number(t_value* v, double n) {
 
 const char* t_get_string(const t_value* v){
     assert(v != NULL && v->type == T_STRING);
+    printf("\n\n t_get_string---->  len  %d \n",v->len);
+    return v->s;
+}
+int  t_get_string_length (const t_value *v ){
+    printf("\n\n t_get_string_length----->  len  %d \n",v->len);
+    assert(v != NULL && v->type == T_STRING);
     return v->len;
 }
 
-void t_set_string(t_value* v, const char* s, size_t len){
+void t_set_string(t_value* v, const char* s, int len){
+    printf("\n\n t_set_string->  len 0  %d \n",len);
     assert(v != NULL && (s != NULL || len == 0));
+    printf("\n\n\n ------------->t_set_string -1  \n\n");
+//printf("\n\n\n -----> %c \n\n",v->s);
+//printf("\n\n  json.c t_set_string 258----> test the first %c %c %c \n",v->s[0],v->s[1],v->s[2]);
     t_free(v);
+    printf("\n\n\n ------------->t_set_string -2  \n\n");
+//printf("\n\n  json.c t_set_string 260----> test the sec %c %c %c \n",v->s[0],v->s[1],v->s[2]);
     v->s = (char*) malloc (len+1);
+    printf("\n\n\n ------------->t_set_string -3  \n\n");
     memcpy(v->s, s, len);
+    printf("\n\n\n ------------->t_set_string -4  \n\n");
     v->s[len] = '\0';
+    printf("\n\n\n ------------->t_set_string -5  \n\n");
     v->len = len;
+    printf("\n\n\n ------------->t_set_string -6  \n\n");
     v->type = T_STRING;
+    printf("\n\n\n ------------->t_set_string -7  \n\n");
 
 }
 
+
+static int t_parse_string (t_context* c, t_value* v ){
+    size_t head = c->top ,len;
+    const char *p;
+    printf("\n\n p[0] %c p[1] %c p[2] %c p[3] %c  \n",c->json[0], c->json[1], c->json[2],c->json[3]);
+    printf("\n\n t_parse_string - > 257:p = c->json;  %c  asic %d 0--> %c - %d \n", c->json, c->json, '\0', '\0');
+    expect (c, '\"');// 判断是不是字符串
+    p = c->json;
+    printf("\n\n t_parse_string - > 258:p = c->json;  %c  asic %d 0--> %c - %d \n", p, p, '\0', '\0');
+    for ( ; ; )
+    {   
+        char ch = *p++; // 向后拨动字符
+        printf("\n\n t_parse_string - > for ->261 :char ch = *p ++;  %c ,asic %d\n",ch,ch);
+        switch (ch)
+        {
+            
+        case '\"' ://开头
+            printf("\n\n t_parse_string---> case '\"'  \n");
+            len = c->top - head;
+            t_set_string (v , (const char *)t_context_pop(c , len), len);
+            c->json = p;
+            return T_PARSE_OK;
+
+        case '\0' :
+        printf("\n\n t_parse_string---> case 0  \n");
+            c->top = head;
+            return T_PARSE_MISS_QUOTATION_MARK;
+
+        default:
+            printf("\n\n t_parse_string---> default:  \n");
+            PUTC(c, ch);
+        }
+    }
+}
 
 
 ///// 一掉部分工具函数写完 下面从37-68 都是对上面的调用与封装
 
+
+
+
 static int t_parse_value(t_context *t , t_value *v){//解析值
+    t_init2(t);
     //char str[40];
     //sprintf(str," *t->json ,%s  *v , %s \n ",*t->json,*v);
     //printf("\n *t->json ,%s   \n",*t->json);
@@ -311,6 +363,7 @@ static int t_parse_value(t_context *t , t_value *v){//解析值
 int t_parse(t_value *v, const char *json){//t_parse(&v,"null")
 
     t_context c;
+    
     printf("\njson.c get -->num : %d, string : %c  \n ",*json,*json);
     assert( v !=NULL );
     c.json =json;
