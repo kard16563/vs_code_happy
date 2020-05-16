@@ -70,8 +70,16 @@ int main(){
    printf("数字（double）是 %lf\n  %lf ", ret,*ptr);
    printf("字符串部分是 |%s|", ptr);
 
-   char *str3;
-   str3 = (char *) realloc(str3, 25);
+        int ta1 = 3;
+        ta1 += ta1;
+        printf("\n\n  ta1 %d \n",ta1);
+
+        ta1 += ta1 *2;
+         printf("\n\n  ta1 %d \n",ta1);
+         ta1 += (ta1 * 2);//先乘在加
+         printf("\n\n  ta1 %d \n",ta1);
+//    char *str3;
+//    str3 = (char *) realloc(str3, 25);
     
 
 

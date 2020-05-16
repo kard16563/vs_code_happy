@@ -106,14 +106,13 @@ static void test_parse_number() {
     test_number(1e10, "1e10");
 
 }
-
+//
 #define test_error(error, json)\
     do {\
         t_value v;\
         v.type = T_FALSE;\
-        printf("\n\n  tt----->1 \n");\
+        \
         expect_eq_int(error, t_parse(&v, json));\
-        printf("\n\n  tt-----> 8888 \n");\
         expect_eq_int(T_NULL, t_get_type(&v));\
     } while(0)
 
@@ -157,9 +156,8 @@ test_error(T_PARSE_NUMBER_TOO_BIG, "-1e309");
 ///////////////////////////////////////////////
 //printf("\n\n   sizeof(expect) - 1 %d alenth %d memcmp(expect,actual,alenth) %d  actual %d  \n\n",sizeof(expect) - 1, alenth, memcmp(expect,actual,alenth), actual);
 #define expect_eq_string(expect, actual, alenth)  \
-printf("\n\n  define expect_eq_string -b  expect-< %d actual-< %d  alenth-< %d  \n", expect,actual,alenth );\
-                    expect_eq_base(sizeof(expect) - 1== alenth && memcmp(expect,actual,alenth) == 0, expect, actual, "%s")\
-printf("\n\n  define expect_eq_string -n \n");
+                    expect_eq_base(sizeof(expect) - 1== alenth && memcmp(expect,actual,alenth) == 0, expect, actual, "%s")
+//printf("\n\n  define expect_eq_string -n \n");
 
 #define expect_true(actural) expect_eq_base((actual) != 0, "true", "false", "actural","%s")
 #define expect_false(actural) expect_eq_base((actural) != 0, "false", "true", "%s")
@@ -186,9 +184,9 @@ static void test_parse_string(){
 }
 
 static void test_parse_missing_quotation_mark() {
-printf("\n\n ------------------ \n");
+//printf("\n\n ------------------ \n");
 test_error(T_PARSE_MISS_QUOTATION_MARK, "\"");
-printf("\n\n ================== \n");
+//printf("\n\n ================== \n");
 test_error(T_PARSE_MISS_QUOTATION_MARK, "\"Cbc");
 }
 
@@ -231,13 +229,13 @@ static void test_access_string() {
     t_init(&v);
     t_set_string(&v, "", 0);
 
-    printf("\n\n 0 test_access_string ---> sizeof %d t_get_string(&v) %d   t_get_string_length(&v) %d \n",sizeof(""),t_get_string(&v), t_get_string_length(&v));
+    //printf("\n\n 0 test_access_string ---> sizeof %d t_get_string(&v) %d   t_get_string_length(&v) %d \n",sizeof(""),t_get_string(&v), t_get_string_length(&v));
     expect_eq_string("", t_get_string(&v), t_get_string_length(&v));
     t_set_string(&v, "Helloa", 6);
     
-    printf("\n\n 1 test_access_string ---> sizeof %d t_get_string(&v) %d   t_get_string_length(&v) %d \n",sizeof("Hello"),t_get_string(&v), t_get_string_length(&v));
+    //printf("\n\n 1 test_access_string ---> sizeof %d t_get_string(&v) %d   t_get_string_length(&v) %d \n",sizeof("Hello"),t_get_string(&v), t_get_string_length(&v));
     expect_eq_string("Helloa", t_get_string(&v), t_get_string_length(&v));//ww
-    printf("\n\n 2 test_access_string ---> \n");
+    //printf("\n\n 2 test_access_string ---> \n");
 
     t_free(&v);
 }
@@ -265,10 +263,10 @@ static void test_parse(){
    // printf("\n  ------>> 5");
     test_parse_root_not_singular();
     test_parse_number_too_big();
-    printf("\n\n test_parse_missing_quotation_mark---->0 \n");
+    //printf("\n\n test_parse_missing_quotation_mark---->0 \n");
 
     test_parse_missing_quotation_mark();
-    printf("\n\n test_parse_missing_quotation_mark----> 1\n");
+    //printf("\n\n test_parse_missing_quotation_mark----> 1\n");
     test_parse_invalid_string_escape();
     test_parse_invalid_string_char();
 

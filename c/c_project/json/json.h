@@ -7,7 +7,7 @@ typedef enum {T_NULL,T_FALSE,T_TURE,T_NUMBER,T_STRING,T_ARRAY,T_OBJ} t_type;
 
 typedef struct 
 {
-    char *s;
+    char *s;//用于是字符串处理
     int len;//size_t 没有
     double n;//用于数字的表达
     t_type type; 
