@@ -210,6 +210,7 @@ static void *t_contex_push(t_context *c,size_t size){
         if ( c->size == 0 ){
             printf("\n\n  c->size   T_PARSE_STACK_INIT_SIZE \n ");
             c->size = T_PARSE_STACK_INIT_SIZE;
+            //c->stack = (char*) realloc (c->stack,c->size);--->添加的这个为边判断边分配了
         }// 完全为空
         while ( c->top + size >= c->size ){
             //c->size +=  c->size * 1;
