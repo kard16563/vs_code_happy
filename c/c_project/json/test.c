@@ -217,11 +217,25 @@ static void test_access_null() {
 
 static void test_access_boolean() {
     /* \TODO */
-    /* Use EXPECT_TRUE() and EXPECT_FALSE() */
+    t_value v;
+    t_init(&v);
+    t_set_string(&v, "a", 1);
+    t_set_boolean(&v, 1);
+    EXPECT_TRUE(t_get_boolean(&v));
+    t_set_boolean(&v, 0);
+    EXPECT_FALSE(t_get_boolean(&v));
+    t_free(&v);//防止内存泄漏
+    
 }
 
 static void test_access_number() {
     /* \TODO */
+    t_value v;
+    t_init(&v);//仅仅是将类型 定位null 进行初始化
+    t_set_string(&v, "a", 1);
+    t_set_number(&v, 1234.5);
+    EXPECT_EQ_DOUBLE(1234.5, t_get_number(&v));
+    t_free(&v);//防止内存泄漏
 }
 
 static void test_access_string() {

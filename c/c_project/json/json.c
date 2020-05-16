@@ -238,15 +238,22 @@ static void * t_context_pop( t_context *c,size_t size ){
 
 int t_get_boolean(const t_value* v) {
     /* \TODO */
-    return 0;
+    assert(v != NULL && (v->type == T_TURE || v->type == T_FALSE));
+    return v->type == T_TURE;
 }
 
 void t_set_boolean(t_value* v, int b) {
     /* \TODO */
+    t_free(v);// 清零 全部释放
+    v->type = b ? T_TURE : T_FALSE;
 }
+
 
 void t_set_number(t_value* v, double n) {
     /* \TODO */
+    t_free(v);
+    v->n = n;
+    v->type = T_NUMBER;
 }
 
 const char* t_get_string(const t_value* v){
