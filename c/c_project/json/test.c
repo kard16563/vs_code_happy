@@ -236,6 +236,10 @@ static void test_access_number() {
     t_set_number(&v, 1234.5);
     EXPECT_EQ_DOUBLE(1234.5, t_get_number(&v));
     t_free(&v);//防止内存泄漏
+    //忘记了释放内存，造成内存泄露
+//含有这种错误的函数每被调用一次就丢失一块内存。
+//刚开始时系统的内存充足，你看不到错误。
+//终有一次程序突然死掉，系统出现提示：内存耗尽。
 }
 
 static void test_access_string() {

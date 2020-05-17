@@ -314,13 +314,33 @@ static int t_parse_string (t_context* c, t_value* v ){
             return T_PARSE_OK;
 
         case '\0' :
-        printf("\n\n t_parse_string---> case 0  \n");
+            printf("\n\n t_parse_string---> case 0  \n");
             c->top = head;
             return T_PARSE_MISS_QUOTATION_MARK;
+        
+        case '\\':
+            switch(*p ++){//转义序列的解析
+                case '\"': PUTC(c, '\"'); break;
+                    case '\\': PUTC(c, '\\'); break;
+                    case '/':  PUTC(c, '/' ); break;
+                    case 'b':  PUTC(c, '\b'); break;
+                    case 'f':  PUTC(c, '\f'); break;
+                    case 'n':  PUTC(c, '\n'); break;
+                    case 'r':  PUTC(c, '\r'); break;
+                    case 't':  PUTC(c, '\t'); break;
+                    default:
+                        c->top = head;
+                        return T_PARSE_INVALID_STRING_ESCAPE;
+            }
 
         default:
-            printf("\n\n t_parse_string---> default:  \n");
-            PUTC(c, ch);
+            printf("\n\n t_parse_string---> default -1:  \n");
+            if ((unsigned char)ch < 0x20 )
+            {
+                c->top = head;
+                return T_PARSE_INVALID_STRING_CHAR;
+            }
+            PUTC(c,ch);
         }
     }
 }

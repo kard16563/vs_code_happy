@@ -75,9 +75,9 @@ int main(){
         printf("\n\n  ta1 %d \n",ta1);
 
         ta1 += ta1 *2;
-         printf("\n\n  ta1 %d \n",ta1);
+        printf("\n\n  ta1 %d \n",ta1);
          ta1 += (ta1 * 2);//先乘在加
-         printf("\n\n  ta1 %d \n",ta1);
+        printf("\n\n  ta1 %d \n",ta1);
 //    char *str3;
 //    str3 = (char *) realloc(str3, 25);
     
