@@ -1,4 +1,13 @@
 //unit testing
+
+#ifdef _WINDOWS
+#define _CRTDBG_MAP_ALLOC
+#include <crtdbg.h>
+#endif
+
+
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -163,6 +172,9 @@ test_error(T_PARSE_NUMBER_TOO_BIG, "-1e309");
 #define expect_false(actural) expect_eq_base((actural) != 0, "false", "true", "%s")
 
 
+#define EXPECT_TRUE(actual) expect_eq_base((actual) != 0, "true", "false", "%s")
+#define EXPECT_FALSE(actual) expect_eq_base((actual) == 0, "false", "true", "%s")
+
 #define test_string(expect,json)\
     do {\
         t_value v;\
@@ -234,7 +246,7 @@ static void test_access_number() {
     t_init(&v);//仅仅是将类型 定位null 进行初始化
     t_set_string(&v, "a", 1);
     t_set_number(&v, 1234.5);
-    EXPECT_EQ_DOUBLE(1234.5, t_get_number(&v));
+    expect_eq_double(1234.5, t_get_number(&v));
     t_free(&v);//防止内存泄漏
     //忘记了释放内存，造成内存泄露
 //含有这种错误的函数每被调用一次就丢失一块内存。
@@ -310,6 +322,10 @@ static void test_parse(){
 
 int main(){
 
+    #ifdef _WINDOWS//内存泄漏检测
+    _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+    #endif
+
     test_parse();
     printf("%d/%d (%3.2f%%) passed\n", test_pass, test_count, test_pass * 100.0 / test_count);
     getchar();
@@ -317,5 +333,4 @@ int main(){
     //E:\the_c_of_vs_code\c\c_project\json
     //E:\the_c_of_vs_code\c\c_project\json>gcc -c json.c
     //gcc -g  test.c json.c -o main
-    //gcc -g  test.c json.o -o main
 }

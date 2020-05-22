@@ -47,7 +47,7 @@ void t_set_boolean(t_value* v, int b);
 const char* t_get_string(const t_value* v);// 获取字符串
 int t_get_string_length(const t_value* v);// 获取字符串的长度
 void t_set_string(t_value* v, const char* s, int len);// 设置字符串 size_t
-
+void t_set_number(t_value* v, double n);
 
 int t_parse(t_value *v,const char* json);//解析 JSON  看看是否合法
 t_type t_get_type(const t_value *v);//访问结果的函数  不合法的话看看是啥类型

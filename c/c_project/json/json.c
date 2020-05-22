@@ -1,3 +1,14 @@
+#ifdef _WINDOWS  // 内存泄漏检测
+#define _CRTDBG_MAP_ALLOC
+#include <crtdbg.h>
+#endif//在两个 .c 文件首行插入这一段代码  
+//并在 main() 开始位置插入
+//int main() {
+//#ifdef _WINDOWS
+//    _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+//#endif
+
+
 #include "json.h"
 #include <assert.h>
 #include <stdlib.h>
