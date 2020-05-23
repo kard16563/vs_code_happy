@@ -300,10 +300,33 @@ void t_set_string(t_value* v, const char* s, int len){
     //printf("\n\n\n ------------->t_set_string -7  \n\n");
 
 }
+//实现 \uXXXX 解析  Unicode
+
+//不合法的十六进位数
+static const char *t_parse_hex4(const char *p, unsigned *u){
+
+    if ( u< 0x0000 || u<0xffff) 
+                return NULL;
+
+    return p;
+}
+
+static void t_encode_utf8(t_context*c, unsigned u){
+
+    if (u >= 0x0800 && u <= 0xFFFF){
+        
+    }
+
+}
+
+#define STRING_ERROR(ret) do { c->top = head; return ret; } while(0)
 
 
 static int t_parse_string (t_context* c, t_value* v ){
     size_t head = c->top ,len;
+
+    unsigned u;
+
     const char *p;
     //printf("\n\n p[0] %c p[1] %c p[2] %c p[3] %c  \n",c->json[0], c->json[1], c->json[2],c->json[3]);
     //printf("\n\n t_parse_string - > 257:p = c->json;  %c  asic %d 0--> %c - %d \n", c->json, c->json, '\0', '\0');
@@ -324,10 +347,10 @@ static int t_parse_string (t_context* c, t_value* v ){
             c->json = p;
             return T_PARSE_OK;
 
-        case '\0' :
-            printf("\n\n t_parse_string---> case 0  \n");
-            c->top = head;
-            return T_PARSE_MISS_QUOTATION_MARK;
+        // case '\0' :
+        //     printf("\n\n t_parse_string---> case 0  \n");
+        //     c->top = head;
+        //     return T_PARSE_MISS_QUOTATION_MARK;
         
         case '\\':
             switch(*p ++){//转义序列的解析
@@ -339,9 +362,21 @@ static int t_parse_string (t_context* c, t_value* v ){
                     case 'n':  PUTC(c, '\n'); break;
                     case 'r':  PUTC(c, '\r'); break;
                     case 't':  PUTC(c, '\t'); break;
+                    case 'u':
+                        if(!( p= t_parse_hex4(p, &u)))
+                                STRING_ERROR(T_PARSE_INVALID_STRING_HEX);
+                        t_encode_utf8(c,u);
+                        break;
+                    case '\0':
+                        STRING_ERROR(T_PARSE_MISS_QUOTATION_MARK);
+
+
                     default:
                         c->top = head;
-                        return T_PARSE_INVALID_STRING_ESCAPE;
+                        STRING_ERROR(T_PARSE_INVALID_STRING_ESCAPE);
+
+                        // c->top = head;
+                        // return T_PARSE_INVALID_STRING_ESCAPE;
             }
 
         default:
