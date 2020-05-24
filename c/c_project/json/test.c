@@ -26,8 +26,8 @@ static int test_pass=0;
                         test_pass++;\
                     }else\
                     {\
-                        fprintf(stderr, " \n  >>>>=====---------->%s:%d: expect: " format " actual: " format "\n", __FILE__, __LINE__, expect, actual);\
-                        fprintf(stderr,"\n    >>>======---------->%s:%d:expect : " format " actual: " format "\n",__FILE__,__LINE__,expect,actual );\
+                        fprintf(stderr, "\n                         *********>>>>=====---------->%s:%d: expect: " format " actual: " format "\n", __FILE__, __LINE__, expect, actual);\
+                        fprintf(stderr,"\n                          *********>>>======---------->%s:%d:expect : " format " actual: " format "\n",__FILE__,__LINE__,expect,actual );\
                         main_ret = 1;\
                     }\
                 } while (0);
@@ -187,7 +187,7 @@ test_error(T_PARSE_NUMBER_TOO_BIG, "-1e309");
 
 static void test_parse_string(){
     test_string("", "\"\"");
-    test_string("HELLO", "\"Hello\"");
+    test_string("Hello", "\"Hello\"");
 // #if 0
 //     test_string("Hello\nWorld", "\"Hello\\nWorld\"");
 //     test_string("\" \\ / \b \f \n \r \t", "\"\\\" \\\\ \\/ \\b \\f \\n \\r \\t\"");
@@ -200,8 +200,28 @@ static void test_parse_string(){
     test_string("\xC2\xA2", "\"\\u00A2\"");     /* Cents sign U+00A2 */
     test_string("\xE2\x82\xAC", "\"\\u20AC\""); /* Euro sign U+20AC */
     test_string("\xF0\x9D\x84\x9E", "\"\\uD834\\uDD1E\"");  /* G clef sign U+1D11E */
-    test_string("\xF0\x9D\x84\x9E", "\"\\ud834\\udd1e\"");  /* G clef sign U+1D11E *
+    test_string("\xF0\x9D\x84\x9E", "\"\\ud834\\udd1e\"");  /* G clef sign U+1D11E */
+    printf("*****************************\n");
+}
 
+
+static void test_parse_invalid_unicode_hex() {
+    test_error(T_PARSE_INVALID_UNICODE_HEX, "\"\\u\"");
+    test_error(T_PARSE_INVALID_UNICODE_HEX, "\"\\u0\"");
+    test_error(T_PARSE_INVALID_UNICODE_HEX, "\"\\u01\"");
+    test_error(T_PARSE_INVALID_UNICODE_HEX, "\"\\u012\"");
+    test_error(T_PARSE_INVALID_UNICODE_HEX, "\"\\u/000\"");
+    test_error(T_PARSE_INVALID_UNICODE_HEX, "\"\\uG000\"");
+    test_error(T_PARSE_INVALID_UNICODE_HEX, "\"\\u0/00\"");
+    test_error(T_PARSE_INVALID_UNICODE_HEX, "\"\\u0G00\"");
+    }
+
+static void test_parse_invalid_unicode_surrogate() {
+    test_error(T_PARSE_INVALID_UNICODE_SURROGATE, "\"\\uD800\"");
+    test_error(T_PARSE_INVALID_UNICODE_SURROGATE, "\"\\uDBFF\"");
+    test_error(T_PARSE_INVALID_UNICODE_SURROGATE, "\"\\uD800\\\\\"");
+    test_error(T_PARSE_INVALID_UNICODE_SURROGATE, "\"\\uD800\\uDBFF\"");
+    test_error(T_PARSE_INVALID_UNICODE_SURROGATE, "\"\\uD800\\uE000\"");
 }
 
 static void test_parse_missing_quotation_mark() {
@@ -314,6 +334,10 @@ static void test_parse(){
     test_access_number();
     test_access_string();
 
+    test_parse_invalid_unicode_hex();
+    test_parse_invalid_unicode_surrogate();
+    test_parse_string();
+
 
 
 
@@ -330,6 +354,7 @@ static void test_parse(){
 
 
 int main(){
+    printf("|test !!!!!! \n\n");
 
     #ifdef _WINDOWS//内存泄漏检测
     _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
@@ -339,6 +364,8 @@ int main(){
     printf("%d/%d (%3.2f%%) passed\n", test_pass, test_count, test_pass * 100.0 / test_count);
     getchar();
     return main_ret;
+    //跳转指定行数: Ctrl + G
+    //跳转到函数 F12 
     //E:\the_c_of_vs_code\c\c_project\json
     //E:\the_c_of_vs_code\c\c_project\json>gcc -c json.c
     //gcc -g  test.c json.c -o main
