@@ -66,9 +66,9 @@ int main(){
     char *ptr;
     double ret;
 
-   ret = strtod(str1, &ptr);
-   printf("数字（double）是 %lf\n  %lf ", ret,*ptr);
-   printf("字符串部分是 |%s|", ptr);
+    ret = strtod(str1, &ptr);
+    printf("数字（double）是 %lf\n  %lf ", ret,*ptr);
+    printf("字符串部分是 |%s|", ptr);
 
         int ta1 = 3;
         ta1 += ta1;

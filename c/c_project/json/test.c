@@ -26,8 +26,8 @@ static int test_pass=0;
                         test_pass++;\
                     }else\
                     {\
-                        fprintf(stderr, "\n                         *********>>>>=====---------->%s:%d: expect: " format " actual: " format "\n", __FILE__, __LINE__, expect, actual);\
-                        fprintf(stderr,"\n                          *********>>>======---------->%s:%d:expect : " format " actual: " format "\n",__FILE__,__LINE__,expect,actual );\
+                        fprintf(stderr, "\n                         *********>>>>++++++++++++++++++++++++++++++++=====---------->%s:%d: expect: " format " actual: " format "---------------------->>>>>\n", __FILE__, __LINE__, expect, actual);\
+                        fprintf(stderr,"\n                          *********>>>+++++++++++++++++++++++++++++++++======---------->%s:%d:expect : " format " actual: " format "--------------------->>>>>\n",__FILE__,__LINE__,expect,actual );\
                         main_ret = 1;\
                     }\
                 } while (0);
@@ -162,9 +162,10 @@ test_error(T_PARSE_NUMBER_TOO_BIG, "-1e309");
 }
 
 
-///////////////////////////////////////////////
+///////////////////////////////////////////////test_string("Hello", "\"Hello\"");
 //printf("\n\n   sizeof(expect) - 1 %d alenth %d memcmp(expect,actual,alenth) %d  actual %d  \n\n",sizeof(expect) - 1, alenth, memcmp(expect,actual,alenth), actual);
 #define expect_eq_string(expect, actual, alenth)  \
+                    printf("\n\n 168 expect, actual---> %s, %s",expect, actual);\
                     expect_eq_base(sizeof(expect) - 1== alenth && memcmp(expect,actual,alenth) == 0, expect, actual, "%s")
 //printf("\n\n  define expect_eq_string -n \n");
 
@@ -174,7 +175,7 @@ test_error(T_PARSE_NUMBER_TOO_BIG, "-1e309");
 
 #define EXPECT_TRUE(actual) expect_eq_base((actual) != 0, "true", "false", "%s")
 #define EXPECT_FALSE(actual) expect_eq_base((actual) == 0, "false", "true", "%s")
-
+//json---> "\"Hello\\nWorld\""
 #define test_string(expect,json)\
     do {\
         t_value v;\
