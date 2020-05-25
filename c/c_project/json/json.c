@@ -354,7 +354,21 @@ static void t_encode_utf8(t_context*c, unsigned u){
     
 
 }
+//////////////////////////////////////////////////////////////
+//数组处理
 
+int t_get_array_size(const t_value *v){
+    assert(v != NULL && v->type == T_ARRAY);
+    return v->array_size;
+}
+
+t_value *t_get_array_element(const t_value*v ,int index){
+    assert(v!=NULL && v->type == T_ARRAY);
+    assert(index < v->array_size);//不要越界
+    return &v->array_e[index];//返回地址
+}
+
+///////////////////////////////////////////////////////
 #define STRING_ERROR(ret) do { c->top = head; return ret; } while(0)
 
 

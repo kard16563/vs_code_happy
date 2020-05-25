@@ -10,9 +10,23 @@ typedef struct
     char *s;//用于是字符串处理
     int len;//size_t 没有
     double n;//用于数字的表达
+
     t_type type; 
+
+    t_value *array_e;//数组的内容
+    int array_size;//size 是元素的个数
+
 }t_value; // pt_value 事实上是一种变体类型（variant type），
 //我们通过 type 来决定它现时是哪种类型，而这也决定了哪些成员是有效的
+
+// struct lept_value {
+//     union {
+//         struct { lept_value* e; size_t size; }a; /* array */
+//         struct { char* s; size_t len; }s;
+//         double n;
+//     }u;
+//     lept_type type;
+// };
 
 
 // typedef struct {
