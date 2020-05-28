@@ -301,9 +301,24 @@ static void test_access_string() {
 }
 
 
+/////////////////////////////////////////////////////////////////
+// 数组
 
 
+//麻烦之处在于，ANSI C（C89）并没有的 size_t 打印方法，在 C99 则加入了 "%zu"，但 VS2015 中才有，之前的 VC 版本使用非标准的 "%Iu"
+#define EXPECT_EQ_SIZE_T(expect, actual) expect_eq_base ((expect) == (actual), (int)expect, (int)actual, "%d" )
+//((expect) == (actual), (size_t)expect, (size_t)actual, "%zu")
+static void test_parse_array(){
+    t_value v;
 
+    t_init (&v);
+    expect_eq_int(T_PARSE_OK, t_parse(&v, "[ ]"));
+    expect_eq_int(T_ARRAY, t_get_type(&v));
+    EXPECT_EQ_SIZE_T(0, t_get_array_size(&v));
+    t_free(&v);
+
+
+}
 
 
 //////////////////////////////////////////////////////////
