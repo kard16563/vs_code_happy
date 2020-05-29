@@ -321,6 +321,15 @@ static void test_parse_array(){
 }
 
 
+static void test_parse_miss_comma_or_square_bracket() {
+#if 0
+    test_error(T_PARSE_MISS_COMMA_OR_SQUARE_BRACKET, "[1");
+    test_error(T_PARSE_MISS_COMMA_OR_SQUARE_BRACKET, "[1}");
+    test_error(T_PARSE_MISS_COMMA_OR_SQUARE_BRACKET, "[1 2");
+    test_error(T_PARSE_MISS_COMMA_OR_SQUARE_BRACKET, "[[]");
+#endif
+}
+
 //////////////////////////////////////////////////////////
 static void test_parse(){
    // printf("\n  ------>> 1");
@@ -353,6 +362,8 @@ static void test_parse(){
     test_parse_invalid_unicode_hex();
     test_parse_invalid_unicode_surrogate();
     test_parse_string();
+
+    test_parse_miss_comma_or_square_bracket();
 
 
 

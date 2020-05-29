@@ -5,7 +5,9 @@
 //类型及函数则用小写 通常枚举值用全大写
 typedef enum {T_NULL,T_FALSE,T_TURE,T_NUMBER,T_STRING,T_ARRAY,T_OBJ} t_type;
 
-typedef struct 
+
+
+typedef struct t_value
 {
     char *s;//用于是字符串处理
     int len;//size_t 没有
@@ -13,10 +15,26 @@ typedef struct
 
     t_type type; 
 
-    t_value *array_e;//数组的内容
+    struct t_value* array_e;//数组的内容
     int array_size;//size 是元素的个数
 
 }t_value; // pt_value 事实上是一种变体类型（variant type），
+
+
+
+
+// typedef struct 
+// {
+//     char *s;//用于是字符串处理
+//     int len;//size_t 没有
+//     double n;//用于数字的表达
+
+//     t_type type; 
+
+//     t_value* array_e;//数组的内容
+//     int array_size;//size 是元素的个数
+
+// }t_value; // pt_value 事实上是一种变体类型（variant type），
 //我们通过 type 来决定它现时是哪种类型，而这也决定了哪些成员是有效的
 
 // struct lept_value {
@@ -49,7 +67,9 @@ enum{//不合法的是啥类型的
     T_PARSE_INVALID_STRING_ESCAPE,
     T_PARSE_INVALID_STRING_CHAR,
     T_PARSE_INVALID_UNICODE_HEX,
-    T_PARSE_INVALID_UNICODE_SURROGATE
+    T_PARSE_INVALID_UNICODE_SURROGATE,
+
+    T_PARSE_MISS_COMMA_OR_SQUARE_BRACKET
 
 };
 
@@ -68,5 +88,7 @@ void t_set_number(t_value* v, double n);
 int t_parse(t_value *v,const char* json);//解析 JSON  看看是否合法
 t_type t_get_type(const t_value *v);//访问结果的函数  不合法的话看看是啥类型
 double t_get_number(const t_value *v);//处理数字
+
+//static int t_parse_value(t_context *t , t_value *v);
 
 #endif

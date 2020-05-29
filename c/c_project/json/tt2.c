@@ -1,5 +1,19 @@
 #include<stdio.h>
 
+
+typedef struct  t_value
+{
+    char *s;//用于是字符串处理
+    int len;//size_t 没有
+    double n;//用于数字的表达
+
+    //t_type type; 
+
+    struct t_value* array_e;//数组的内容
+    int array_size;//size 是元素的个数
+
+}; // pt_value 事实上是一种变体类型（variant type），
+
 void check_string(char *ch2){
  while  ( *ch2 )
     {
@@ -9,6 +23,10 @@ void check_string(char *ch2){
 }
 
 int main(){
+    // t_value a;
+    // t_value b;
+
+    // b.array_e=&b;
     
     char ch='\\';
     printf("------ > %p   %d \n\n\n",(unsigned char)ch,((unsigned char)ch -0x20 ) );

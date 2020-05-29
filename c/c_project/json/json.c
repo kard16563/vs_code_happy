@@ -368,6 +368,8 @@ t_value *t_get_array_element(const t_value*v ,int index){
     return &v->array_e[index];//返回地址
 }
 
+
+
 ///////////////////////////////////////////////////////
 #define STRING_ERROR(ret) do { c->top = head; return ret; } while(0)
 
@@ -528,12 +530,61 @@ static int t_parse_value(t_context *t , t_value *v){//解析值
     printf("\n  ------> json.c 6 \n");
         return t_parse_string(t, v);
     
+    case '[':
+    printf("\n ------> json.c 7\n");
+        return t_parse_array(t, v);
+    
     default:
     printf("\n  ------> json.c 7");
         return t_parse_number(t, v);
         //break;不是那三种字面值
     }
 }
+
+
+/////////////////////////////////////////////
+
+
+static int t_parse_array(t_context *c, t_value*v ){
+    int size=0;
+    int ret;
+    expect(c,'[');
+    if (*c->json == ']'){
+        c->json++ ;
+        v->type = T_ARRAY;
+        v->array_size = 0;
+        v->array_e=NULL; 
+    }
+
+    for ( ; ; )
+    {
+        t_value e;
+        t_init(&e);
+        if((ret = t_parse_value(c,&e)) != T_PARSE_OK) return ret;
+        memcpy(t_contex_push(c, sizeof(t_value)), &e, sizeof(t_value));
+        size++;
+        if(*c->json == ',') c->json++;
+        else if (*c->json == ']'){
+            c->json++;
+            v->type = T_ARRAY;
+            v->array_size = size;
+            size *= sizeof(t_value);
+            memcpy(v->array_e = (t_value*)malloc(size), t_context_pop(c, size), size);
+            return T_PARSE_OK;
+        } 
+
+        else return T_PARSE_MISS_COMMA_OR_SQUARE_BRACKET;
+
+    }
+    
+}
+//t_parse_value
+
+
+
+////////////////////////////////////////////////
+
+
 
 int t_parse(t_value *v, const char *json){//t_parse(&v,"null")
 
