@@ -89,6 +89,9 @@ int t_parse(t_value *v,const char* json);//解析 JSON  看看是否合法
 t_type t_get_type(const t_value *v);//访问结果的函数  不合法的话看看是啥类型
 double t_get_number(const t_value *v);//处理数字
 
+
+int lept_get_array_size(const t_value* v);
+t_value* lept_get_array_element(const t_value* v, int index);
 //static int t_parse_value(t_context *t , t_value *v);
 
 #endif

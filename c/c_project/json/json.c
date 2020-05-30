@@ -205,6 +205,7 @@ static double t_parse_number(t_context *c, t_value *v){
 }
 
 //处理栈函数 缓冲区
+//------》一个字符空间 的申请 一个字符空间的填装
 #define PUTC(c,ch) do { *(char*) t_contex_push(c,sizeof(char)) = (ch); } while(0)
 
 
@@ -256,7 +257,9 @@ static void * t_context_pop( t_context *c,size_t size ){
     //size 为信息单元 的高度
     assert( c->top >= size );//为假就会报错 为真就会放行
     return c->stack +( c->top -= size );//下降
-}
+}//返回 要弹出栈的 起始位置  并不是真正的出栈 而是 从这个位置开始转移字符 转移完了
+//将堆栈变为零  字符串 12345 以从左到右的顺序入栈  栈的起始指针指向 1 栈的top
+// （借由1相对指向了5）指向5 
 
 
 
@@ -301,9 +304,12 @@ void t_set_string(t_value* v, const char* s, int len){
     //printf("\n\n\n ------------->t_set_string -2  \n\n");
 //printf("\n\n  json.c t_set_string 260----> test the sec %c %c %c \n",v->s[0],v->s[1],v->s[2]);
     v->s = (char*) malloc (len+1);
-    //printf("\n\n\n ------------->t_set_string -3  \n\n");
-    memcpy(v->s, s, len);
-    //printf("\n\n\n ------------->t_set_string -4  \n\n");
+    
+    //第二次参数为 要被复制的指针发的始位置
+    //第一个参数为  复制的新位置的指针起始位置
+    memcpy(v->s, s, len);//将解析出来的东西生成一个字符串  写入v的s中
+
+    
     v->s[len] = '\0';
     //printf("\n\n\n ------------->t_set_string -5  \n\n");
     v->len = len;
@@ -401,12 +407,13 @@ static int t_parse_string (t_context* c, t_value* v ){
         printf("\n\n t_parse_string - > for ->361 :char ch = *p ++;  %c ,asic %d  p-->%p  \n",ch,ch,p);
         switch (ch)
         {
-        case '\"' ://开头
+        case '\"' ://检索接受 字符串到头  “ .... ”
             printf("\n\n t_parse_string---> case '\"'  \n");
             len = c->top - head;
+
             t_set_string (v , (const char *)t_context_pop(c , len), len);
             c->json = p;
-            return T_PARSE_OK;
+            return T_PARSE_OK;//字符串解析完整的结束了
         
         case '\\':/*555 --> \ 单个斜杠 555*/
             printf("\n\n 384 ------->  work %d \n",p);
@@ -477,7 +484,7 @@ static int t_parse_string (t_context* c, t_value* v ){
 
         default:
             printf("\n\n t_parse_string---> default : return T_PARSE_INVALID_STRING_CHAR  \n");
-            if ((unsigned char)ch < 0x20 )
+            if ((unsigned char)ch < 0x20 )//进行字符检查 不符合条件的 不能通过
             {
                 printf("\n 432  t_parse_string ->if char-> %s ch-> %p , loss %d \n",ch,(unsigned char)ch,((unsigned char)ch-0x20));
                 c->top = head;
@@ -488,6 +495,49 @@ static int t_parse_string (t_context* c, t_value* v ){
     }
 }
 
+
+///////////////////////////////////////////////
+static int t_parse_value(t_context* c, t_value* v);//先给下面的声明一下 下面的呢个函数 【t_parse_array】要用
+//这两个函数有点 互相调用的意思 但是 要调用的话必须要出现在前面所以 前项 声明一下
+static int t_parse_array(t_context *c, t_value*v ){
+    int size=0;
+    int ret;
+    expect(c,'[');//["abc",[1,2],3]--->判定为数组
+    if (*c->json == ']'){// [] 完了为空
+        c->json++ ;
+        v->type = T_ARRAY;
+        v->array_size = 0;
+        v->array_e=NULL; 
+    }
+
+    for ( ; ; )
+    {
+        t_value e;
+        t_init(&e);
+        if((ret = t_parse_value(c,&e)) != T_PARSE_OK) return ret;
+        memcpy(t_contex_push(c, sizeof(t_value)), &e, sizeof(t_value));
+        size++;
+        if(*c->json == ',') c->json++;
+        else if (*c->json == ']'){
+            c->json++;
+            v->type = T_ARRAY;
+            v->array_size = size;
+            size *= sizeof(t_value);
+            memcpy(v->array_e = (t_value*)malloc(size), t_context_pop(c, size), size);
+            return T_PARSE_OK;
+        } 
+
+        else return T_PARSE_MISS_COMMA_OR_SQUARE_BRACKET;
+
+    }
+    
+}
+//t_parse_value
+
+
+
+
+/////////////////////////////////////////////////////////////
 
 ///// 一掉部分工具函数写完 下面从37-68 都是对上面的调用与封装
 
@@ -543,43 +593,6 @@ static int t_parse_value(t_context *t , t_value *v){//解析值
 
 
 /////////////////////////////////////////////
-
-
-static int t_parse_array(t_context *c, t_value*v ){
-    int size=0;
-    int ret;
-    expect(c,'[');
-    if (*c->json == ']'){
-        c->json++ ;
-        v->type = T_ARRAY;
-        v->array_size = 0;
-        v->array_e=NULL; 
-    }
-
-    for ( ; ; )
-    {
-        t_value e;
-        t_init(&e);
-        if((ret = t_parse_value(c,&e)) != T_PARSE_OK) return ret;
-        memcpy(t_contex_push(c, sizeof(t_value)), &e, sizeof(t_value));
-        size++;
-        if(*c->json == ',') c->json++;
-        else if (*c->json == ']'){
-            c->json++;
-            v->type = T_ARRAY;
-            v->array_size = size;
-            size *= sizeof(t_value);
-            memcpy(v->array_e = (t_value*)malloc(size), t_context_pop(c, size), size);
-            return T_PARSE_OK;
-        } 
-
-        else return T_PARSE_MISS_COMMA_OR_SQUARE_BRACKET;
-
-    }
-    
-}
-//t_parse_value
-
 
 
 ////////////////////////////////////////////////
