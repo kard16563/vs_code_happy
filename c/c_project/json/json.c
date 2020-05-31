@@ -225,7 +225,7 @@ void t_init2 (t_context *c){//栈的初始化
 }
 
 static void *t_contex_push(t_context *c,size_t size){
-    
+    //用于申请空间处理 返回的是 申请出 空间的 首地址 
 
     void *ret;
     assert(size>0);//判断传入的数据是否出错大于0就通过 
@@ -517,13 +517,13 @@ static int t_parse_array(t_context *c, t_value*v ){
         if((ret = t_parse_value(c,&e)) != T_PARSE_OK) return ret;
         memcpy(t_contex_push(c, sizeof(t_value)), &e, sizeof(t_value));
         size++;
-        if(*c->json == ',') c->json++;
-        else if (*c->json == ']'){
+        if(*c->json == ',') c->json++;//继续处理 继续解析
+        else if (*c->json == ']'){//解析结束
             c->json++;
             v->type = T_ARRAY;
             v->array_size = size;
             size *= sizeof(t_value);
-            memcpy(v->array_e = (t_value*)malloc(size), t_context_pop(c, size), size);
+            memcpy(v->array_e = (t_value*)malloc(size), t_context_pop(c, size), size);//连接
             return T_PARSE_OK;
         } 
 
