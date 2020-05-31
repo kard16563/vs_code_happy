@@ -509,6 +509,9 @@ static int t_parse_array(t_context *c, t_value*v ){
         v->array_size = 0;
         v->array_e=NULL; 
     }
+    // 如果为 【1，【2,3】，4】----》解析第二个 【时 会 中断再次调用该函数 所以知道处理完这个后再执行第一个
+    //同过下面的e把它们都串起来  进入第二层就变为了 v 从而  memcpy(v->array_e = (t_value*)malloc(size), t_context_pop(c, size), size);//连接
+    //
 
     for ( ; ; )
     {
@@ -635,5 +638,10 @@ double t_get_number(const t_value *v){
     return v->n;
 }
 
+t_value* t_get_array_element(const t_value* v, int index) {
+    assert(v != NULL && v->type == T_ARRAY);
+    assert(index < v->array_size);
+    return &v->array_e[index];
+}
 
 //E:\the_c_of_vs_code\c\c_project\json>gcc -c json.c

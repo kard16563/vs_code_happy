@@ -94,4 +94,6 @@ int lept_get_array_size(const t_value* v);
 t_value* lept_get_array_element(const t_value* v, int index);
 //static int t_parse_value(t_context *t , t_value *v);
 
+t_value* t_get_array_element(const t_value* v, int index);
+
 #endif
