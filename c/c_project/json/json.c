@@ -36,10 +36,10 @@ static void t_parse_ws(t_context *c){// parse_whitespace 解析空格
     const char *p = c->json;//测试第一个字符n
     while (*p==' ' || *p=='\t' ||*p=='\n'||*p=='\r' )
     {
-        p++;
+        p++;//看看如果是字符串 就继续向后进行拨动字符串 直到不是为止
     }
     //printf("\n fun->t_parse_ws_>  p - %d ",p);
-    c->json=p;
+    c->json=p;//将位置进行保存
 }
 
 
@@ -503,11 +503,15 @@ static int t_parse_array(t_context *c, t_value*v ){
     int size=0;
     int ret;
     expect(c,'[');//["abc",[1,2],3]--->判定为数组
+
+    t_parse_ws(c);// 解析空白字符  解析出来是空的将json指针 相向后移动直到不是为空为止
+
     if (*c->json == ']'){// [] 完了为空
         c->json++ ;
         v->type = T_ARRAY;
         v->array_size = 0;
         v->array_e=NULL; 
+        return T_PARSE_OK;
     }
     // 如果为 【1，【2,3】，4】----》解析第二个 【时 会 中断再次调用该函数 所以知道处理完这个后再执行第一个
     //同过下面的e把它们都串起来  进入第二层就变为了 v 从而  memcpy(v->array_e = (t_value*)malloc(size), t_context_pop(c, size), size);//连接
@@ -517,10 +521,16 @@ static int t_parse_array(t_context *c, t_value*v ){
     {
         t_value e;
         t_init(&e);
-        if((ret = t_parse_value(c,&e)) != T_PARSE_OK) return ret;
+        if((ret = t_parse_value(c,&e)) != T_PARSE_OK) break;
         memcpy(t_contex_push(c, sizeof(t_value)), &e, sizeof(t_value));
         size++;
-        if(*c->json == ',') c->json++;//继续处理 继续解析
+
+        t_parse_ws(c);// 解析空白字符
+
+        if(*c->json == ',') {
+            c->json++;//继续处理 继续解析
+            t_parse_ws(c);//  解析空白字符 看上面向后移动的是不是 空字符串 是的话 继续向后拨动 
+            }
         else if (*c->json == ']'){//解析结束
             c->json++;
             v->type = T_ARRAY;
@@ -530,8 +540,18 @@ static int t_parse_array(t_context *c, t_value*v ){
             return T_PARSE_OK;
         } 
 
-        else return T_PARSE_MISS_COMMA_OR_SQUARE_BRACKET;
+        else {
+            return T_PARSE_MISS_COMMA_OR_SQUARE_BRACKET;
+            break;
+            }
 
+    }
+
+    //出栈  数组已经被放入 v->array_e  指针中
+    //将c释放掉
+    for(int i=0; i<size ; i++){
+        t_free((t_value*)t_context_pop(c, sizeof(t_value) ));
+        return ret;
     }
     
 }
@@ -638,10 +658,10 @@ double t_get_number(const t_value *v){
     return v->n;
 }
 
-t_value* t_get_array_element(const t_value* v, int index) {
-    assert(v != NULL && v->type == T_ARRAY);
-    assert(index < v->array_size);
-    return &v->array_e[index];
-}
+// t_value* t_get_array_element(const t_value* v, int index) {
+//     assert(v != NULL && v->type == T_ARRAY);
+//     assert(index < v->array_size);
+//     return &v->array_e[index];
+// }
 
 //E:\the_c_of_vs_code\c\c_project\json>gcc -c json.c

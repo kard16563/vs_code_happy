@@ -328,7 +328,7 @@ static void test_parse_array(){
     expect_eq_int(T_NUMBER, t_get_array_element(&v, 3));
     expect_eq_int(T_STRING, t_get_array_element(&v, 4));
     expect_eq_double(123.0, t_get_number( t_get_array_element(&v, 4) ));
-    expect_eq_string("abc", t_get_string(t_get_array_element(&v, 4)), t_get_string_length(lept_get_array_element(&v, 4)));
+    expect_eq_string("abc", t_get_string(t_get_array_element(&v, 4)), t_get_string_length(t_get_array_element(&v, 4)));
     t_free(&v);
 
     t_init(&v);
@@ -337,13 +337,13 @@ static void test_parse_array(){
     EXPECT_EQ_SIZE_T(4, t_get_array_size(&v));
 
     for(int i=0; i<4 ; i++){
-        t_value a = t_get_array_element(&v,i);
+        t_value *a = t_get_array_element(&v,i);
         expect_eq_int(T_ARRAY, t_get_type(&v));
         EXPECT_EQ_SIZE_T(i, t_get_array_size(&v));
 
         for(int j=0 ; j<i ; j++){
             t_value *e =  t_get_array_element(a,j);
-            expect_eq_int(T_NUMBER, t_get_array_element(e));
+            expect_eq_int(T_NUMBER, t_get_type(e));
             expect_eq_double((double) j, t_get_number( e ));
 
 
@@ -351,6 +351,7 @@ static void test_parse_array(){
         }
 
     }
+    free(&v);
 
 
 }
