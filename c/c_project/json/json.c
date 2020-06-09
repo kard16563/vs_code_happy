@@ -495,6 +495,17 @@ static int t_parse_string (t_context* c, t_value* v ){
     }
 }
 
+//原始的
+static int t_parse_string_raw(t_context *c, char** str, int* len ){
+
+
+}
+
+
+///////////////////////////////////////////// 对象 object
+static int t_parse_object(t_context* c, t_value* v){
+    
+}
 
 ///////////////////////////////////////////////
 static int t_parse_value(t_context* c, t_value* v);//先给下面的声明一下 下面的呢个函数 【t_parse_array】要用

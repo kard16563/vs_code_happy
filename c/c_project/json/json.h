@@ -104,4 +104,10 @@ t_value* lept_get_array_element(const t_value* v, int index);
 
 t_value* t_get_array_element(const t_value* v, int index);
 
+//obj
+int t_get_object_size(const t_value* v);
+const char* t_get_object_key(const t_value* v, int index);
+int t_get_object_key_length(const t_value* v, int index);
+t_value* t_get_object_value(const t_value* , int index);
+
 #endif
