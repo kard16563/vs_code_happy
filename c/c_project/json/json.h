@@ -5,11 +5,17 @@
 //类型及函数则用小写 通常枚举值用全大写
 typedef enum {T_NULL,T_FALSE,T_TURE,T_NUMBER,T_STRING,T_ARRAY,T_OBJ} t_type;
 
-struct t_object_member{//对象成员
-    char* key_string;
+typedef struct t_object_member {//对象成员
+    char* key_value_string;
     int key_length;
     t_value v;
-};
+}t_object_member;
+
+// typedef struct taa
+// {
+//     int a;
+// };
+
 
 
 typedef struct t_value
@@ -77,7 +83,11 @@ enum{//不合法的是啥类型的
     T_PARSE_INVALID_UNICODE_HEX,
     T_PARSE_INVALID_UNICODE_SURROGATE,
 
-    T_PARSE_MISS_COMMA_OR_SQUARE_BRACKET
+    T_PARSE_MISS_COMMA_OR_SQUARE_BRACKET,
+
+    T_PARSE_MISS_KEY,
+    T_PARSE_MISS_COLON,
+    T_PARSE_MISS_COMMA_OR_CURLY_BRACKET
 
 };
 

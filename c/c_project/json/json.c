@@ -504,7 +504,39 @@ static int t_parse_string_raw(t_context *c, char** str, int* len ){
 
 ///////////////////////////////////////////// 对象 object
 static int t_parse_object(t_context* c, t_value* v){
+
+    int size;
     
+    t_object_member m;
+    int ret;
+
+    expect(c,'{');
+    t_parse_ws(c);
+    if(*c->json == "}"){
+        c->json++;
+        v->type = T_OBJ;
+        v->obj_member=0;
+        v->obj_size=0;
+        return 0;
+    }
+
+    //normal
+    m.key_value_string=NULL;
+    size = 0;
+    for(;;){
+
+        t_init(&m.v);
+        if((ret= t_parse_value(c,&m.v)) != T_PARSE_OK)break;
+        t_parse_ws(c);
+        memcpy(t_contex_push(c,sizeof(t_object_member)), &m, sizeof(t_object_member));
+        size++;
+        m.key_value_string = NULL;
+        
+
+    }
+
+
+
 }
 
 ///////////////////////////////////////////////
