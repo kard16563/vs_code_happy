@@ -1,7 +1,10 @@
+package test_dao;
+
 public class student extends person {
-    private int score;
+    private int score =0;
 
     public void  setScore(int num){
+
         this.score = num;
     }
 
@@ -16,13 +19,14 @@ public class student extends person {
     }
 
 
-    public static void main(String[] args){
-        student a1 = new student("0.123",11);
-        System.out.println("okk");
-        a1.print();
 
+
+
+
+
+    public int getScore() {
+        return score;
     }
-
 }
 
 

@@ -1,7 +1,9 @@
+package test_dao;
+
 /**
  * @author Lenovo
  */
-public class person {
+public class person implements Human {
     private  String name;
     private int age;
 
@@ -30,8 +32,12 @@ public class person {
         System.out.println("father`s project ");
     }
 
-
-
+    @Override
+    public int getFood() {
+        int food;
+        food = Human.FOOD;
+        return food;
+    }
 
 
 }
