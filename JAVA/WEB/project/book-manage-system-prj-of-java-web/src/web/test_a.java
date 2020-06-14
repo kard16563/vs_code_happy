@@ -9,6 +9,7 @@ public class test_a {
         a1.setAge(10);
 
         student a2 = new student("0.00",25);
+        boolean comp =a1.equals(a2);
 
         Colora cc = Colora.GREEN;
         String ans=cc.getNam();

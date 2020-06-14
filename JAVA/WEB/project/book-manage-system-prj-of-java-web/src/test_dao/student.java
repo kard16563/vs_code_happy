@@ -1,7 +1,9 @@
 package test_dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -11,6 +13,11 @@ public class student extends person {
      * list  有序列表
      * */
     List<String> list1 = new ArrayList<>();
+    /**
+     * 建立映射表 方便查找
+     */
+    Map<String,student> map = new HashMap<>();
+
 
     public void  setScore(int num){
 
@@ -62,7 +69,9 @@ public class student extends person {
             System.out.println("初始化+转换为数字"+n);
         }
     }
-
+/**
+ * 用于比较大小的
+ * */
     @Override
     public boolean equals(Object o) {
         boolean ageEquals = false;
@@ -75,6 +84,17 @@ public class student extends person {
         System.out.println("比较处理返回结果-》"+ageEquals);
         return ageEquals;
     }
+    }
+
+    public void listMapPush(String key,student value){
+        //将key和Student实例映射并关联
+            map.put(key,value);
+
+    }
+
+
+    public student  listMapFind(String key){
+        return map.get(key);
     }
 
 
