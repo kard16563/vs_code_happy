@@ -5,7 +5,7 @@ package test_dao;
  */
 public class person implements Human {
     private  String name;
-    private int age;
+    private int age=-1;
 
     public void   setName(String name){
         this.name = name;
