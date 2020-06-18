@@ -73,7 +73,7 @@ public class student extends person {
  * 用于比较大小的
  * */
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(Object o) {//无论是 list 还是 哈希 都要到这个
         boolean ageEquals = false;
         if (o instanceof student){
             student s =(student)o;
@@ -87,10 +87,31 @@ public class student extends person {
     }
 
     public void listMapPush(String key,student value){
-        //将key和Student实例映射并关联
+        //将key和Student实例映射并关联--->哈希安排
             map.put(key,value);
 
     }
+
+    HashMap<String,student> hashmap = new HashMap<>();
+
+    public void hashPut(String key, student value){
+        this.hashmap.put(key,value);//get remove
+    }
+    /**
+     * https://blog.csdn.net/wdays83892469/article/details/79615609
+     * */
+
+    @Override//自己重写哈希的加密算法
+    public int hashCode(){
+
+        System.out.println("哈希加密自定义");
+        int h = 0;
+        h = 31 * h + this.getAge();
+        h = 31 * h + this.getName().hashCode();
+        h = 31 * h + this.getScore();
+        return h;
+    }
+
 
 
     public student  listMapFind(String key){

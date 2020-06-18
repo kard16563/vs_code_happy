@@ -3,6 +3,8 @@ package web_test;
 import test_dao.Colora;
 import test_dao.student;
 
+import java.util.HashMap;
+
 public class test_a {
     public static void main(String[] args){
         student a1 = new student("0.123",11);
@@ -15,6 +17,9 @@ public class test_a {
         String ans=cc.getNam();
         a1.listMapPush("aa-1",a1);
         student bb = a1.listMapFind("aa-1");
+        //bb.hashCode();
+
+        bb.hashPut("bb", bb);
 
         a1.listAdd("000");
         a1.listAdd("111");
@@ -30,3 +35,8 @@ public class test_a {
 
     }
 }
+
+/**
+ * 看到treemap
+ *
+ * */
