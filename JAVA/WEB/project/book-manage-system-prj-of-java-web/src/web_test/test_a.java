@@ -1,4 +1,4 @@
-package web;
+package web_test;
 
 import test_dao.Colora;
 import test_dao.student;
@@ -13,6 +13,8 @@ public class test_a {
 
         Colora cc = Colora.GREEN;
         String ans=cc.getNam();
+        a1.listMapPush("aa-1",a1);
+        student bb = a1.listMapFind("aa-1");
 
         a1.listAdd("000");
         a1.listAdd("111");
