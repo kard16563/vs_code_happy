@@ -1,9 +1,7 @@
-package web_test;
+package aweb_test;
 
 import test_dao.Colora;
 import test_dao.student;
-
-import java.util.HashMap;
 
 public class test_a {
     public static void main(String[] args){
