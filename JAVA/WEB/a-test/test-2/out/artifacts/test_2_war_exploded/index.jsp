@@ -12,5 +12,10 @@
   </head>
   <body>
   <h1>hello world666 </h1>
+
+  <%
+    String name = (String)session.getAttribute("name");
+  %>
+  session中的name: <%=name%>
   </body>
 </html>
