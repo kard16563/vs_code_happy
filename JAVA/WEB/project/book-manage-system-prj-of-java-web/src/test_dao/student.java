@@ -89,7 +89,6 @@ public class student extends person {
     public void listMapPush(String key,student value){
         //将key和Student实例映射并关联--->哈希安排
             map.put(key,value);
-
     }
 
     HashMap<String,student> hashmap = new HashMap<>();

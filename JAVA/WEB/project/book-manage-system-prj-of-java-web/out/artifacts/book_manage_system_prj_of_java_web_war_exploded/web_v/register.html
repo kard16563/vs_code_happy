@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户注册</title>
+
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="../vue-js/axios.min.js"></script>
+
+    <!-- import CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+
+
+</head>
+
+<style type="text/css">
+
+
+    .divs{
+        margin:0 auto;
+        text-align:center;
+    }
+
+    .op{
+        margin:50px;
+        opacity:0.5;
+
+    }
+
+
+    body{
+
+        background: url("../b_register.gif") ;
+        background-position: center center;
+
+        background-repeat: no-repeat;
+
+        background-attachment: fixed;
+
+        background-size: cover;
+
+
+    }
+</style>
+
+<body>
+
+<div class="op" id="app">
+    <div style="width:400px" class="divs" >
+    <el-form :model="ruleForm" label-width="100px" class="demo-ruleForm">
+
+        <el-form-item label="用户名" >
+            <el-input placeholder="如：aa" v-model.number="ruleForm.username"></el-input>
+        </el-form-item>
+
+        <el-form-item label="密码" >
+            <el-input placeholder="如： 1234566" type="password" v-model="ruleForm.pass" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="确认密码" >
+            <el-input placeholder="务必与密码保持一致" type="password" v-model="ruleForm.checkPass" autocomplete="off"></el-input>
+
+            <div style="margin-top: 20px">
+                <el-radio v-model="radio" label="1" border size="medium">普通用户</el-radio>
+                <el-radio v-model="radio" label="2" border size="medium">管理员</el-radio>
+            </div>
+        </el-form-item>
+
+
+
+
+
+
+        <el-form-item>
+            <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
+            <el-button @click="resetForm('ruleForm')">重置</el-button>
+        </el-form-item>
+    </el-form>
+    <p v-if = "seen">现在你看到我了</p>
+    </div>
+
+
+
+</div>
+
+
+</body>
+<!-- import Vue before Element -->
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<!-- import JavaScript -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data:
+            {
+                url:"/register",
+                radio: '1',
+                seen:false,
+                name:null,
+
+                ruleForm: {
+                    pass: '',
+                    checkPass: '',
+                    username: ''
+                },
+
+
+                },
+        watch:{
+            "ruleForm.checkPass":{
+                handler:'passCheck',
+                deep:true,
+            },
+
+
+
+        },
+
+
+        methods: {
+            passCheck(){
+                console.log("5555555==> "+this.ruleForm.pass);
+                if (this.ruleForm.checkPass == this.ruleForm.pass){
+                    console.log("==> "+this.ruleForm.pass);
+                    this.seen=false
+                }else {
+                    this.seen=true
+                }
+            },
+
+            submitForm(formName) {
+                this.name = this.ruleForm.username;
+                let formData = new FormData();
+                console.log('msg->',this.ruleForm.username,this.ruleForm.pass);
+                formData.append('name', this.ruleForm.username);
+                formData.append('pass', this.ruleForm.pass);
+                formData.append('select', this.radio);
+
+                axios({
+                    method: 'POST',
+                    url: this.url,
+                    //url: '/vue',
+                    headers: {
+                        //'Content-Type': 'text/html;charset=utf-8',
+                        'enctype': 'multipart/form-data',
+                    },
+                    data:formData
+
+                }).then(function (res) {
+                    console.log("data--->",res.data);
+
+                    if(res.data == "1"){
+                        window.location.href='./normal_user/normal_welcome.html';
+                    }else{
+                        console.log("wrong arr",res.data == 1);
+                    }
+
+
+
+
+                });
+                console.log('*-->',this.url);
+                console.log('**-->',this.name);
+                sessionStorage.setItem('key',this.name);
+
+            },
+            resetForm(formName) {
+                this.$refs[formName].resetFields();
+            },
+            bb(){
+                axios.get(this.url);
+            }
+
+
+
+
+    }
+
+    })
+
+
+</script>
+</html>

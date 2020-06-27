@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>管理员</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="../../vue-js/axios.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+
+</head>
+<style>
+    body{
+        background-color: lightyellow;
+        　　}
+
+</style>
+<body>
+<div class="page-header">
+    <h1>图书管理系统<small>欢迎光临！</small></h1>
+</div>
+<div id="app">
+    <div class="line"></div>
+    <el-menu
+            :default-active="activeIndex2"
+            class="el-menu-demo"
+            mode="horizontal"
+            @select="handleSelect"
+            background-color="#545c64"
+            text-color="#fff"
+            active-text-color="#ffd04b">
+        <el-menu-item index="1">购买处理中心</el-menu-item>
+        <el-menu-item index="2" @click="add()">确定补货</el-menu-item>
+        <el-menu-item index="3" @click="dialog = true" >添加新书</el-menu-item>
+
+
+    </el-menu>
+
+
+
+
+
+
+
+
+
+
+
+    <el-drawer
+            title="添加新书"
+            :before-close="handleClose"
+            :visible.sync="dialog"
+            direction="ltr"
+            custom-class="demo-drawer"
+            ref="drawer"
+    >
+        <div class="demo-drawer__content">
+            <el-form :model="form">
+                <el-form-item label="书名" :label-width="formLabelWidth">
+                    <el-input v-model="name" autocomplete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="价格" :label-width="formLabelWidth">
+                    <el-input v-model="price" autocomplete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="数量" :label-width="formLabelWidth">
+                    <el-input v-model="num" autocomplete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="推荐语" :label-width="formLabelWidth">
+                    <el-input v-model="recommendation" autocomplete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="图片" :label-width="formLabelWidth">
+                    <input type="file" @change="getFile($event)"></input>
+                </el-form-item>
+
+
+
+            </el-form>
+
+            <div class="demo-drawer__footer">
+                <el-button @click="cancelForm">取 消s</el-button>
+
+                <el-button type="primary"  @click="$refs.drawer.closeDrawer()" :loading="loading">{{ loading ? '提交中 ...' : '提交？' }}</el-button>
+
+            </div>
+        </div>
+<!--        <input type="text" value="11" v-model="name" placeholder="请输入用户名">-->
+<!--        <input type="text" value="22" v-model="age" placeholder="请输入年龄">-->
+<!--        <input type="file" @change="getFile($event)">-->
+
+
+    </el-drawer>
+
+
+
+    <el-row>
+        <el-col :span="8" v-for="(item, index) in picList" :key="item.id" :offset=" 2 ">
+            <el-card :body-style="{ padding: '8px' }">
+                <img :src="item.idView" class="image">
+                <!--                <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image">-->
+                <div style="padding: 14px;">
+                    <span>书籍:{{item.name}} -->{{index}}</span>
+                    <br>
+                    <span>简介：{{item.recommendation}}</span>
+                    <br>
+                    <span>价格：{{item.price}} 元</span>
+                    <br>
+                    <span>余量：</span>
+                    <el-progress :text-inside="true" :stroke-width="16" :percentage="item.remain"></el-progress>
+
+                    <div class="bottom clearfix">
+                        <time class="time">{{ currentDate }}</time>
+                        <el-button type="text" @click="show(item)" class="button">增加数量</el-button>
+                    </div>
+                </div>
+            </el-card>
+        </el-col>
+    </el-row>
+
+
+
+
+
+
+    {{form.name }}
+</div>
+
+</body>
+
+<!-- import Vue before Element -->
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<!-- import JavaScript -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+
+<SCRIPT>
+    new Vue({
+        el: '#app',
+        data:
+            {
+
+                table: false,
+                dialog: false,
+                loading: false,
+                name: '',
+                price: '',
+                num: '',
+                recommendation: '',
+                file:'',
+
+                form: {
+
+                    delivery: false,
+                    type: [],
+                    resource: '',
+                    desc: ''
+                },
+                formLabelWidth: '80px',
+                timer: null,
+
+
+
+
+                activeIndex: '1',
+                activeIndex2: '1',
+
+
+                currentDate: new Date(),
+                url:"/admain",
+                picList:null,
+                count:0,
+                totalBuy:0,
+                idBuy:[],
+                back:[],
+            },
+        watch:{
+            item:{
+                handler:'change',
+                deep:true,
+            }
+        },
+        methods: {
+            calling(){
+                let p;
+                p=axios.get("/Servlet_normal_user").then(function (res) {
+                    console.log("data-->",res.data);
+                    return res;
+                });
+                p.then((v)=>
+                {
+                    this.picList=v.data;//解析Promise对象 为json字符串
+                    console.log('v-data',v.data);
+
+                });
+                this.picList = eval(this.picList );//json ->array
+
+                //this.picList = eval('(' + this.picList + ')');// json -> obj
+                console.log('picList--->',this.picList);
+                //console.log('picList--->2',jsa);
+
+
+
+            },
+            getFile(event) {
+                this.file = event.target.files[0];
+                console.log(this.file);
+            },
+
+
+            handleClose(done) {
+                if (this.loading) {
+                    return;
+                }
+                this.$confirm('确定要提交表单吗？')
+                    .then(_ => {
+                        this.sub();
+                        this.loading = true;
+                        this.timer = setTimeout(() => {
+
+                            done();
+                            // 动画关闭需要一定的时间
+                            setTimeout(() => {
+                                this.loading = false;
+                                this.calling();
+                            }, 400);
+                        }, 2000);
+                    })
+                    .catch(_ => {});
+                //this.cancelForm();
+            },
+            cancelForm() {
+                this.loading = false;
+                this.dialog = false;
+                clearTimeout(this.timer);
+            },
+
+
+
+
+
+
+
+
+
+
+            handleSelect(key, keyPath) {
+                console.log(key, keyPath);
+            },
+
+            sub() {
+                console.log("name"+this.name);
+                console.log("sub"+this.file);
+                console.log('recommendation',this.recommendation);
+
+                let formData = new FormData();
+                formData.append('file',this.file);
+                formData.append('name',this.name);
+                formData.append('remain',this.num);
+                formData.append('price',this.price);
+                formData.append('recommendation',this.recommendation);
+                formData.append('note',1);
+
+
+                axios({
+                    method: 'POST',
+                    url: this.url,
+                    //url: '/vue',
+                    headers: {
+                        //'Content-Type': 'text/html;charset=utf-8',
+                        'enctype': 'multipart/form-data',
+                    },
+                    data:formData
+
+                }).then(function (res) {
+                    console.log("data--->",res.data);
+                    if(res.data==0){
+                        console.log("已经添加过了");
+                    }
+
+                    //window.location.href='./normal_user/normal_welcome.html';
+
+
+                });
+
+
+            },
+
+            add(){
+                console.log("增加");
+                this.back = this.idBuy;
+                console.log("st1-->",this.back);
+                let st = JSON.stringify( this.back);
+
+                let formData = new FormData();
+                formData.append('data',st);
+                formData.append('note',"admin");
+
+                //formData.append('total',st);
+
+
+                axios({
+                    method: 'POST',
+                    url: "/Servlet_normal_user",
+                    //url: '/vue',
+                    headers: {
+                        //'Content-Type': 'text/html;charset=utf-8',
+                        'enctype': 'multipart/form-data',
+                    },
+                    data:formData
+
+                }).then(function (res) {
+                    console.log("data--->",res.data);
+
+                    //window.location.href='./normal_user/normal_welcome.html';
+
+
+                });
+
+
+            },
+
+            change() {
+                console.log('change-->');
+            },
+            show(item) {
+                item.remain += 1;
+
+                console.log('sss!!' + item);
+
+                console.log('temp-->', item.id);
+                let temp = this.idBuy.findIndex(x => x.id == item.id);
+                console.log('temp-->', temp);
+                if (temp == -1) {
+                    let obj = {};
+                    obj['id'] = item.id;
+                    obj['num'] = 1;
+
+                    this.idBuy.push(obj);
+                } else {
+                    console.log('else-->', this.idBuy[temp]);
+                    this.idBuy[temp].num += 1;
+                }
+
+            },
+        },
+
+
+        created(){
+            let p;
+            p=axios.get("/Servlet_normal_user").then(function (res) {
+                console.log("data-->",res.data);
+                return res;
+            });
+            p.then((v)=>
+            {
+                this.picList=v.data;//解析Promise对象 为json字符串
+                console.log('v-data',v.data);
+
+            });
+            this.picList = eval(this.picList );//json ->array
+
+            //this.picList = eval('(' + this.picList + ')');// json -> obj
+            console.log('picList--->',this.picList);
+            //console.log('picList--->2',jsa);
+
+
+        }
+    }
+
+    )
+
+
+</SCRIPT>
+
+<style>
+    .time {
+        font-size: 13px;
+        color: #999;
+    }
+
+    .bottom {
+        margin-top: 13px;
+        line-height: 12px;
+    }
+
+    .button {
+        padding: 0;
+        float: right;
+    }
+
+    .image {
+        width: 100%;
+        display: block;
+    }
+
+    .clearfix:before,
+    .clearfix:after {
+        display: table;
+        content: "";
+    }
+
+    .clearfix:after {
+        clear: both
+    }
+</style>
+
+
+</html>

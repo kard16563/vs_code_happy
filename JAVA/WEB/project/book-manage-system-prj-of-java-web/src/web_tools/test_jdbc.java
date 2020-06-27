@@ -27,7 +27,8 @@ public class test_jdbc {
     }
 
 
-    public void bookBuy(){
+    public void bookNumChange(int flag){
+
         String msg = this.msgBuy;
         //String msg="[{\"id\":0,\"num\":4},{\"id\":1,\"num\":4}]";
         //String data = (String) params.get("data");
@@ -49,10 +50,15 @@ public class test_jdbc {
             try (Connection c = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/test?characterEncoding=UTF-8",
                     "root", "123456");
                  Statement s = c.createStatement();) {
+                String sql;
 
+                if(flag==0){
+                    sql = "update books set remain=remain-"+numBuy+" where id ="+idBuy;
+                }else {
+                     sql = "update books set remain=remain+"+numBuy+" where id ="+idBuy;
+                }
 
-
-                String sql = "update books set remain=remain-"+numBuy+" where id ="+idBuy;
+                //String sql = "update books set remain=remain-"+numBuy+" where id ="+idBuy;
                 s.execute(sql);
                 System.out.println("ok");
 
