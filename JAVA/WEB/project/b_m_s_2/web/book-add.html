@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>添加图书</title>
+</head>
+
+<style>
+    #aa{
+        width:450px;
+        position: absolute;
+        left:45%;
+        top:50%;
+        margin-left:-100px;
+        margin-top:-100px;
+
+    }
+
+</style>
+
+<body>
+    <div id="aa">
+        <form action="BookAddServlet" method="post">
+            <div>
+                <label for="book_isbn">图书ISBN:</label>
+                <input type="text" id="book_isbn" name="book_isbn" placeholder="请输入图书ISBN">
+            </div>
+            <div>
+                <label>图书名称:</label>
+                <input type="text" name="book_name" placeholder="请输入图书名称">
+            </div>
+            <div>
+                <label>图书价格:</label>
+                <input type="text" name="book_price" placeholder="请输入图书价格">
+            </div>
+            <div>
+                <label>图书作者:</label>
+                <input type="text" name="book_author" placeholder="请输入图书价格">
+            </div>
+            <div>
+                <label>图书数量:</label>
+                <input type="text" name="book_count" placeholder="请输入图书数量">
+            </div>
+            <input type="submit" value="提交">
+        </form>
+    </div>
+</body>
+</html>
