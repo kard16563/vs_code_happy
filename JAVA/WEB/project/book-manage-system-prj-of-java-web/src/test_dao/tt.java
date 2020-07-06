@@ -18,7 +18,7 @@ public class tt  {
     public static void main(String[] args) throws InterruptedException {
         cc kk= new cc("123",4);
 
-        String a = "[{\"name\":\"电话卡\",\"id\":\"1\"},{\"name\":\"电话卡2\",\"id2\":\"12\"}]";
+        String a = "[{\"name\":\"电话卡\",\"id\":1},{\"name\":\"电话卡2\",\"id2\":\"12\"}]";
 
         JSONArray json = JSONArray.fromObject(a );
         int dd=json.size();
