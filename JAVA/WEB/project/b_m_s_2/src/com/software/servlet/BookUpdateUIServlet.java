@@ -32,6 +32,7 @@ public class BookUpdateUIServlet extends HttpServlet {
 		
 		request.setAttribute("book", book);
 		request.getRequestDispatcher("book-update.jsp").forward(request, response);
+
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

@@ -32,7 +32,7 @@
             <th>图书作者</th>
             <th>图书数量</th>
         </tr>
-        <c:forEach items="${books }" var="book">
+        <c:forEach items="${books}" var="book">
         <tr>
             <td>${book.bookISBN }</td>
             <td>${book.bookName }</td>
