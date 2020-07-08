@@ -2,7 +2,7 @@ package com.software.test;
 
 import java.sql.SQLException;
 
-import com.software.util.DBUtil;
+import com.software.util.NewDbutil;
 
 /**
  * @author Lenovo
@@ -11,10 +11,11 @@ public class DBUtilTest {
 	public static void main(String[] args) {
 		long startTime = System.nanoTime();
 
+
 		try {
-			System.out.println(DBUtil.getConnection());
+			System.out.println(NewDbutil.getConnection());
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
 		}
 

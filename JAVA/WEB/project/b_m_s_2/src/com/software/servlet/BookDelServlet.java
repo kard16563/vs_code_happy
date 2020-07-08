@@ -11,8 +11,7 @@ import com.software.dao.IBookDao;
 import com.software.dao.impl.BookDaoImpl;
 
 /**
- * @author guojinan
- * @version 创建时间：2020-7-3  14:52:26
+ * @author Lenovo
  */
 @WebServlet("/BookDelServlet")
 public class BookDelServlet extends HttpServlet {

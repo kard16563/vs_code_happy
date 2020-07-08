@@ -12,6 +12,9 @@ import com.software.bean.BookBuy;
 import com.software.dao.IBookDao;
 import com.software.util.DBUtil;
 
+/**
+ * @author Lenovo
+ */
 public class BookDaoImpl implements IBookDao {
 
 	@Override

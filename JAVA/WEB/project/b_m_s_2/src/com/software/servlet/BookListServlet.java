@@ -15,9 +15,9 @@ import com.software.dao.impl.BookDaoImpl;
 
 import sun.awt.RepaintArea;
 
+
 /**
- * @author guojinan
- * @version 创建时间：2020-7-3  14:34:34
+ * @author Lenovo
  */
 @WebServlet("/BookListServlet")
 public class BookListServlet extends HttpServlet {

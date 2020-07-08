@@ -11,9 +11,9 @@ import com.software.bean.Book;
 import com.software.dao.IBookDao;
 import com.software.dao.impl.BookDaoImpl;
 
+
 /**
- * @author guojinan
- * @version 创建时间：2020-7-3  14:59:45
+ * @author Lenovo
  */
 @WebServlet("/BookUpdateUIServlet")
 public class BookUpdateUIServlet extends HttpServlet {

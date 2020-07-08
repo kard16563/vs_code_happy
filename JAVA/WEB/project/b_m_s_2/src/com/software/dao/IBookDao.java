@@ -5,6 +5,9 @@ import java.util.List;
 import com.software.bean.Book;
 import com.software.bean.BookBuy;
 
+/**
+ * @author Lenovo
+ */
 public interface IBookDao {
 	//新增图书
 	public void addBook(Book book);

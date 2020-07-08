@@ -676,3 +676,5 @@ JAVA/WEB/project/work_bms_2/web/WEB-INF/classes/com/test/tt1.class
 JAVA/WEB/project/work_bms_2/web/WEB-INF/classes/com/test/UDPClient.class
 JAVA/WEB/project/work_bms_2/web/WEB-INF/classes/com/test/UDPServer.class
 JAVA/WEB/project/work_bms_2/web/WEB-INF/classes/com/util/DBUtil.class
+JAVA/WEB/project/work_bms_2/out/artifacts/work_bms_2_war_exploded/WEB-INF/classes/com/test/UDPClient.class
+JAVA/WEB/project/work_bms_2/out/artifacts/work_bms_2_war_exploded/WEB-INF/classes/com/test/UDPServer.class
