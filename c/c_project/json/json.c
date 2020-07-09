@@ -380,8 +380,10 @@ t_value *t_get_array_element(const t_value*v ,int index){
 #define STRING_ERROR(ret) do { c->top = head; return ret; } while(0)
 
 
-static int t_parse_string (t_context* c, t_value* v ){
-    size_t head = c->top ,len;
+//预处理
+static int t_parse_string_raw(t_context *c, char** str, int* len ){
+
+size_t head = c->top ,len;
     unsigned u, u2;
     const char *p;
     long flag2=0;
@@ -409,9 +411,11 @@ static int t_parse_string (t_context* c, t_value* v ){
         {
         case '\"' ://检索接受 字符串到头  “ .... ”
             printf("\n\n t_parse_string---> case '\"'  \n");
-            len = c->top - head;
+            *len = c->top - head;
+            *str = t_context_pop(c , *len);
 
-            t_set_string (v , (const char *)t_context_pop(c , len), len);
+
+           // t_set_string (v , (const char *)t_context_pop(c , len), len);
             c->json = p;
             return T_PARSE_OK;//字符串解析完整的结束了
         
@@ -493,13 +497,142 @@ static int t_parse_string (t_context* c, t_value* v ){
             PUTC(c,ch);
         }
     }
-}
-
-//原始的
-static int t_parse_string_raw(t_context *c, char** str, int* len ){
-
 
 }
+
+
+static int t_parse_string (t_context* c, t_value* v ){
+    //t_set_string (v , (const char *)t_context_pop(c , len), len);
+
+    int ret;
+    char *s;
+    int len;
+    if ((ret=t_parse_string_raw(c, &s, &len)) == T_PARSE_OK )
+    {
+        t_set_string(v, s, len);
+    }
+    return ret; 
+    
+    
+}
+
+
+// static int t_parse_string (t_context* c, t_value* v ){
+//     size_t head = c->top ,len;
+//     unsigned u, u2;
+//     const char *p;
+//     long flag2=0;
+
+
+//     //json---> "\"Hello\\nWorld\""
+//     //printf("\n\n p[0] %c p[1] %c p[2] %c p[3] %c  \n",c->json[0], c->json[1], c->json[2],c->json[3]);
+//     //printf("\n\n t_parse_string - > 257:p = c->json;  %c  asic %d 0--> %c - %d \n", c->json, c->json, '\0', '\0');
+//     expect (c, '\"');// 判断是不是字符串
+//     p = c->json;
+    
+//     t_context ch2=*c; 
+//     //char **ch2= &(c->json);
+//     check_string(ch2.json);
+//     int flag = 0;
+//     int count=0;
+//     //printf("\n\n t_parse_string - > 258:p = c->json;  %c  asic %d 0--> %c - %d \n", p, p, '\0', '\0');
+//     for ( ; ; )
+//     {   
+//         char ch = *p++; // 向后拨动字符
+//         count= count+1;
+
+//         printf("\n\n t_parse_string - > for ->361 :char ch = *p ++;  %c ,asic %d  p-->%p  \n",ch,ch,p);
+//         switch (ch)
+//         {
+//         case '\"' ://检索接受 字符串到头  “ .... ”
+//             printf("\n\n t_parse_string---> case '\"'  \n");
+//             len = c->top - head;
+
+//             t_set_string (v , (const char *)t_context_pop(c , len), len);
+//             c->json = p;
+//             return T_PARSE_OK;//字符串解析完整的结束了
+        
+//         case '\\':/*555 --> \ 单个斜杠 555*/
+//             printf("\n\n 384 ------->  work %d \n",p);
+//             //flag2 = p ;
+//             flag = 1;//---->1
+            
+//             //char ch3= ; /* 看 \x x是啥 同时下一一个 */
+//             switch(*p++){//转义序列的解析
+                
+//                     case '\"': printf("\n\n 384 ------->  work 403-1 p-> %p \n",p); PUTC(c, '\"'); break;
+//                     case '\\':printf("\n\n 384 ------->  work 404-2  p-> %p \n",p); PUTC(c, '\\'); break;
+//                     case '/':printf("\n\n 384 ------->  work /  p-> %p \n",p);  PUTC(c, '/' ); break;
+//                     case 'b':printf("\n\n 384 ------->  work b p-> %p \n",p);  PUTC(c, '\b'); break;
+//                     case 'f':printf("\n\n 384 ------->  work f p-> %p \n",p);  PUTC(c, '\f'); break;
+//                     case 'n':printf("\n\n 384 ------->  work n p-> %p \n",p);  PUTC(c, '\n');printf("384 ------->  work n p-> %p  count %d \n",p,count); break;
+//                     case 'r':printf("\n\n 384 ------->  work r p-> %p \n",p);  PUTC(c, '\r'); break;
+//                     case 't':printf("\n\n 384 ------->  work t p-> %p \n",p);  PUTC(c, '\t'); break;
+//                     case 'u':printf("\n\n 384 ------->  work u p-> %p \n",p);
+//                         if(!( p= t_parse_hex4(p, &u)))
+//                                 STRING_ERROR(T_PARSE_INVALID_UNICODE_HEX);
+
+//                                 if (u >= 0xD800 && u <= 0xDBFF) { /* surrogate pair */
+//                             printf("\n\n ------> add\n\n ");
+//                             if (*p++ != '\\')
+//                                 STRING_ERROR(T_PARSE_INVALID_UNICODE_SURROGATE);
+//                             if (*p++ != 'u')
+//                                 STRING_ERROR(T_PARSE_INVALID_UNICODE_SURROGATE);
+//                             if (!(p = t_parse_hex4(p, &u2)))
+//                                 STRING_ERROR(T_PARSE_INVALID_UNICODE_HEX);
+//                             if (u2 < 0xDC00 || u2 > 0xDFFF)
+//                                 STRING_ERROR(T_PARSE_INVALID_UNICODE_SURROGATE);
+//                             u = (((u - 0xD800) << 10) | (u2 - 0xDC00)) + 0x10000;
+//                         }
+
+//                         t_encode_utf8(c,u);
+//                         break;
+
+//                     case '\0':
+//                         STRING_ERROR(T_PARSE_MISS_QUOTATION_MARK);
+
+
+//                     default:
+//                         c->top = head;
+//                         STRING_ERROR(T_PARSE_INVALID_STRING_ESCAPE);
+
+//                         //c->top = head;
+//                         // return T_PARSE_INVALID_STRING_ESCAPE;
+//             }
+
+
+//         case '\0' :
+//                 printf("\n 425 ->t_parse_string--->  0-->  T_PARSE_MISS_QUOTATION_MARK \n");        
+//                 printf("\n\nch-> %c  stand-> %c \n",ch,'\0');
+//                 printf("\n\nd->  %d  stand-> %d \n",ch,'\0');
+//                 //printf("\n\n  flag2: %p p: %p   count : %d  \n\n  ",flag2,p,count);
+                
+//                 if(flag != 0 ){
+//                     flag = 0;
+//                     //printf()
+//                 }else
+//                 {
+//                     printf("\n 425 ->t_parse_string--->  0-->  T_PARSE_MISS_QUOTATION_MARK \n");
+//                     STRING_ERROR(T_PARSE_MISS_QUOTATION_MARK);
+//                 }
+                
+                
+//                 break;
+
+//         default:
+//             printf("\n\n t_parse_string---> default : return T_PARSE_INVALID_STRING_CHAR  \n");
+//             if ((unsigned char)ch < 0x20 )//进行字符检查 不符合条件的 不能通过
+//             {
+//                 printf("\n 432  t_parse_string ->if char-> %s ch-> %p , loss %d \n",ch,(unsigned char)ch,((unsigned char)ch-0x20));
+//                 c->top = head;
+//                 return T_PARSE_INVALID_STRING_CHAR;
+//             }
+//             PUTC(c,ch);
+//         }
+//     }
+// }
+
+
 
 
 ///////////////////////////////////////////// 对象 object
@@ -600,6 +733,35 @@ static int t_parse_array(t_context *c, t_value*v ){
 }
 //t_parse_value
 
+
+static int t_parse_obj(t_context*c, t_value* v){
+    int i,size;
+    t_object_member m;
+    int res;
+
+    expect(c,'{');
+    t_parse_ws(c);
+
+    if (*c->json == '}')//为空的情况
+    {
+        c->json++;
+        v->type = T_OBJ;
+        v->obj_member = 0;
+        v->obj_size = 0;
+    }
+
+    m.key_length = NULL;//处理正常的进行相关的初始化
+    size=0;
+    for (;;)
+    {
+        char* str;
+        t_init(&m.v);
+    }
+    
+    
+
+
+}
 
 
 
