@@ -735,9 +735,14 @@ static int t_parse_array(t_context *c, t_value*v ){
 
 
 static int t_parse_obj(t_context*c, t_value* v){
+    //语法格式 分析
+    //member = string ws %x3A ws value
+    //object = %x7B ws [ member *( ws %x2C ws member ) ] ws %x7D
+    // %x3A-->U+003A-> :  Unicode编码解释
+
     int i,size;
     t_object_member m;
-    int res;
+    int ret;
 
     expect(c,'{');
     t_parse_ws(c);
@@ -756,6 +761,40 @@ static int t_parse_obj(t_context*c, t_value* v){
     {
         char* str;
         t_init(&m.v);
+
+        if(*c->json == '"'){// err->{""}
+            ret = T_PARSE_MISS_KEY;
+            break;
+        }
+
+        if((ret = t_parse_string_raw(c,&m,m.key_length) )!= T_PARSE_OK )break;
+        
+        memcpy( (m.key_value_string=(char*)malloc(m.key_length+1) ),str,m.key_length );
+        m.key_value_string[m.key_length]='\0';//添加最后一个字符
+
+        t_parse_ws(c);
+
+        if(*c->json != ':'){
+            ret = T_PARSE_MISS_COLON;
+            break;
+        }
+
+        c->json++;
+        t_parse_ws(c);
+
+        if( (ret = t_parse_value(c,&m.v)) != T_PARSE_OK ){
+            break;
+        }
+        memcpy((t_contex_push(c,sizeof(t_object_member))) ,&m,sizeof(t_object_member));
+        size++;
+        m.key_value_string = NULL;
+
+        t_parse_ws(c);
+
+
+
+
+
     }
     
     
