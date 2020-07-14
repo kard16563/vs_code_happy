@@ -788,13 +788,37 @@ static int t_parse_obj(t_context*c, t_value* v){
         memcpy((t_contex_push(c,sizeof(t_object_member))) ,&m,sizeof(t_object_member));
         size++;
         m.key_value_string = NULL;
-
         t_parse_ws(c);
 
+        if(c->json = ','){
+            c->json++;
+            t_parse_ws(c);
+        }
+        else if(c->json == '}'){
+            int s = sizeof(t_object_member)*size;
+            c->json ++ ;
+            v->type=T_OBJ;
+            memcpy(v->obj_member = (t_object_member*)malloc(s),t_contex_push(c,s),s);
+            return T_PARSE_OK;
+        }
 
+        else
+        {
+            ret = T_PARSE_MISS_COMMA_OR_CURLY_BRACKET;
+            break;
+        }
 
+        free(m.key_value_string);
+        for (int i = 0; i < size; i++)
+        {
+            t_object_member *m = (t_object_member*)t_context_pop(c,sizeof(t_object_member));
+            free(&m->v);
+            t_free(&m->v);
+        }
 
-
+        v->type = T_NULL;
+        return ret;
+        
     }
     
     
