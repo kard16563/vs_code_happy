@@ -5,17 +5,6 @@
 //类型及函数则用小写 通常枚举值用全大写
 typedef enum {T_NULL,T_FALSE,T_TURE,T_NUMBER,T_STRING,T_ARRAY,T_OBJ} t_type;
 
-typedef struct t_object_member {//对象成员
-    char* key_value_string;
-    int key_length;
-    t_value v;
-}t_object_member;
-
-// typedef struct taa
-// {
-//     int a;
-// };
-
 
 
 typedef struct t_value
@@ -35,6 +24,17 @@ typedef struct t_value
 }t_value; // pt_value 事实上是一种变体类型（variant type），
 
 
+
+typedef struct t_object_member {//对象成员
+    char* key_value_string;
+    int key_length;
+    t_value v;
+}t_object_member;
+
+// typedef struct taa
+// {
+//     int a;
+// };
 
 
 // typedef struct 

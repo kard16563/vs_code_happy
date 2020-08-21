@@ -357,6 +357,9 @@ static void test_parse_array(){
 }
 
 
+
+
+
 static void test_parse_miss_comma_or_square_bracket() {
 #if 0
     test_error(T_PARSE_MISS_COMMA_OR_SQUARE_BRACKET, "[1");
@@ -365,6 +368,80 @@ static void test_parse_miss_comma_or_square_bracket() {
     test_error(T_PARSE_MISS_COMMA_OR_SQUARE_BRACKET, "[[]");
 #endif
 }
+
+
+
+//////////////////////////////////////////// 处理obj
+
+static void test_parse_obj(){
+    t_value v;
+    int i;
+
+    t_init(&v);
+    expect_eq_int(T_PARSE_OK, t_parse(&v, " { } "));
+    expect_eq_int(T_OBJ, t_get_type(&v));
+    EXPECT_EQ_SIZE_T(0, t_get_object_size(&v));
+    t_free(&v);
+
+    t_init(&v);
+    expect_eq_int(T_PARSE_OK, t_parse(&v,
+        " { "
+        "\"n\" : null , "
+        "\"f\" : false , "
+        "\"t\" : true , "
+        "\"i\" : 123 , "
+        "\"s\" : \"abc\", "
+        "\"a\" : [ 1, 2, 3 ],"
+        "\"o\" : { \"1\" : 1, \"2\" : 2, \"3\" : 3 }"
+        " } "
+    ));
+
+
+//expect_eq_int  expect_eq_string
+    expect_eq_int(T_OBJ, t_get_type(&v));
+    EXPECT_EQ_SIZE_T(7, t_get_object_size(&v));
+    expect_eq_string("n", t_get_object_key(&v, 0), t_get_object_key_length(&v, 0));
+    expect_eq_int(T_NULL,   t_get_type(t_get_object_value(&v, 0)));
+    expect_eq_string("f", t_get_object_key(&v, 1), t_get_object_key_length(&v, 1));
+    expect_eq_int(T_FALSE,  t_get_type(t_get_object_value(&v, 1)));
+    expect_eq_string("t", t_get_object_key(&v, 2), t_get_object_key_length(&v, 2));
+    expect_eq_int(T_TURE,   t_get_type(t_get_object_value(&v, 2)));
+    expect_eq_string("i", t_get_object_key(&v, 3), t_get_object_key_length(&v, 3));
+    expect_eq_int(T_NUMBER, t_get_type(t_get_object_value(&v, 3)));
+    expect_eq_double(123.0, t_get_number(t_get_object_value(&v, 3)));
+    expect_eq_string("s", t_get_object_key(&v, 4), t_get_object_key_length(&v, 4));
+    expect_eq_int(T_STRING, t_get_type(t_get_object_value(&v, 4)));
+    expect_eq_string("abc", t_get_string(t_get_object_value(&v, 4)), t_get_string_length(t_get_object_value(&v, 4)));
+    expect_eq_string("a", t_get_object_key(&v, 5), t_get_object_key_length(&v, 5));
+    expect_eq_int(T_ARRAY, t_get_type(t_get_object_value(&v, 5)));
+    EXPECT_EQ_SIZE_T(3, t_get_array_size(t_get_object_value(&v, 5)));
+
+    for(i=0; i<3; i++){
+        t_value* e = t_get_array_element(t_get_object_value(&v,5),i);
+        expect_eq_int(T_NUMBER,t_get_type(e));
+        expect_eq_double(i*1.0,t_get_number(e));
+    }
+
+    expect_eq_string("o", t_get_object_key(&v, 6), t_get_object_key_length(&v, 6));
+
+
+    {
+        t_value* o = t_get_object_value(&v, 6);
+        expect_eq_int(T_OBJ, t_get_type(o));
+        for (i = 0; i < 3; i++) {
+            t_value* ov = t_get_object_value(o, i);
+            EXPECT_TRUE('1' + i == t_get_object_key(o, i)[0]);
+            EXPECT_EQ_SIZE_T(1, t_get_object_key_length(o, i));
+            expect_eq_int(T_NUMBER, t_get_type(ov));
+            expect_eq_double(i + 1.0, t_get_number(ov));
+            //expect_eq_double
+        }
+    }
+    t_free(&v);
+}
+
+
+
 
 //////////////////////////////////////////////////////////
 static void test_parse(){
@@ -400,6 +477,11 @@ static void test_parse(){
     test_parse_string();
 
     test_parse_miss_comma_or_square_bracket();
+    
+    test_parse_array();//问题函数所在位置
+// #if 0
+//     test_parse_object();
+// #endif
 
 
 

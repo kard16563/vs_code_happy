@@ -383,7 +383,7 @@ t_value *t_get_array_element(const t_value*v ,int index){
 //预处理
 static int t_parse_string_raw(t_context *c, char** str, int* len ){
 
-size_t head = c->top ,len;
+size_t head = c->top ;
     unsigned u, u2;
     const char *p;
     long flag2=0;
@@ -635,43 +635,6 @@ static int t_parse_string (t_context* c, t_value* v ){
 
 
 
-///////////////////////////////////////////// 对象 object
-static int t_parse_object(t_context* c, t_value* v){
-
-    int size;
-    
-    t_object_member m;
-    int ret;
-
-    expect(c,'{');
-    t_parse_ws(c);
-    if(*c->json == "}"){
-        c->json++;
-        v->type = T_OBJ;
-        v->obj_member=0;
-        v->obj_size=0;
-        return 0;
-    }
-
-    //normal
-    m.key_value_string=NULL;
-    size = 0;
-    for(;;){
-
-        t_init(&m.v);
-        if((ret= t_parse_value(c,&m.v)) != T_PARSE_OK)break;
-        t_parse_ws(c);
-        memcpy(t_contex_push(c,sizeof(t_object_member)), &m, sizeof(t_object_member));
-        size++;
-        m.key_value_string = NULL;
-        
-
-    }
-
-
-
-}
-
 ///////////////////////////////////////////////
 static int t_parse_value(t_context* c, t_value* v);//先给下面的声明一下 下面的呢个函数 【t_parse_array】要用
 //这两个函数有点 互相调用的意思 但是 要调用的话必须要出现在前面所以 前项 声明一下
@@ -732,6 +695,47 @@ static int t_parse_array(t_context *c, t_value*v ){
     
 }
 //t_parse_value
+
+
+
+
+///////////////////////////////////////////// 对象 object
+static int t_parse_object(t_context* c, t_value* v){
+
+    int size;
+    
+    t_object_member m;
+    int ret;
+
+    expect(c,'{');
+    t_parse_ws(c);
+    if(*c->json == "}"){
+        c->json++;
+        v->type = T_OBJ;
+        v->obj_member=0;
+        v->obj_size=0;
+        return 0;
+    }
+
+    //normal
+    m.key_value_string=NULL;
+    size = 0;
+    for(;;){
+
+        t_init(&m.v);
+        if((ret= t_parse_value(c,&m.v)) != T_PARSE_OK)break;
+        t_parse_ws(c);
+        memcpy(t_contex_push(c,sizeof(t_object_member)), &m, sizeof(t_object_member));
+        size++;
+        m.key_value_string = NULL;
+        
+
+    }
+    return ret;
+
+
+
+}
 
 
 static int t_parse_obj(t_context*c, t_value* v){
@@ -931,5 +935,34 @@ double t_get_number(const t_value *v){
 //     assert(index < v->array_size);
 //     return &v->array_e[index];
 // }
+
+
+
+int t_get_object_size(const t_value* v) {
+    assert(v != NULL && v->type == T_OBJ);
+    return v->obj_size;
+}
+
+const char* t_get_object_key(const t_value* v, int index) {
+    assert(v != NULL && v->type == T_OBJ);
+    assert(index < v->obj_size);
+    //return v->u.o.m[index].k;
+    return v->obj_member[index].key_value_string;
+}
+
+int t_get_object_key_length(const t_value* v, int index) {
+    assert(v != NULL && v->type == T_OBJ);
+   //assert(index < v->u.o.size);
+    assert(index < v->obj_size);
+    //return v->u.o.m[index].klen;
+    return v->obj_member[index].key_length;
+}
+
+t_value* t_get_object_value(const t_value* v, int index) {
+    assert(v != NULL && v->type == T_OBJ);
+    assert(index < v->obj_size);
+    //return &v->u.o.m[index].v;
+    return &v->obj_member[index].v;
+}
 
 //E:\the_c_of_vs_code\c\c_project\json>gcc -c json.c
