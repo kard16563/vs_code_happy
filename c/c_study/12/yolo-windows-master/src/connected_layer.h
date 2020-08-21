@@ -1,27 +1,3 @@
-#ifndef CONNECTED_LAYER_H
-#define CONNECTED_LAYER_H
-
-#include "activations.h"
-#include "layer.h"
-#include "network.h"
-
-typedef layer connected_layer;
-
-connected_layer make_connected_layer(int batch, int inputs, int outputs, ACTIVATION activation, int batch_normalize);
-
-void forward_connected_layer(connected_layer layer, network_state state);
-void backward_connected_layer(connected_layer layer, network_state state);
-void update_connected_layer(connected_layer layer, int batch, float learning_rate, float momentum, float decay);
-void denormalize_connected_layer(layer l);
-void statistics_connected_layer(layer l);
-
-#ifdef GPU
-void forward_connected_layer_gpu(connected_layer layer, network_state state);
-void backward_connected_layer_gpu(connected_layer layer, network_state state);
-void update_connected_layer_gpu(connected_layer layer, int batch, float learning_rate, float momentum, float decay);
-void push_connected_layer(connected_layer layer);
-void pull_connected_layer(connected_layer layer);
-#endif
-
-#endif
-
+version https://git-lfs.github.com/spec/v1
+oid sha256:434efd5cd384ace0f934d82199959831bbf20c00f1d24b53543bd603d1688812
+size 1046

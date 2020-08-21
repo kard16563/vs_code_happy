@@ -1,20 +1,3 @@
-#ifndef CROP_LAYER_H
-#define CROP_LAYER_H
-
-#include "image.h"
-#include "layer.h"
-#include "network.h"
-
-typedef layer crop_layer;
-
-image get_crop_image(crop_layer l);
-crop_layer make_crop_layer(int batch, int h, int w, int c, int crop_height, int crop_width, int flip, float angle, float saturation, float exposure);
-void forward_crop_layer(const crop_layer l, network_state state);
-void resize_crop_layer(layer *l, int w, int h);
-
-#ifdef GPU
-void forward_crop_layer_gpu(crop_layer l, network_state state);
-#endif
-
-#endif
-
+version https://git-lfs.github.com/spec/v1
+oid sha256:c110c276851490491f40ac43e07e0a636ac23246443921708e1bfe7e0d9a2532
+size 542
