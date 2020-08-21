@@ -1,15 +1,3 @@
-import sqlite3
-
-def collate_reverse(string1, string2):
-    return -cmp(string1, string2)
-
-con = sqlite3.connect(":memory:")
-con.create_collation("reverse", collate_reverse)
-
-cur = con.cursor()
-cur.execute("create table test(x)")
-cur.executemany("insert into test(x) values (?)", [("a",), ("b",)])
-cur.execute("select x from test order by x collate reverse")
-for row in cur:
-    print row
-con.close()
+version https://git-lfs.github.com/spec/v1
+oid sha256:c5f5fd74807da67997595d0561b0a84785aeb675776e6cfa07f506e769d05040
+size 400
