@@ -8,7 +8,8 @@
             "request": "launch",
             "targetArchitecture": "x64",
             "program": "${workspaceFolder}/${fileBasenameNoExtension}.exe",
-            "miDebuggerPath": "C:/cygwin64/bin/gdb.exe",
+            "miDebuggerPath": "E:\\DevelopRoom\\DevConfig_env\\C++\\mingw64\\bin\\gdb.exe",
+            //"miDebuggerPath": "C:/cygwin64/bin/gdb.exe",
             "MIMode": "gdb",
             "args": [],
             "stopAtEntry": false,
@@ -31,7 +32,8 @@
             "environment": [],
             "externalConsole": true, // 调试时是否显示控制台窗口，一般设置为true显示控制台
             "MIMode": "gdb",
-            "miDebuggerPath": "E:/mingw64/bin/gdb.exe", // miDebugger的路径，注意这里要与MinGw的路径对应
+            "miDebuggerPath": "E:\\DevelopRoom\\DevConfig_env\\C++\\mingw64\\bin\\gdb.exe",
+            //"miDebuggerPath": "E:/mingw64/bin/gdb.exe", // miDebugger的路径，注意这里要与MinGw的路径对应
 
             "preLaunchTask": "c++",//寻找lable 
             // 调试会话开始前执行的任务，一般为编译程序，c++为g++, c为gcc
