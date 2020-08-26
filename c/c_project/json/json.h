@@ -112,8 +112,8 @@ int lept_get_array_size(const t_value* v);
 t_value* lept_get_array_element(const t_value* v, int index);
 //static int t_parse_value(t_context *t , t_value *v);
 
-t_value* t_get_array_element(const t_value* v, int index);
-
+t_value* t_get_array_element(const t_value* v, int index, int flag);
+int t_get_array_element_type(const t_value*v ,int index);
 //obj
 int t_get_object_size(const t_value* v);
 const char* t_get_object_key(const t_value* v, int index);

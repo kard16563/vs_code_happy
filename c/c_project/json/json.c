@@ -109,6 +109,7 @@ static int t_parse_literal(t_context *c ,t_value *v,const char *literal,t_type t
             return T_PARSE_INVALID_VALUE;
     c->json += i;//指针移到最后
     v->type = type;
+    
     return T_PARSE_OK;
 
 }
@@ -117,14 +118,15 @@ static int t_parse_literal(t_context *c ,t_value *v,const char *literal,t_type t
 
 void check_string(const char *ch2){
 
-    printf("\n\n  check_string  ----------------------->");
+    printf("\n\n  check_string  -----------------------> begin\n");
  while  ( *ch2 )
     {
         printf("%c",*ch2);
         ch2=ch2+1;
     }
 
-    printf("\n\n");
+    printf("\n end check ------------------>\n\n");
+    printf("\n\n json.c check_string 128  -> 字符串检查结果-->   \n");
 }
 
 
@@ -226,30 +228,30 @@ void t_init2 (t_context *c){//栈的初始化
 
 static void *t_contex_push(t_context *c,size_t size){
     //用于申请空间处理 返回的是 申请出 空间的 首地址 
-
+    printf("\n\njson.c 227 t_contex_push-> 用于申请空间处理 --------\n");
     void *ret;
     assert(size>0);//判断传入的数据是否出错大于0就通过 
-    printf("\n\n t_contex_push  size-> %d c->size %d c->top %d \n",size, c->size, c->top);
+    printf("\n\n  t_contex_push  size-> %d c->size %d c->top %d 本次初始值\n",size, c->size, c->top);
     if ( c->top + size >= c->size ){// top 位置将超过 限定的高度  栈的容量比较小
         if ( c->size == 0 ){
-            printf("\n\n  c->size   T_PARSE_STACK_INIT_SIZE \n ");
+            printf("\n\n  c->size   T_PARSE_STACK_INIT_SIZE 内存初始化设定为256\n ");
             c->size = T_PARSE_STACK_INIT_SIZE;
             //c->stack = (char*) realloc (c->stack,c->size);--->添加的这个为边判断边分配了
         }// 完全为空
         while ( c->top + size >= c->size ){
             //c->size +=  c->size * 1;
-            c->size = c->size + 2;
-            printf("\n----> push end 00 c->size %d top->  %d\n",c->size ,c->top);
+            c->size = c->size + 122;
+           // printf("\n----> push end 00 c->size %d top->  %d 打算扩容已经达到临界 \n",c->size ,c->top);
         }//临界
         
         //通过上面确定好 栈的大小后 进行扩容操作
-        printf("\n----> push end 01 c->size %d \n",c->size);
+        printf("\n----> push end 01 c->size %d 准备扩容 \n",c->size);
             c->stack = (char*) realloc (c->stack,c->size);//void *realloc(void *ptr, size_t size) ptr -- 指针指向一个要重新分配内存的内存块  size -- 内存块的新的大小，以字节为单位 
-        printf("\n----> push end 02 \n");
+        printf("\n----> push end 02 c->size %d  扩容完毕 \n",c->size);
     }
     ret = c->stack + c->top;//在限定内 top直接上移动   起始地址+top  一开始top为0
     c->top += size;//更新大小
-    printf("\n----> push end 03 \n");
+    printf("\n----> push end 03 栈顶指针更新完毕 更新为 c->top: %d c->size : %d  \n",c->top,c->size);
     return ret;
 }
 
@@ -295,19 +297,24 @@ int  t_get_string_length (const t_value *v ){
 }
 
 void t_set_string(t_value* v, const char* s, int len){
-    //printf("\n\n t_set_string->  len 0  %d \n",len);
+//printf("\n\n t_set_string->  len 0  %d \n",len);
     assert(v != NULL && (s != NULL || len == 0));
-    //printf("\n\n\n ------------->t_set_string -1  \n\n");
+//printf("\n\n\n ------------->t_set_string -1  \n\n");
 //printf("\n\n\n -----> %c \n\n",v->s);
 //printf("\n\n  json.c t_set_string 258----> test the first %c %c %c \n",v->s[0],v->s[1],v->s[2]);
     t_free(v);
-    //printf("\n\n\n ------------->t_set_string -2  \n\n");
+//printf("\n\n\n ------------->t_set_string -2  \n\n");
 //printf("\n\n  json.c t_set_string 260----> test the sec %c %c %c \n",v->s[0],v->s[1],v->s[2]);
     v->s = (char*) malloc (len+1);
     
     //第二次参数为 要被复制的指针发的始位置
     //第一个参数为  复制的新位置的指针起始位置
     memcpy(v->s, s, len);//将解析出来的东西生成一个字符串  写入v的s中
+    // char ch2 = *(v->s);
+    // check_string(&ch2);
+
+    // printf("json.c  t_set_string 311 -> v->s %c ",v->s);
+    // getchar();
 
     
     v->s[len] = '\0';
@@ -368,10 +375,29 @@ int t_get_array_size(const t_value *v){
     return v->array_size;
 }
 
-t_value *t_get_array_element(const t_value*v ,int index){
+t_value *t_get_array_element(const t_value*v ,int index,int flag){
     assert(v!=NULL && v->type == T_ARRAY);
     assert(index < v->array_size);//不要越界
-    return &v->array_e[index];//返回地址
+    printf("\n json.c 381 t_get_array_element-> %d,%d  flag %d",&v->array_e[index].type,*(&v->array_e[index].type),flag,"\n");
+    //getchar();
+    if(flag == 1){
+        printf("\njson.c 385  t_get_array_element flag =1  %d \n", &v->array_e[index].n);
+        return &v->array_e[index];//返回地址
+    }else
+    {
+        printf("\njson.c 387  t_get_array_element flag =0  %d \n", *(&v->array_e[index].type));
+        return &v->array_e[index].type;//返回地址
+        
+    }
+    }
+
+int t_get_array_element_type(const t_value*v ,int index){
+    assert(v!=NULL && v->type == T_ARRAY);
+    assert(index < v->array_size);//不要越界
+    printf("\njson.c 397 t_get_array_element_type-> %d,%d  ",&v->array_e[index].type,*(&v->array_e[index].type),"\n");
+    printf("\njson.c 398  t_get_array_element_type flag =0  %d \n", *(&v->array_e[index].type));
+    int aa =*(&v->array_e[index].type);
+    return aa; //返回地址
 }
 
 
@@ -383,7 +409,7 @@ t_value *t_get_array_element(const t_value*v ,int index){
 //预处理
 static int t_parse_string_raw(t_context *c, char** str, int* len ){
 
-size_t head = c->top ;
+    size_t head = c->top ;
     unsigned u, u2;
     const char *p;
     long flag2=0;
@@ -392,12 +418,18 @@ size_t head = c->top ;
     //json---> "\"Hello\\nWorld\""
     //printf("\n\n p[0] %c p[1] %c p[2] %c p[3] %c  \n",c->json[0], c->json[1], c->json[2],c->json[3]);
     //printf("\n\n t_parse_string - > 257:p = c->json;  %c  asic %d 0--> %c - %d \n", c->json, c->json, '\0', '\0');
+    printf("\n******字符串检查*******\n");
+    t_context ch2=*c;
+    check_string(ch2.json);
     expect (c, '\"');// 判断是不是字符串
     p = c->json;
     
-    t_context ch2=*c; 
+    ch2=*c; 
     //char **ch2= &(c->json);
     check_string(ch2.json);
+    printf("\njson.c 407  t_parse_string_raw  \n");
+    //getchar();
+
     int flag = 0;
     int count=0;
     //printf("\n\n t_parse_string - > 258:p = c->json;  %c  asic %d 0--> %c - %d \n", p, p, '\0', '\0');
@@ -406,11 +438,11 @@ size_t head = c->top ;
         char ch = *p++; // 向后拨动字符
         count= count+1;
 
-        printf("\n\n t_parse_string - > for ->361 :char ch = *p ++;  %c ,asic %d  p-->%p  \n",ch,ch,p);
+        printf("\n\n t_parse_string - > for ->421 :char ch = *p ++; 图形符号：%c  ,asic %d  p-->%p  \n",ch,ch,p);
         switch (ch)
         {
-        case '\"' ://检索接受 字符串到头  “ .... ”
-            printf("\n\n t_parse_string---> case '\"'  \n");
+        case '\"' ://检索结束 字符串到头  “ .... ”
+            printf("\n\n t_parse_string---> case '\"' 检索结束 字符串到头 \n");
             *len = c->top - head;
             *str = t_context_pop(c , *len);
 
@@ -495,7 +527,15 @@ size_t head = c->top ;
                 return T_PARSE_INVALID_STRING_CHAR;
             }
             PUTC(c,ch);
+            printf("\n json.c 510 t_parse_string--->->default 进行入栈操作！\n");
+            ch2=*c;
+            check_string(ch2.json);
+        
         }
+        printf("\n json.c 513 t_parse_string---->switch 结束 注意查看分类结果!!\n\n\n");
+        ch2=*c;
+        check_string(ch2.json);
+        //getchar();
     }
 
 }
@@ -636,7 +676,7 @@ static int t_parse_string (t_context* c, t_value* v ){
 
 
 ///////////////////////////////////////////////
-static int t_parse_value(t_context* c, t_value* v);//先给下面的声明一下 下面的呢个函数 【t_parse_array】要用
+static int t_parse_value(t_context* c, t_value* v,int flag);//先给下面的声明一下 下面的呢个函数 【t_parse_array】要用
 //这两个函数有点 互相调用的意思 但是 要调用的话必须要出现在前面所以 前项 声明一下
 static int t_parse_array(t_context *c, t_value*v ){
     int size=0;
@@ -655,13 +695,28 @@ static int t_parse_array(t_context *c, t_value*v ){
     // 如果为 【1，【2,3】，4】----》解析第二个 【时 会 中断再次调用该函数 所以知道处理完这个后再执行第一个
     //同过下面的e把它们都串起来  进入第二层就变为了 v 从而  memcpy(v->array_e = (t_value*)malloc(size), t_context_pop(c, size), size);//连接
     //
+   // t_context* tmp= t_contex_push(c, sizeof(t_value));
+
+    printf("\n\n 0 json.c 660  t_parse_array ->  c->size %d c->top %d \n", c->size ,c->top);
 
     for ( ; ; )
     {
         t_value e;
+        
         t_init(&e);
-        if((ret = t_parse_value(c,&e)) != T_PARSE_OK) break;
+
+        printf("\n\n 1 json.c 667  t_parse_array ->  c->size %d c->top %d \n", c->size ,c->top);
+        //t_context tmp = *c;
+
+        if((ret = t_parse_value(c,&e,1)) != T_PARSE_OK) break;//这里会对 c的进行刷新--->进入主调用在进行分类
+        printf("----------->e %d, %d ,%d ,%d ",e.type,e.s,e.n,e.len);
+        //getchar();
+        printf("\n\n 1.5 json.c 671  t_parse_array ->  c->size %d c->top %d \n", c->size ,c->top);
+
+        
+        
         memcpy(t_contex_push(c, sizeof(t_value)), &e, sizeof(t_value));
+        //memcpy(t_contex_push(c, sizeof(t_value)), &e, sizeof(t_value));
         size++;
 
         t_parse_ws(c);// 解析空白字符
@@ -669,6 +724,9 @@ static int t_parse_array(t_context *c, t_value*v ){
         if(*c->json == ',') {
             c->json++;//继续处理 继续解析
             t_parse_ws(c);//  解析空白字符 看上面向后移动的是不是 空字符串 是的话 继续向后拨动 
+
+            printf("\n\n 3 json.c 680  t_parse_array ->  c->size %d c->top %d \n", c->size ,c->top);
+
             }
         else if (*c->json == ']'){//解析结束
             c->json++;
@@ -676,6 +734,10 @@ static int t_parse_array(t_context *c, t_value*v ){
             v->array_size = size;
             size *= sizeof(t_value);
             memcpy(v->array_e = (t_value*)malloc(size), t_context_pop(c, size), size);//连接
+            
+            printf("\n\n json.c 696 t_parse_array-> 解析结束 %d * %d * %d * %d \n",v->array_e[0].type,v->array_e[1].type,v->array_e[2].type,v->array_e[3].type,v->array_e[4].type);
+            //getchar();
+            
             return T_PARSE_OK;
         } 
 
@@ -683,6 +745,8 @@ static int t_parse_array(t_context *c, t_value*v ){
             return T_PARSE_MISS_COMMA_OR_SQUARE_BRACKET;
             break;
             }
+
+        printf("\n\n 4 json.c 697  t_parse_array ->  c->size %d c->top %d \n", c->size ,c->top);
 
     }
 
@@ -692,6 +756,8 @@ static int t_parse_array(t_context *c, t_value*v ){
         t_free((t_value*)t_context_pop(c, sizeof(t_value) ));
         return ret;
     }
+
+    getchar();
     
 }
 //t_parse_value
@@ -723,7 +789,7 @@ static int t_parse_object(t_context* c, t_value* v){
     for(;;){
 
         t_init(&m.v);
-        if((ret= t_parse_value(c,&m.v)) != T_PARSE_OK)break;
+        if((ret= t_parse_value(c,&m.v,0)) != T_PARSE_OK)break;
         t_parse_ws(c);
         memcpy(t_contex_push(c,sizeof(t_object_member)), &m, sizeof(t_object_member));
         size++;
@@ -786,7 +852,7 @@ static int t_parse_obj(t_context*c, t_value* v){
         c->json++;
         t_parse_ws(c);
 
-        if( (ret = t_parse_value(c,&m.v)) != T_PARSE_OK ){
+        if( (ret = t_parse_value(c,&m.v,0)) != T_PARSE_OK ){
             break;
         }
         memcpy((t_contex_push(c,sizeof(t_object_member))) ,&m,sizeof(t_object_member));
@@ -839,8 +905,18 @@ static int t_parse_obj(t_context*c, t_value* v){
 
 
 
-static int t_parse_value(t_context *t , t_value *v){//解析值
-    t_init2(t);
+static int t_parse_value(t_context *t , t_value *v, int flag ){//解析值
+    if (flag == 1)
+    {
+        printf("\n\njson.c 863 -> t_parse_value 不会对其进行初始化 \n");
+    }
+    else
+    {
+        t_init2(t);
+    }
+    
+    
+    
     //char str[40];
     //sprintf(str," *t->json ,%s  *v , %s \n ",*t->json,*v);
     //printf("\n *t->json ,%s   \n",*t->json);
@@ -879,6 +955,10 @@ static int t_parse_value(t_context *t , t_value *v){//解析值
     printf("\n ------> json.c 7\n");
         return t_parse_array(t, v);
     
+    case '{':  
+    printf("\n ------> json.c 8\n");
+    return t_parse_object(t, v);
+    
     default:
     printf("\n  ------> json.c 7");
         return t_parse_number(t, v);
@@ -903,7 +983,7 @@ int t_parse(t_value *v, const char *json){//t_parse(&v,"null")
     c.json =json;
     v->type=T_NULL;
 
-    int ret= t_parse_value(&c,v);
+    int ret= t_parse_value(&c,v,0);
 
     //printf("\n___1 ret--> %d ___",ret);
 

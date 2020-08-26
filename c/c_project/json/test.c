@@ -308,7 +308,7 @@ static void test_access_string() {
 //麻烦之处在于，ANSI C（C89）并没有的 size_t 打印方法，在 C99 则加入了 "%zu"，但 VS2015 中才有，之前的 VC 版本使用非标准的 "%Iu"
 #define EXPECT_EQ_SIZE_T(expect, actual) expect_eq_base ((expect) == (actual), (int)expect, (int)actual, "%d" )
 //((expect) == (actual), (size_t)expect, (size_t)actual, "%zu")
-static void test_parse_array(){
+static void test_parse_array(){//问题所在 2020 8 25 
     t_value v;
 
     t_init (&v);
@@ -318,40 +318,58 @@ static void test_parse_array(){
     t_free(&v);
 
 
+
     t_init(&v);
+    // printf("\n testing!! position-> test.c 320 \n");
+    // getchar();
     expect_eq_int(T_PARSE_OK,t_parse(&v, "[ null , false , true , 123 , \"abc\" ]"));
+    // printf("\n testing!! position-> test.c 329  \n");
+    // getchar();
+
     expect_eq_int(T_ARRAY, t_get_type(&v));
     EXPECT_EQ_SIZE_T(5, t_get_array_size(&v));
-    expect_eq_int(T_NULL, t_get_array_element(&v, 0));//add
-    expect_eq_int(T_FALSE, t_get_array_element(&v, 1));
-    expect_eq_int(T_TURE, t_get_array_element(&v, 2));
-    expect_eq_int(T_NUMBER, t_get_array_element(&v, 3));
-    expect_eq_int(T_STRING, t_get_array_element(&v, 4));
-    expect_eq_double(123.0, t_get_number( t_get_array_element(&v, 4) ));
-    expect_eq_string("abc", t_get_string(t_get_array_element(&v, 4)), t_get_string_length(t_get_array_element(&v, 4)));
+    
+    //expect_eq_int(T_NULL,t_get_array_element(&v, 0, 0));//add
+    expect_eq_int(T_FALSE, t_get_array_element_type(&v, 1));
+    expect_eq_int(T_TURE, t_get_array_element_type(&v, 2));
+    expect_eq_int(T_NUMBER, t_get_array_element_type(&v, 3 ));
+    expect_eq_int(T_STRING, t_get_type(t_get_array_element(&v, 4,1)));////不同之处
+
+    // printf("\n testing!! position-> test.c 338  \n");
+    // getchar();
+
+    expect_eq_double(123.0, t_get_number( t_get_array_element(&v, 3, 1) ));
+    expect_eq_string("abc", t_get_string(t_get_array_element(&v, 4, 1)), t_get_string_length(t_get_array_element(&v, 4, 1)));
     t_free(&v);
+    
 
     t_init(&v);
     expect_eq_int(T_PARSE_OK, t_parse(&v, "[ [ ] , [ 0 ] , [ 0 , 1 ] , [ 0 , 1 , 2 ] ]"));
     expect_eq_int(T_ARRAY, t_get_type(&v));
     EXPECT_EQ_SIZE_T(4, t_get_array_size(&v));
+    // printf("\n testing!! position-> test.c 353 \n");
+    // getchar();
 
     for(int i=0; i<4 ; i++){
-        t_value *a = t_get_array_element(&v,i);
-        expect_eq_int(T_ARRAY, t_get_type(&v));
-        EXPECT_EQ_SIZE_T(i, t_get_array_size(&v));
+        t_value *a = t_get_array_element(&v,i,1);
+        expect_eq_int(T_ARRAY, t_get_type(a));
+        EXPECT_EQ_SIZE_T(i, t_get_array_size(a));
+        // printf("\n testing!! position-> test.c 349 \n");
+        // getchar();
 
         for(int j=0 ; j<i ; j++){
-            t_value *e =  t_get_array_element(a,j);
+            t_value *e =  t_get_array_element(a, j, 1);
             expect_eq_int(T_NUMBER, t_get_type(e));
+            //printf("\ntesting!! position-> test.c 361 num ->%lf i->%d j ->%lf  \n",t_get_number( e ),i,(double)j);
+            //printf("\n -- %lf -- \n",  t_get_number( t_get_array_element(t_get_array_element(&v,3,1),3, 1) ) );
+            //getchar();
             expect_eq_double((double) j, t_get_number( e ));
-
-
-
         }
 
     }
-    free(&v);
+    //printf("\n  end 2\n ");
+    t_free(&v);
+    //printf("\n  end 1\n ");
 
 
 }
@@ -378,7 +396,7 @@ static void test_parse_obj(){
     int i;
 
     t_init(&v);
-    expect_eq_int(T_PARSE_OK, t_parse(&v, " { } "));
+    expect_eq_int(T_PARSE_OK, t_parse(&v, "{}"));
     expect_eq_int(T_OBJ, t_get_type(&v));
     EXPECT_EQ_SIZE_T(0, t_get_object_size(&v));
     t_free(&v);
@@ -417,7 +435,7 @@ static void test_parse_obj(){
     EXPECT_EQ_SIZE_T(3, t_get_array_size(t_get_object_value(&v, 5)));
 
     for(i=0; i<3; i++){
-        t_value* e = t_get_array_element(t_get_object_value(&v,5),i);
+        t_value* e = t_get_array_element(t_get_object_value(&v,5),i, 0);
         expect_eq_int(T_NUMBER,t_get_type(e));
         expect_eq_double(i*1.0,t_get_number(e));
     }
@@ -479,9 +497,8 @@ static void test_parse(){
     test_parse_miss_comma_or_square_bracket();
     
     test_parse_array();//问题函数所在位置
-// #if 0
-//     test_parse_object();
-// #endif
+    test_parse_obj();
+
 
 
 
@@ -511,7 +528,9 @@ int main(){
     return main_ret;
     //跳转指定行数: Ctrl + G
     //跳转到函数 F12 
-    //E:\the_c_of_vs_code\c\c_project\json
+    //E:\the_c_of_vs_code\ c\c_project\json
     //E:\the_c_of_vs_code\c\c_project\json>gcc -c json.c
     //gcc -g  test.c json.c -o main
+
+    // wsl--> /mnt/e/DevelopRoom/Code/the_c_of_vs_code/c/c_project/json
 }
