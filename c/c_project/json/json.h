@@ -120,4 +120,7 @@ const char* t_get_object_key(const t_value* v, int index);
 int t_get_object_key_length(const t_value* v, int index);
 t_value* t_get_object_value(const t_value* , int index);
 
+
+char* t_stringify(const t_value* v, int* length);
+
 #endif
