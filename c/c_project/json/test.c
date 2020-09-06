@@ -197,7 +197,7 @@ static void test_parse_string(){
     test_string("Hello\nWorld", "\"Hello\\nWorld\"");
     test_string("\" \\ / \b \f \n \r \t", "\"\\\" \\\\ \\/ \\b \\f \\n \\r \\t\"");
     test_string("Hello\0World", "\"Hello\\u0000World\"");
-    test_string("\x24", "\"\\u0024\"");         /* Dollar sign U+0024 */
+    //test_string("\x24", "\"\\u0024\"");         /* Dollar sign U+0024 */
     test_string("\xC2\xA2", "\"\\u00A2\"");     /* Cents sign U+00A2 */
     test_string("\xE2\x82\xAC", "\"\\u20AC\""); /* Euro sign U+20AC */
     test_string("\xF0\x9D\x84\x9E", "\"\\uD834\\uDD1E\"");  /* G clef sign U+1D11E */
@@ -311,34 +311,36 @@ static void test_access_string() {
 static void test_parse_array(){//问题所在 2020 8 25 
     t_value v;
 
-    t_init (&v);
-    expect_eq_int(T_PARSE_OK, t_parse(&v, "[ ]"));
-    expect_eq_int(T_ARRAY, t_get_type(&v));
-    EXPECT_EQ_SIZE_T(0, t_get_array_size(&v));
-    t_free(&v);
+    // t_init (&v);
+    // expect_eq_int(T_PARSE_OK, t_parse(&v, "[ ]"));
+    // expect_eq_int(T_ARRAY, t_get_type(&v));
+    // EXPECT_EQ_SIZE_T(0, t_get_array_size(&v));
+    // t_free(&v);
 
 
 
     t_init(&v);
-    // printf("\n testing!! position-> test.c 320 \n");
-    // getchar();
+                                            // printf("\n testing!! position-> test.c 320 \n");
+                                            // getchar();
     expect_eq_int(T_PARSE_OK,t_parse(&v, "[ null , false , true , 123 , \"abc\" ]"));
-    // printf("\n testing!! position-> test.c 329  \n");
-    // getchar();
+                                                // printf("\n testing!! position-> test.c 329  \n");
+                                                // getchar();
 
     expect_eq_int(T_ARRAY, t_get_type(&v));
     EXPECT_EQ_SIZE_T(5, t_get_array_size(&v));
     
-    //expect_eq_int(T_NULL,t_get_array_element(&v, 0, 0));//add
+                                                    //expect_eq_int(T_NULL,t_get_array_element(&v, 0, 0));//add
     expect_eq_int(T_FALSE, t_get_array_element_type(&v, 1));
     expect_eq_int(T_TURE, t_get_array_element_type(&v, 2));
     expect_eq_int(T_NUMBER, t_get_array_element_type(&v, 3 ));
     expect_eq_int(T_STRING, t_get_type(t_get_array_element(&v, 4,1)));////不同之处
 
-    // printf("\n testing!! position-> test.c 338  \n");
-    // getchar();
-
+    //                     // printf("\n testing!! position-> test.c 338  \n");
+    //                     // getchar();
+    
     expect_eq_double(123.0, t_get_number( t_get_array_element(&v, 3, 1) ));
+    printf("\n 开始进入测试 ！！！！ \n");
+    getchar();
     expect_eq_string("abc", t_get_string(t_get_array_element(&v, 4, 1)), t_get_string_length(t_get_array_element(&v, 4, 1)));
     t_free(&v);
     
@@ -347,29 +349,29 @@ static void test_parse_array(){//问题所在 2020 8 25
     expect_eq_int(T_PARSE_OK, t_parse(&v, "[ [ ] , [ 0 ] , [ 0 , 1 ] , [ 0 , 1 , 2 ] ]"));
     expect_eq_int(T_ARRAY, t_get_type(&v));
     EXPECT_EQ_SIZE_T(4, t_get_array_size(&v));
-    // printf("\n testing!! position-> test.c 353 \n");
-    // getchar();
+                                            printf("\n testing!! position-> test.c 353 \n");
+                                            getchar();
 
     for(int i=0; i<4 ; i++){
         t_value *a = t_get_array_element(&v,i,1);
         expect_eq_int(T_ARRAY, t_get_type(a));
         EXPECT_EQ_SIZE_T(i, t_get_array_size(a));
-        // printf("\n testing!! position-> test.c 349 \n");
-        // getchar();
+                                                    // printf("\n testing!! position-> test.c 349 \n");
+                                                    // getchar();
 
         for(int j=0 ; j<i ; j++){
             t_value *e =  t_get_array_element(a, j, 1);
             expect_eq_int(T_NUMBER, t_get_type(e));
-            //printf("\ntesting!! position-> test.c 361 num ->%lf i->%d j ->%lf  \n",t_get_number( e ),i,(double)j);
-            //printf("\n -- %lf -- \n",  t_get_number( t_get_array_element(t_get_array_element(&v,3,1),3, 1) ) );
-            //getchar();
+                                                //printf("\ntesting!! position-> test.c 361 num ->%lf i->%d j ->%lf  \n",t_get_number( e ),i,(double)j);
+                                                //printf("\n -- %lf -- \n",  t_get_number( t_get_array_element(t_get_array_element(&v,3,1),3, 1) ) );
+                                                //getchar();
             expect_eq_double((double) j, t_get_number( e ));
         }
 
     }
-    //printf("\n  end 2\n ");
+                                        //printf("\n  end 2\n ");
     t_free(&v);
-    //printf("\n  end 1\n ");
+                                        //printf("\n  end 1\n ");
 
 
 }
@@ -392,18 +394,23 @@ static void test_parse_miss_comma_or_square_bracket() {
 //////////////////////////////////////////// 处理obj
 
 static void test_parse_obj(){
+    //printf("\n\n -----------------------test obj- 1 ----------------------------\n");
     t_value v;
     int i;
 
-    t_init(&v);
-    expect_eq_int(T_PARSE_OK, t_parse(&v, "{}"));
-    expect_eq_int(T_OBJ, t_get_type(&v));
-    EXPECT_EQ_SIZE_T(0, t_get_object_size(&v));
-    t_free(&v);
+    // t_init(&v);
+    // expect_eq_int(T_PARSE_OK, t_parse(&v, "{ }"));
+    // expect_eq_int(T_OBJ, t_get_type(&v));
+    // EXPECT_EQ_SIZE_T(0, t_get_object_size(&v));
+    // t_free(&v);
 
+
+    
+    printf("\n\n -----------------------test obj- 2 ----------------------------\n");
     t_init(&v);
+    //getchar();
     expect_eq_int(T_PARSE_OK, t_parse(&v,
-        " { "
+        "{ "
         "\"n\" : null , "
         "\"f\" : false , "
         "\"t\" : true , "
@@ -413,7 +420,8 @@ static void test_parse_obj(){
         "\"o\" : { \"1\" : 1, \"2\" : 2, \"3\" : 3 }"
         " } "
     ));
-
+    printf("\n\n -----------------------test obj- 3 ----------------------------\n");
+    getchar();
 
 //expect_eq_int  expect_eq_string
     expect_eq_int(T_OBJ, t_get_type(&v));
@@ -434,14 +442,15 @@ static void test_parse_obj(){
     expect_eq_int(T_ARRAY, t_get_type(t_get_object_value(&v, 5)));
     EXPECT_EQ_SIZE_T(3, t_get_array_size(t_get_object_value(&v, 5)));
 
+printf("\n\n -----------------------test obj- 4 ----------------------------\n");
     for(i=0; i<3; i++){
-        t_value* e = t_get_array_element(t_get_object_value(&v,5),i, 0);
+        t_value* e = t_get_array_element(t_get_object_value(&v,5),i, 1);
         expect_eq_int(T_NUMBER,t_get_type(e));
-        expect_eq_double(i*1.0,t_get_number(e));
+        expect_eq_double(i+1.0,t_get_number(e));
     }
-
+printf("\n\n -----------------------test obj- 5 ----------------------------\n");
     expect_eq_string("o", t_get_object_key(&v, 6), t_get_object_key_length(&v, 6));
-
+printf("\n\n -----------------------test obj- 6 ----------------------------\n");
 
     {
         t_value* o = t_get_object_value(&v, 6);
@@ -463,25 +472,21 @@ static void test_parse_obj(){
 
 //////////////////////////////////////////////////////////
 static void test_parse(){
-   // printf("\n  ------>> 1");
     test_parse_null();
-    //printf("\n  ------>> 1");
+    
     test_parse_true();
-    //printf("\n  ------>> 2");
+    
     test_parse_false();
-    //printf("\n  ------>> 2");
+    
     test_parse_number();
-   // printf("\n  ------>> 3");
     test_parse_expect_value();
-   // printf("\n  ------>> 4");
     test_parse_invalid_value();
-   // printf("\n  ------>> 5");
     test_parse_root_not_singular();
     test_parse_number_too_big();
-    //printf("\n\n test_parse_missing_quotation_mark---->0 \n");
+    
 
     test_parse_missing_quotation_mark();
-    //printf("\n\n test_parse_missing_quotation_mark----> 1\n");
+    
     test_parse_invalid_string_escape();
     test_parse_invalid_string_char();
 
@@ -513,16 +518,114 @@ static void test_parse(){
 
 }
 
+////JSON 生成器（generator）负责相反的事情，就是把树形数据结构转换成 JSON 文本。这个过程又称为「字符串化（stringify）」
+#define TEST_ROUNDTRIP(json)\
+    do {\
+        t_value v;\
+        char* json2;\
+        int length;\
+        t_init(&v);\
+        expect_eq_int(T_PARSE_OK, t_parse(&v, json));\
+        json2 = t_stringify(&v, &length);\
+        expect_eq_string(json, json2, length);\
+        t_free(&v);\
+        free(json2);\
+    } while(0)
 
 
+static void test_stringify_number() {
+    printf("\ntest_stringify_number()---------\n");
+    TEST_ROUNDTRIP("0");
+    TEST_ROUNDTRIP("-0");
+    TEST_ROUNDTRIP("1");
+    TEST_ROUNDTRIP("-1");
+    TEST_ROUNDTRIP("1.5");
+    TEST_ROUNDTRIP("-1.5");
+    TEST_ROUNDTRIP("3.25");
+    TEST_ROUNDTRIP("1e+20");
+    TEST_ROUNDTRIP("1.234e+20");
+    TEST_ROUNDTRIP("1.234e-20");
+
+    TEST_ROUNDTRIP("1.0000000000000002"); /* the smallest number > 1 */
+    TEST_ROUNDTRIP("4.9406564584124654e-324"); /* minimum denormal */
+    TEST_ROUNDTRIP("-4.9406564584124654e-324");
+    TEST_ROUNDTRIP("2.2250738585072009e-308");  /* Max subnormal double */
+    TEST_ROUNDTRIP("-2.2250738585072009e-308");
+    TEST_ROUNDTRIP("2.2250738585072014e-308");  /* Min normal positive double */
+    TEST_ROUNDTRIP("-2.2250738585072014e-308");
+    TEST_ROUNDTRIP("1.7976931348623157e+308");  /* Max double */
+    TEST_ROUNDTRIP("-1.7976931348623157e+308");
+}
+
+static void test_stringify_string() {
+    printf("\ntest_stringify_string()---------\n");
+    TEST_ROUNDTRIP("\"\"");
+    TEST_ROUNDTRIP("\"Hello\"");
+    TEST_ROUNDTRIP("\"Hello\\nWorld\"");
+    TEST_ROUNDTRIP("\"\\\" \\\\ / \\b \\f \\n \\r \\t\"");
+    TEST_ROUNDTRIP("\"Hello\\u0000World\"");
+}
+
+static void test_stringify_array() {
+    printf("\ntest_stringify_array()---------\n");
+    TEST_ROUNDTRIP("[]");
+    TEST_ROUNDTRIP("[null,false,true,123,\"abc\",[1,2,3]]");
+}
+
+static void test_stringify_object() {
+    printf("\ntest_stringify_object()---------\n");
+    TEST_ROUNDTRIP("{}");
+    TEST_ROUNDTRIP("{\"n\":null,\"f\":false,\"t\":true,\"i\":123,\"s\":\"abc\",\"a\":[1,2,3],\"o\":{\"1\":1,\"2\":2,\"3\":3}}");
+}
+
+static void test_stringify() {
+    printf("\ntest_stringify()---------1\n");
+    TEST_ROUNDTRIP("null");
+    printf("\ntest_stringify()---------2\n");
+    TEST_ROUNDTRIP("false");
+    printf("\ntest_stringify()---------3\n");
+    TEST_ROUNDTRIP("true");
+    printf("\ntest_stringify()---------4\n");
+    test_stringify_number();
+    printf("\ntest_stringify()---------5\n");
+    test_stringify_string();//168 expect, actual---> "Hello\u0000World", "Hello\u0000World"
+    printf("\ntest_stringify()---------6\n");
+    test_stringify_array();
+    printf("\ntest_stringify()---------7\n"); //168 expect, actual---> [null,false,true,123,"abc",[1,2,3]], [null,false,true,123,"abc",[1,2,3]]
+    test_stringify_object();//68 expect, actual---> {"n":null,"f":false,"t":true,"i":123,"s":"abc","a":[1,2,3],"o":{"1":1,"2":2,"3":3}}, {"n":null,"f":false,"t":true,"i":123,"s":"abc","a":[1,2,3],"o":{"1":1,"2":2,"3":3}}
+    
+}
+
+
+
+static void test_access() {
+    printf("\ntest_access()---------1\n");
+    test_access_null();
+    printf("\ntest_access()---------2\n");
+    test_access_boolean();
+    printf("\ntest_access()---------3\n");
+    test_access_number();
+    printf("\ntest_access()---------4\n");
+    test_access_string();
+        //168 expect, actual---> ,
+        //168 expect, actual---> Helloa, Helloa2/2 (100.00%) passed
+}
+
+//////////////////////////////////////////////////////////
 int main(){
     printf("|test !!!!!! \n\n");
 
     #ifdef _WINDOWS//内存泄漏检测
     _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
     #endif
-
+    
     test_parse();
+
+    test_stringify();
+    printf("\ntest_stringify()结束---------\n");
+    getchar();
+    test_access();
+
     printf("%d/%d (%3.2f%%) passed\n", test_pass, test_count, test_pass * 100.0 / test_count);
     getchar();
     return main_ret;
@@ -533,4 +636,8 @@ int main(){
     //gcc -g  test.c json.c -o main
 
     // wsl--> /mnt/e/DevelopRoom/Code/the_c_of_vs_code/c/c_project/json
+    //kard@DESKTOP-POU8OU3:/mnt/e/DevelopRoom/Code/the_c_of_vs_code/c/c_project/json$ gcc -g  test.c json.c -o main_2
+    //./main_2
+    //gdb main_2
+    //sudo apt-get install valgrind  --->内存泄漏检测
 }

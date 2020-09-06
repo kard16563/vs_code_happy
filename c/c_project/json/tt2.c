@@ -6,13 +6,13 @@ typedef struct  t_value
     char *s;//用于是字符串处理
     int len;//size_t 没有
     double n;//用于数字的表达
-
+    size_t head1,head2;
     //t_type type; 
 
     struct t_value* array_e;//数组的内容
     int array_size;//size 是元素的个数
 
-}; // pt_value 事实上是一种变体类型（variant type），
+}t_value; // pt_value 事实上是一种变体类型（variant type），
 
 void check_string(char *ch2){
  while  ( *ch2 )
@@ -23,11 +23,23 @@ void check_string(char *ch2){
 }
 
 int main(){
-    // t_value a;
+    t_value aa;
+    t_value *bb=&aa;
+    size_t cc2=bb->head2;
+    bb->head2=0;
+    bb->len=0;
+    int cc3 = bb->len;
+    bb->head1=1;
+
     // t_value b;
 
     // b.array_e=&b;
+    //c->stack +( c->top -= size )
     
+
+    int a=1,b=2,c=3;
+    printf("--------->------------> %d --** %d *** 1.》  %d **2.》  %d\n",(a+(b-=c)),(a+ (b-c)),(bb->head1-cc2),(bb->head1-cc3));    
+   //仔细观察上面的式子bb->head1-cc2 应当为0 但是他为一个随机负值  其原因在于 用了size_t cc2 见于第28行
     char ch='\\';
     printf("------ > %p   %d \n\n\n",(unsigned char)ch,((unsigned char)ch -0x20 ) );
     char *ch2 = "22\"Hello\\nWorld\"";
